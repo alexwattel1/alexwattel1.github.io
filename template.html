@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{name} — {tagline}</title>
-<meta name="description" content="{name} (se prononce « help ») accompagne les entreprises dans l'intégration de l'IA : audit, agents IA sur-mesure, accompagnement des équipes. Basé à {city}.">
+<meta name="description" content="{name} accompagne les entreprises dans l'intégration de l'IA : audit, agents IA sur-mesure, accompagnement des équipes. Basé à {city}.">
 <meta property="og:title" content="{name} — {tagline}">
-<meta property="og:description" content="L'IA qui vous aide vraiment. Diagnostic de 30 min offert.">
+<meta property="og:description" content="L'IA qui vous aide vraiment. Premier échange de 30 min offert.">
 <meta name="theme-color" content="#f5f5f7">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='32' y2='32' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='.35' stop-color='%23a78bfa'/%3E%3Cstop offset='.65' stop-color='%23f472b6'/%3E%3Cstop offset='1' stop-color='%23fbbf24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='url(%23g)' stroke-width='6' stroke-dasharray='12.3 5' stroke-dashoffset='6'/%3E%3C/svg%3E">
 <style>
@@ -111,6 +111,24 @@
   .pipe li::before {{ counter-increment: p; content: counter(p); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
                       background: linear-gradient(135deg, #0090ff, #7a5cff); color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 10px; }}
   .pipe b {{ display: block; color: #fff; font-size: 16px; margin-bottom: 2px; }}
+  .demo {{ background: #fff; color: var(--ink); border-radius: 18px; padding: 22px; margin: 0 0 28px; text-align: left; box-shadow: 0 10px 40px rgba(0,0,0,.35); }}
+  .demo-top {{ display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-bottom: 6px; }}
+  .demo-name {{ font-size: 24px; font-weight: 800; letter-spacing: -.02em; background: linear-gradient(120deg,#a78bfa,#f472b6 55%,#fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }}
+  .pill {{ font-size: 11px; font-weight: 700; border-radius: 980px; padding: 3px 10px; letter-spacing: .03em; }}
+  .pill.fit {{ background: #16a34a; color: #fff; }} .pill.sc {{ background: #ede9fe; color: #6d28d9; }} .pill.ex {{ background: #f5f5f7; color: var(--muted); margin-left: auto; }}
+  .demo-desc {{ font-size: 14px; color: var(--body); margin: 0 0 16px; }}
+  .demo-grid {{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }}
+  @media (min-width: 761px) {{ .demo-grid {{ grid-template-columns: repeat(4, 1fr); }} }}
+  .crit {{ border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }}
+  .crit small {{ display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #7c3aed; margin-bottom: 6px; }}
+  .crit b {{ display: flex; align-items: center; gap: 6px; font-size: 15px; }}
+  .crit p {{ font-size: 12px; color: var(--muted); margin: 4px 0 0; line-height: 1.4; }}
+  .ok {{ width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; flex: none; background: #dcfce7; color: #16a34a; }}
+  .ok.mid {{ background: #fef3c7; color: #b45309; }}
+  .dm {{ display: flex; align-items: center; gap: 10px; margin-top: 12px; background: #f5f5f7; border-radius: 12px; padding: 10px 12px; font-size: 14px; }}
+  .dm i {{ width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#a78bfa,#fb923c); color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 12px; flex: none; }}
+  .dm span {{ color: var(--muted); font-size: 12px; display: block; }}
+  .demo-msg {{ margin-top: 12px; border-left: 3px solid #7a5cff; background: #faf8ff; border-radius: 0; padding: 10px 14px; font-size: 13px; color: var(--body); }}
   .center {{ display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }}
   .product .btn-ghost {{ background: #3a3a3c; color: #fff; }}
 
@@ -175,6 +193,7 @@
   <symbol id="i-team" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M16 5a3 3 0 0 1 0 6M21 20v-1a5 5 0 0 0-3-4.5"/></symbol>
   <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/></symbol>
   <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
   <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h7l-1 7 9-11h-7z"/></symbol>
 </svg>
 
@@ -183,20 +202,19 @@
     <a class="brand" href="#top" aria-label="{name}, accueil"><svg class="brand-icon"><use href="#logo"/></svg><span>h<span class="ai">AI</span>lp</span></a>
     <div class="spacer"></div>
     <nav class="menu" aria-label="Sections"><a href="#services">Services</a><a href="#ai-mpct">AI-MPCT</a><a href="#methode">Méthode</a><a href="#faq">FAQ</a></nav>
-    <a class="btn btn-primary btn-sm" href="#contact">Échangeons sur votre projet</a>
+    <a class="btn btn-primary btn-sm" href="{calendly}" target="_blank" rel="noopener">Prendre rendez-vous</a>
   </div>
 </header>
 
 <main id="top">
   <div class="wrap hero">
-    <span class="eyebrow">h<b>AI</b>lp · se prononce « help »</span>
+    <span class="eyebrow">Conseil et agents IA sur-mesure</span>
     <h1>L'IA qui vous <em>aide vraiment.</em></h1>
     <p class="lede">{name} accompagne les entreprises dans l'intégration concrète de l'IA : on identifie où elle vous fait gagner du temps, on conçoit les agents IA qui font le travail, et on accompagne vos équipes jusqu'à ce qu'elles s'en servent au quotidien.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="#contact">Réserver un diagnostic offert</a>
+      <a class="btn btn-primary" href="{calendly}" target="_blank" rel="noopener">Réserver un premier échange</a>
       <a class="btn btn-ghost" href="contact.vcf" download>Enregistrer le contact</a>
     </div>
-    <p class="hero-note">30 minutes, sans engagement. Basé à {city}, on intervient partout en France.</p>
     <div class="stats" aria-label="En bref">
       <div class="stat"><b>Conseil</b><small>Audit et feuille de route IA</small></div>
       <div class="stat"><b>Sur-mesure</b><small>Agents IA conçus pour vos process</small></div>
@@ -208,7 +226,7 @@
   <section id="services">
     <div class="wrap">
       <h2 class="g1">Nos services de <em>conseil en IA</em></h2>
-      <p class="sub">Du premier diagnostic à l'agent en production, un seul interlocuteur qui conseille <b>et</b> construit.</p>
+      <p class="sub">Du premier échange à l'agent en production, un seul interlocuteur qui conseille <b>et</b> construit.</p>
       <div class="grid3">
         <div class="card"><div class="ico i1"><svg><use href="#i-search"/></svg></div><h3>Audit IA</h3><p>On cartographie vos process, on repère les tâches où l'IA fait gagner du temps, et on vous remet une feuille de route priorisée et chiffrée.</p></div>
         <div class="card"><div class="ico i2"><svg><use href="#i-code"/></svg></div><h3>Développement sur-mesure</h3><p>Agents IA et automatisations branchés sur vos outils existants (mail, CRM, ERP, fichiers) pour traiter, trier, rédiger et relancer à votre place.</p></div>
@@ -238,6 +256,18 @@
       <div class="product">
         <h2 class="g1">AI-MPCT, <em>l'agent de prospection</em></h2>
         <p class="sub">Notre agent sur étagère détecte les entreprises qui ont un besoin maintenant, les qualifie, identifie les bons décideurs et rédige le message d'approche. Vos commerciaux ne perdent plus de temps à chercher : ils se concentrent sur la conversation.</p>
+        <div class="demo" aria-label="Exemple de fiche prospect produite par AI-MPCT, données fictives">
+          <div class="demo-top"><span class="demo-name">EXEMPLE SAS</span><span class="pill fit">FIT 8/10</span><span class="pill sc">82</span><span class="pill ex">Exemple · données fictives</span></div>
+          <p class="demo-desc">PME de services B2B de 20 à 49 salariés, indépendante, en croissance : elle recrute un commercial terrain, signe d'un besoin de développement.</p>
+          <div class="demo-grid">
+            <div class="crit"><small>ACTIVITÉ B2B</small><b><span class="ok">✓</span>Confirmée</b><p>100 % clients professionnels</p></div>
+            <div class="crit"><small>TAILLE</small><b><span class="ok">✓</span>Dans la cible</b><p>20 à 49 salariés</p></div>
+            <div class="crit"><small>AUTONOMIE</small><b><span class="ok">✓</span>Indépendante</b><p>Aucun groupe identifié</p></div>
+            <div class="crit"><small>DYNAMIQUE</small><b><span class="ok mid">~</span>Positive</b><p>Recrutement en cours</p></div>
+          </div>
+          <div class="dm"><i>CM</i><div><b>C. Martin</b><span>Directrice générale · décideuse identifiée</span></div></div>
+          <div class="demo-msg">« Bonjour, j'ai vu que vous recrutiez un commercial terrain… » Message d'approche personnalisé, prêt à envoyer.</div>
+        </div>
         <ol class="pipe">
           <li><b>Signal d'achat</b>Offres d'emploi et signaux publics qui révèlent un besoin</li>
           <li><b>Qualification</b>Vérification de l'entreprise, analyse de son site et score d'adéquation</li>
@@ -246,7 +276,7 @@
         </ol>
         <div class="center">
           <a class="btn btn-primary" href="{aimpct}" target="_blank" rel="noopener">Découvrir AI-MPCT</a>
-          <a class="btn btn-ghost" href="#contact">Demander une démo</a>
+          <a class="btn btn-ghost" href="{calendly}" target="_blank" rel="noopener">Demander une démo</a>
         </div>
       </div>
     </div>
@@ -257,7 +287,7 @@
       <h2 class="g3">Comment <em>collaborer avec nous ?</em></h2>
       <p class="sub">On commence petit, on mesure, puis on étend. Pas de grand projet de transformation avant d'avoir prouvé la valeur.</p>
       <div class="steps">
-        <div class="card step"><span class="clock">30 min · offert</span><h3>Diagnostic</h3><p>Vous nous décrivez votre activité. On identifie où l'IA peut vous faire gagner le plus.</p></div>
+        <div class="card step"><span class="clock">30 min · offert</span><h3>Premier échange</h3><p>Vous nous parlez de votre activité et de ce qui vous prend du temps. On voit ensemble où l'IA peut vous aider.</p></div>
         <div class="card step"><span class="clock">Quelques jours</span><h3>Audit et feuille de route</h3><p>Les cas d'usage priorisés, avec le gain attendu, le coût et le délai pour chacun.</p></div>
         <div class="card step"><span class="clock">Quelques semaines</span><h3>Pilote</h3><p>Un premier agent sur un process précis, avec un objectif mesurable et un prix fixé à l'avance.</p></div>
         <div class="card step"><span class="clock">Dans la durée</span><h3>Déploiement et suivi</h3><p>On étend si les résultats sont là, et on fait le point avec vous à 30 et 90 jours.</p></div>
@@ -280,9 +310,9 @@
     <div class="wrap">
       <h2 class="g5">Questions <em>fréquentes</em></h2>
       <div class="faq" style="margin-top:32px">
-        <details><summary>Je n'y connais rien en IA. Est-ce que c'est pour moi ?</summary><p>Oui, c'est même le cas le plus fréquent. Vous connaissez votre métier, on connaît l'IA. Le diagnostic sert justement à traduire l'un dans l'autre, sans jargon.</p></details>
-        <details><summary>Par où commencer ?</summary><p>Par le diagnostic de 30 minutes, offert. Selon ce qui en ressort, on part soit sur un audit pour avoir une vision d'ensemble, soit directement sur un pilote si un cas d'usage évident se dégage.</p></details>
-        <details><summary>Combien ça coûte ?</summary><p>Chaque pilote a un périmètre et un prix fixés à l'avance, après le diagnostic. Pas de régie qui dérive : vous savez ce que vous payez et ce que vous obtenez.</p></details>
+        <details><summary>Je n'y connais rien en IA. Est-ce que c'est pour moi ?</summary><p>Oui, c'est même le cas le plus fréquent. Vous connaissez votre métier, on connaît l'IA. Le premier échange sert justement à traduire l'un dans l'autre, sans jargon.</p></details>
+        <details><summary>Par où commencer ?</summary><p>Par un premier échange de 30 minutes, offert. Selon ce qui en ressort, on part soit sur un audit pour avoir une vision d'ensemble, soit directement sur un pilote si un cas d'usage évident se dégage.</p></details>
+        <details><summary>Combien ça coûte ?</summary><p>Chaque pilote a un périmètre et un prix fixés à l'avance, après notre premier échange. Pas de régie qui dérive : vous savez ce que vous payez et ce que vous obtenez.</p></details>
         <details><summary>Quelle différence avec ChatGPT ?</summary><p>ChatGPT répond à une question quand on la lui pose. Un agent IA exécute une tâche de bout en bout, branché sur vos outils : il lit vos emails, remplit votre CRM, prépare vos devis, relance vos clients.</p></details>
         <details><summary>Et mes données ?</summary><p>On choisit avec vous des outils adaptés à la sensibilité de vos données, et rien n'est connecté à vos systèmes sans votre accord explicite. L'humain garde la validation finale sur ce que l'agent produit.</p></details>
       </div>
@@ -299,14 +329,15 @@
           <ul class="lines">
             <li><a href="tel:{phone_raw}"><svg><use href="#i-phone"/></svg>{phone}</a></li>
             <li><a href="mailto:{email}"><svg><use href="#i-mail"/></svg>{email}</a></li>
+            <li><a href="{calendly}" target="_blank" rel="noopener"><svg><use href="#i-cal"/></svg>Prendre rendez-vous (Calendly)</a></li>
             <li><a href="{linkedin}" target="_blank" rel="noopener"><svg><use href="#i-in"/></svg>LinkedIn · {person}</a></li>
           </ul>
           <a class="btn btn-primary w100" href="contact.vcf" download><svg width="18" height="18"><use href="#i-user"/></svg>Enregistrer dans mes contacts</a>
         </div>
         <div class="offerbox">
-          <h3>Diagnostic de 30 min, offert</h3>
+          <h3>Un premier échange de 30 min</h3>
           <p>Vous nous décrivez une tâche qui vous coûte du temps. On vous dit honnêtement si l'IA peut s'en charger, en combien de temps et pour quel ordre de prix. Et si ce n'est pas le cas, on vous le dit aussi.</p>
-          <a class="btn btn-ghost" href="mailto:{email}?subject=Diagnostic%20IA%2030%20min">Demander un créneau</a>
+          <a class="btn btn-primary" href="{calendly}" target="_blank" rel="noopener">Choisir un créneau</a>
         </div>
       </div>
     </div>
@@ -323,7 +354,7 @@
 <nav class="dock" aria-label="Contact rapide">
   <a href="contact.vcf" download><svg><use href="#i-user"/></svg>Enregistrer</a>
   <a href="tel:{phone_raw}"><svg><use href="#i-phone"/></svg>Appeler</a>
-  <a href="mailto:{email}"><svg><use href="#i-mail"/></svg>Email</a>
+  <a href="{calendly}" target="_blank" rel="noopener"><svg><use href="#i-cal"/></svg>RDV</a>
 </nav>
 </body>
 </html>

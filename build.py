@@ -18,6 +18,7 @@ CONFIG = {
     "linkedin": "https://www.linkedin.com/in/alexandre-wattel-652303a8/",
     "city": "Lyon",
     "aimpct": "https://ai-mpct.com",
+    "calendly": "https://calendly.com/alexandre-wattel1/30min",
 }
 
 ROOT = pathlib.Path(__file__).parent
