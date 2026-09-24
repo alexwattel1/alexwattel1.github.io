@@ -9,7 +9,8 @@ import pathlib, html
 CONFIG = {
     "name": "Hailp",                       # ← le nom de la boîte, en 1 ligne
     "tagline": "Conseil et agents IA sur-mesure",
-    "url": "https://alexwattel1.github.io",  # URL encodée dans le QR (à remplacer par le domaine une fois branché)
+    "url": "https://hailp.tech",
+    "qr_url": "https://alexwattel1.github.io",  # QR volontairement sur l’URL neutre : redirige vers hailp.tech, survit à un changement de domaine
     "person": "Alexandre Wattel",
     "role": "Fondateur · Conseil et agents IA",
     "phone": "+33 6 58 43 88 24",
@@ -46,7 +47,7 @@ def page(c):
 def qr(c):
     import qrcode
     q = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=20, border=2)
-    q.add_data(c["url"])
+    q.add_data(c["qr_url"])
     q.make(fit=True)
     q.make_image(fill_color="#0B1B24", back_color="white").save(ROOT / "qr.png")
 
