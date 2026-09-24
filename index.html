@@ -63,7 +63,7 @@
   .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px 0 8px; }
   @media (min-width: 761px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 14px; } }
   .stat { border-radius: 18px; padding: 18px 20px; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
-  .stat b { display: block; font-size: 24px; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 4px; }
+  .stat b { display: block; font-size: clamp(19px, 5vw, 24px); hyphens: none; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 4px; }
   .stat small { color: rgba(255,255,255,.95); font-size: 13px; font-weight: 500; line-height: 1.35; display: block; }
   .stat:nth-child(1) { background: linear-gradient(120deg, #a78bfa, #f0abfc 50%, #fbbf24); }
   .stat:nth-child(2) { background: linear-gradient(120deg, #38bdf8, #34d399); }
