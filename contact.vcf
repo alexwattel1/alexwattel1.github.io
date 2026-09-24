@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Wattel;Alexandre;;;
+FN:Alexandre Wattel
+ORG:Hailp
+TITLE:Fondateur - Conseil et agents IA
+TEL;TYPE=CELL:+33658438824
+EMAIL;TYPE=WORK:alexandre.wattel1@gmail.com
+URL:https://alexwattel1.github.io
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/alexandre-wattel-652303a8/
+ADR;TYPE=WORK:;;;Lyon;;;France
+NOTE:Conseil et agents IA sur-mesure. Rencontré via le QR code.
+END:VCARD
