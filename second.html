@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(location.protocol==="http:"&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1")location.replace("https://"+location.host+location.pathname+location.search+location.hash)</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Second — Votre bras droit IA | Hailp</title>
+<meta name="description" content="Second : un assistant IA qui connaît votre métier, voit vos outils et travaille selon vos procédures — installé chez vous, sous votre contrôle. Par Hailp, Lyon.">
+<meta property="og:title" content="Second — Votre bras droit IA">
+<meta property="og:description" content="Il connaît votre métier, voit vos outils et travaille selon vos procédures. Les IA changent tous les trois mois — votre Second restera.">
+<meta name="theme-color" content="#f5f5f7">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='32' y2='32' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='.35' stop-color='%23a78bfa'/%3E%3Cstop offset='.65' stop-color='%23f472b6'/%3E%3Cstop offset='1' stop-color='%23fbbf24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='url(%23g)' stroke-width='6' stroke-dasharray='12.3 5' stroke-dashoffset='6'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f5f5f7; --card: #fff; --ink: #1d1d1f; --muted: #86868b; --body: #4b4b50;
+    --line: #e8e8ed; --accent: #0071e3; --accent-soft: #eaf3fe;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 17px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 761px) { .wrap { padding: 0 24px; } }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  header { padding: 14px 0; background: rgba(255,255,255,.85);
+           backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+           position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; gap: 14px; }
+  .brand { font-size: 24px; font-weight: 700; letter-spacing: -.02em; color: var(--ink);
+           display: flex; align-items: center; gap: 9px; }
+  .brand:hover { text-decoration: none; }
+  .brand-icon { width: 26px; height: 26px; }
+  .spacer { flex: 1; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 980px;
+         font-weight: 500; font-size: 16px; transition: filter .15s; min-height: 46px; }
+  .btn:hover { filter: brightness(1.07); text-decoration: none; }
+  .btn-primary { background: linear-gradient(135deg, #0090ff, #7a5cff); color: #fff; }
+  .btn-ghost { background: #e8e8ed; color: var(--ink); }
+
+  .grad { background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grad2 { background: linear-gradient(120deg, #f472b6, #fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grad3 { background: linear-gradient(120deg, #6366f1, #ec4899); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .hero { padding: 64px 0 40px; }
+  @media (min-width: 761px) { .hero { padding: 92px 0 52px; } }
+  .eyebrow { display: inline-block; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft);
+             border-radius: 980px; padding: 4px 12px; margin: 0 0 18px; }
+  h1 { font-size: clamp(56px, 12vw, 110px); line-height: 1; font-weight: 800;
+       letter-spacing: -.04em; margin: 0 0 10px; }
+  .hero .sub1 { font-size: clamp(24px, 4vw, 34px); font-weight: 700; letter-spacing: -.02em; margin: 0 0 14px; }
+  .lede { font-size: clamp(18px, 2.4vw, 21px); color: var(--body); max-width: 40em; margin: 0 0 28px; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .hero-note { font-size: 13px; color: var(--muted); margin: 14px 0 0; }
+
+  .promise { background: #1d1d1f; color: #f5f5f7; border-radius: 24px; padding: 40px 28px; margin: 36px 0 0; }
+  @media (min-width: 761px) { .promise { padding: 56px 48px; } }
+  .promise h2 { font-size: clamp(26px, 4.6vw, 42px); line-height: 1.15; font-weight: 800; letter-spacing: -.03em; margin: 0; text-align: left; }
+  .promise p { color: #a1a1a6; margin: 14px 0 0; max-width: 46em; }
+
+  section { padding: 52px 0; }
+  section h2 { font-size: clamp(30px, 5.5vw, 48px); line-height: 1.12; font-weight: 800;
+       letter-spacing: -.03em; color: var(--ink); margin: 0 0 12px; text-align: center; text-wrap: balance; }
+  .sub { text-align: center; color: var(--body); max-width: 40em; margin: 0 auto 32px; font-size: 18px; }
+
+  .card { background: var(--card); border-radius: 16px; padding: 24px 26px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .grid3 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 761px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
+  .grid4 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 761px) { .grid4 { grid-template-columns: repeat(4, 1fr); } }
+  .card h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.01em; }
+  .card p { margin: 0; font-size: 15px; color: var(--body); }
+  .ico { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 14px; color: #fff; font-size: 20px; }
+  .i1 { background: linear-gradient(135deg, #0090ff, #7a5cff); }
+  .i2 { background: linear-gradient(135deg, #38bdf8, #34d399); }
+  .i3 { background: linear-gradient(135deg, #f472b6, #fb923c); }
+  .i4 { background: linear-gradient(135deg, #2dd4bf, #a3e635); }
+  .i5 { background: linear-gradient(135deg, #a78bfa, #f0abfc 50%, #fbbf24); }
+  .i6 { background: linear-gradient(135deg, #6366f1, #ec4899); }
+
+  .statement { text-align: center; font-size: clamp(22px, 4vw, 34px); font-weight: 800; letter-spacing: -.02em; margin: 36px auto 0; max-width: 24em; line-height: 1.25; }
+
+  .cmd { display: flex; gap: 14px; align-items: baseline; background: var(--card); border-radius: 14px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .cmd + .cmd { margin-top: 10px; }
+  .cmd code { background: #1d1d1f; color: #fff; border-radius: 8px; padding: 6px 12px; font-weight: 700; font-size: 15px; white-space: nowrap; }
+  .cmd p { margin: 0; font-size: 15px; color: var(--body); }
+
+  .stats { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 761px) { .stats { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+  .stat { border-radius: 18px; padding: 20px 22px; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+  .stat b { display: block; font-size: 19px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; margin-bottom: 4px; }
+  .stat small { color: rgba(255,255,255,.95); font-size: 13.5px; font-weight: 500; line-height: 1.4; display: block; }
+  .s1 { background: linear-gradient(120deg, #0090ff, #7a5cff); }
+  .s2 { background: linear-gradient(120deg, #6366f1, #ec4899); }
+  .s3 { background: linear-gradient(120deg, #38bdf8, #34d399); }
+  .s4 { background: linear-gradient(120deg, #f472b6, #fb923c); }
+  .s5 { background: linear-gradient(120deg, #2dd4bf, #a3e635); }
+  .s6 { background: linear-gradient(120deg, #a78bfa, #f0abfc 55%, #fbbf24); }
+
+  .steps { display: grid; grid-template-columns: 1fr; gap: 14px; counter-reset: step; }
+  @media (min-width: 761px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+  .step { background: var(--card); border-radius: 16px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .step b.num { display:block; font-size: 30px; font-weight: 800; background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 6px; }
+  .step h3 { margin: 0 0 2px; font-size: 17px; }
+  .step small { color: var(--muted); display: block; margin-bottom: 8px; }
+  .step p { margin: 0; font-size: 14.5px; color: var(--body); }
+
+  .cta-final { background: #1d1d1f; border-radius: 24px; padding: 44px 28px; text-align: center; color: #f5f5f7; }
+  @media (min-width: 761px) { .cta-final { padding: 60px 48px; } }
+  .cta-final h2 { color: #f5f5f7; }
+  .cta-final p { color: #a1a1a6; max-width: 38em; margin: 12px auto 26px; }
+
+  footer { padding: 34px 0 46px; font-size: 13px; color: var(--muted); text-align: center; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#38bdf8"/><stop offset=".35" stop-color="#a78bfa"/><stop offset=".65" stop-color="#f472b6"/><stop offset="1" stop-color="#fbbf24"/></linearGradient></defs><circle cx="16" cy="16" r="11" fill="none" stroke="url(#hg)" stroke-width="6" stroke-dasharray="12.3 5" stroke-dashoffset="6"/></svg>
+      Hailp
+    </a>
+    <div class="spacer"></div>
+    <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Échanger 30 min</a>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <span class="eyebrow">Nouvelle offre</span>
+  <h1 class="grad">Second</h1>
+  <p class="sub1">Votre bras droit IA.</p>
+  <p class="lede">Il connaît votre métier, voit vos outils et travaille selon vos procédures — installé chez vous, sous votre contrôle.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Réserver un échange de 30 min</a>
+    <a class="btn btn-ghost" href="#fonctionnement">Comment ça marche</a>
+  </div>
+
+  <div class="promise">
+    <h2>Les IA peuvent changer tous les trois mois.<br><span class="grad">Votre Second restera.</span></h2>
+    <p>Le moteur d'IA se remplace — celui d'aujourd'hui, un autre demain si besoin. Vos procédures, votre mémoire, vos accès <b style="color:#f5f5f7">vous appartiennent</b> et survivent aux versions comme aux modes.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>L'expérience que vous avez<br>peut-être déjà faite</h2>
+    <p class="sub">Une IA brillante… et pourtant décevante. Le problème n'est pas l'intelligence — c'est ce qui manque autour.</p>
+    <div class="grid3">
+      <div class="card"><div class="ico i1">🧭</div><h3>Elle ne connaît ni votre métier, ni votre actualité</h3><p>Vos clients, vos dossiers en cours ? Elle ne s'en rappelle pas. Aucun historique de ce qui s'est dit ou décidé. Résultat : des réponses génériques.</p></div>
+      <div class="card"><div class="ico i3">🔌</div><h3>Elle ne voit pas vos outils</h3><p>Mails, agenda, logiciel métier : invisibles pour elle. Tout passe par du copier-coller — rien ne se prépare là où vous travaillez vraiment.</p></div>
+      <div class="card"><div class="ico i6">🕳️</div><h3>Elle oublie tout</h3><p>Chaque conversation repart de zéro. Ce qu'elle a appris hier a disparu. Sa mémoire, c'est vous.</p></div>
+    </div>
+    <p class="statement">C'est comme si votre meilleure recrue <span class="grad3">perdait la mémoire chaque nuit.</span></p>
+  </div>
+</section>
+
+<section id="fonctionnement" style="padding-top:0">
+  <div class="wrap">
+    <h2>Votre Second <span class="grad">sait</span>, <span class="grad">voit</span> et <span class="grad">fait</span></h2>
+    <p class="sub">Trois couches, installées chez vous et réglées à votre façon de travailler.</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="ico i1">🧠</div>
+        <h3>Il sait — une mémoire qui vit</h3>
+        <p>Des fiches reliées entre elles : vos clients, vos dossiers, vos comptes rendus. Chaque échange l'enrichit, elle s'organise toute seule — sans que vous ayez rien à faire. Ce que ce client vous a dit il y a six mois ? La réponse sort en dix secondes, avec la source.</p>
+      </div>
+      <div class="card">
+        <div class="ico i2">🔗</div>
+        <h3>Il voit — branché sur vos outils</h3>
+        <p>Boîte mail, agenda, logiciel métier, documents : il voit ce qui arrive, sans copier-coller. Lecture ou écriture — chaque droit se décide avec vous, outil par outil. Vos outils restent vos outils : on ne remplace rien, on branche.</p>
+      </div>
+      <div class="card">
+        <div class="ico i3">⚡</div>
+        <h3>Il fait — un mot, une procédure complète</h3>
+        <p>Vous dites « rendez-vous terminé » : le compte rendu est rédigé à votre format, le mail de suite est prêt à relire, votre logiciel est mis à jour, les actions décidées sont notées. Il prépare — vous validez.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Des commandes <span class="grad">à votre image</span></h2>
+    <p class="sub">Chaque commande est un agent à votre service : votre procédure, écrite en français clair, que vous pouvez lire, corriger et faire évoluer. Les possibilités sont quasi illimitées — quelques exemples :</p>
+    <div class="cmd"><code>/rdv</code><p>Rédige le compte rendu du rendez-vous, prépare le mail de suite, distille les actions décidées, met vos fiches à jour.</p></div>
+    <div class="cmd"><code>/veille</code><p>Chaque matin : rassemble l'actualité utile de votre secteur et de vos clients, triée selon vos critères.</p></div>
+    <div class="cmd"><code>/relance</code><p>Repère les dossiers restés sans réponse et prépare des relances personnalisées — prêtes à relire.</p></div>
+    <div class="cmd"><code>/cloture</code><p>En fin de journée : range tout, met la mémoire à jour, pose les priorités de demain.</p></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Sous votre contrôle, <span class="grad2">toujours</span></h2>
+    <div class="grid4">
+      <div class="card"><div class="ico i1">✅</div><h3>Il prépare, vous validez</h3><p>Aucun mail ne part, aucune fiche ne change sans votre relecture.</p></div>
+      <div class="card"><div class="ico i2">🔑</div><h3>Des droits décidés par vous</h3><p>Chaque autorisation d'écriture est une décision — la vôtre, outil par outil.</p></div>
+      <div class="card"><div class="ico i4">🏠</div><h3>Vos données restent chez vous</h3><p>Vos fichiers vivent sur votre machine et ne servent pas à entraîner les modèles.</p></div>
+      <div class="card"><div class="ico i3">📜</div><h3>La liste des interdits</h3><p>Ce qu'il ne doit jamais faire chez vous — définie ensemble, lisible à tout moment.</p></div>
+    </div>
+    <p class="statement" style="font-size:clamp(19px,3vw,26px)">Et chaque semaine, votre Second relit son propre travail et propose des améliorations. <span class="grad">Le Second du troisième mois est meilleur que celui du premier jour.</span></p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>En résumé, votre Second c'est…</h2>
+    <div class="stats">
+      <div class="stat s1"><b>Une IA interchangeable</b><small>Le moteur change tous les trois mois. Votre Second reste.</small></div>
+      <div class="stat s2"><b>Une donnée construite et exploitée</b><small>Chaque échange l'enrichit — et votre Second s'en sert tous les jours.</small></div>
+      <div class="stat s3"><b>Un cerveau numérique indépendant</b><small>Il vit chez vous. Il vous appartient.</small></div>
+      <div class="stat s4"><b>Des agents illimités</b><small>Une nouvelle commande se crée vite et facilement — et vous gardez la main.</small></div>
+      <div class="stat s5"><b>Une productivité accrue</b><small>Le travail de fond se fait. Vous relisez, vous validez.</small></div>
+      <div class="stat s6"><b>La passation résolue</b><small>Départ, absence : la façon de travailler est historisée, rien ne part avec personne.</small></div>
+    </div>
+    <p class="statement" style="font-size:clamp(19px,3vw,26px)">Une mémoire d'entreprise qui grandit chaque jour — <span class="grad">c'est elle qui vaut de l'argent.</span></p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Concrètement ?</h2>
+    <p class="sub">Un PC ou un Mac — le vôtre. Un outil de transcription pour vos réunions et notes vocales. Un moteur IA (Claude Code ou Codex), interchangeable. C'est tout : pas de serveur, pas de nouveau logiciel à apprendre — et vos outils actuels, branchés.</p>
+    <div class="steps">
+      <div class="step"><b class="num">1</b><h3>Diagnostic</h3><small>½ journée</small><p>Dans votre quotidien : où partent vos heures, quelles procédures valent de l'or chez vous.</p></div>
+      <div class="step"><b class="num">2</b><h3>Installation</h3><small>1 journée</small><p>Sur votre machine : la mémoire, la fiche d'identité, les branchements.</p></div>
+      <div class="step"><b class="num">3</b><h3>Vos procédures</h3><small>1 à 2 jours</small><p>Écrites à partir de vos vrais documents, testées avec vous sur des cas réels.</p></div>
+      <div class="step"><b class="num">4</b><h3>Formation &amp; suivi</h3><small>½ journée + 30 jours</small><p>Quatre ou cinq gestes simples, puis un point de valeur : les heures rendues, mesurées.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-final">
+      <h2>La prochaine étape : <span class="grad">une demi-journée de diagnostic.</span></h2>
+      <p>Nous cartographions votre semaine réelle, ensemble, dans votre quotidien. Vous repartez avec la carte de vos heures et les 3 à 5 commandes qui peuvent les rendre — utile, que nous poursuivions ensemble ou non.</p>
+      <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Réserver un échange de 30 min</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Second est une offre <a href="/">Hailp</a> — Alexandre Wattel · Lyon · <a href="mailto:alexandre.wattel1@gmail.com">alexandre.wattel1@gmail.com</a>
+  </div>
+</footer>
+
+</body>
+</html>
