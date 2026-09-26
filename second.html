@@ -5,9 +5,9 @@
 <script>if(location.protocol==="http:"&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1")location.replace("https://"+location.host+location.pathname+location.search+location.hash);document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Second — Votre bras droit IA | Hailp</title>
-<meta name="description" content="Second : un assistant IA qui connaît votre métier, voit vos outils et travaille selon vos procédures — installé chez vous, sous votre contrôle. Par Hailp, Lyon.">
+<meta name="description" content="Second : un assistant IA qui connaît votre métier, voit vos outils et travaille selon vos méthodes — installé chez vous, sous votre contrôle. Par Hailp, Lyon.">
 <meta property="og:title" content="Second — Votre bras droit IA">
-<meta property="og:description" content="Il connaît votre métier, voit vos outils et travaille selon vos procédures. Les modèles IA changent tous les trois mois — votre Second restera.">
+<meta property="og:description" content="Il connaît votre métier, voit vos outils et travaille selon vos méthodes. Les modèles IA changent tous les trois mois — votre Second restera.">
 <meta name="theme-color" content="#f5f5f7">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='32' y2='32' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='.35' stop-color='%23a78bfa'/%3E%3Cstop offset='.65' stop-color='%23f472b6'/%3E%3Cstop offset='1' stop-color='%23fbbf24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='url(%23g)' stroke-width='6' stroke-dasharray='12.3 5' stroke-dashoffset='6'/%3E%3C/svg%3E">
 <style>
@@ -40,7 +40,6 @@
          font-weight: 500; font-size: 16px; transition: filter .15s; min-height: 46px; }
   .btn:hover { filter: brightness(1.07); text-decoration: none; }
   .btn-primary { background: linear-gradient(135deg, #0090ff, #7a5cff); color: #fff; }
-  .btn-ghost { background: #e8e8ed; color: var(--ink); }
 
   .grad  { background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .grad2 { background: linear-gradient(120deg, #f472b6, #fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -51,27 +50,12 @@
   .ai { background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
   /* ---- hero centré ---- */
-  .hero { padding: 80px 0 40px; text-align: center; }
-  @media (min-width: 761px) { .hero { padding: 110px 0 60px; } }
-  h1 { font-size: clamp(64px, 14vw, 130px); line-height: 1; font-weight: 800;
-       letter-spacing: -.04em; margin: 0 0 10px; }
-  .hero .sub1 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; letter-spacing: -.02em; margin: 0 0 14px; }
-  .lede { font-size: clamp(18px, 2.4vw, 21px); color: var(--body); max-width: 38em; margin: 0 auto 30px; }
-  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; }
-
-  /* ---- déclaration (slide 2) ---- */
-  .statement { padding: 90px 0 100px; text-align: center; }
-  .statement h2 { font-size: clamp(30px, 6vw, 58px); line-height: 1.12; font-weight: 800;
-                  letter-spacing: -.03em; margin: 0; text-wrap: balance; }
-  .statement .l2 { margin-top: 6px; }
-
-  /* ---- texte qui s'allume au scroll ---- */
-  html.js .fill-text { color: #c9cacd;
-    background: linear-gradient(#1d1d1f, #1d1d1f) no-repeat 0 0 / 0% 100%;
-    -webkit-background-clip: text; background-clip: text; }
-  @media (prefers-reduced-motion: reduce) {
-    html.js .fill-text { color: var(--ink); background: none; }
-  }
+  .hero { padding: 90px 0 min(30vh, 300px); text-align: center; }
+  @media (min-width: 761px) { .hero { padding: 120px 0 min(32vh, 340px); } }
+  h1 { font-size: clamp(64px, 14vw, 130px); line-height: 1.05; font-weight: 800;
+       letter-spacing: -.04em; margin: 0 0 12px; padding-bottom: .05em; }
+  .hero .sub1 { font-size: clamp(23px, 4vw, 36px); font-weight: 700; letter-spacing: -.02em; margin: 0 0 10px; }
+  .hero .sub2 { font-size: clamp(23px, 4vw, 36px); font-weight: 700; letter-spacing: -.02em; margin: 0; color: var(--body); }
 
   /* ---- scènes épinglées ---- */
   html.js .stack { height: calc(var(--n) * 110vh + 50vh); position: relative; }
@@ -83,47 +67,44 @@
   @media (min-width: 761px) { .scene { padding: 100px 24px 32px; } }
   .scene > h2 { font-size: clamp(30px, 5.5vw, 48px); line-height: 1.12; font-weight: 800;
                 letter-spacing: -.03em; margin: 0 0 8px; flex: none; text-wrap: balance; }
-  .scene .kicker { font-size: clamp(16px, 2.2vw, 20px); font-weight: 700; color: var(--muted);
-                   text-transform: none; letter-spacing: .01em; margin: 0 0 6px; flex: none; }
-  .bigline { font-size: clamp(34px, min(7vw, 9vh), 72px) !important; line-height: 1.05 !important; letter-spacing: -.035em !important; }
+  .bigline { font-size: clamp(34px, min(7vw, 9vh), 72px) !important; line-height: 1.08 !important; letter-spacing: -.035em !important; }
   .slides { position: relative; flex: 1; min-height: 0; }
   .scard { display: flex; flex-direction: column; align-items: center; justify-content: center;
-           justify-content: safe center; gap: 18px; text-align: center; height: 100%; }
+           justify-content: safe center; gap: 14px; text-align: center; height: 100%; }
   html.js .scard { position: absolute; inset: 0; opacity: 0; will-change: opacity, transform; pointer-events: none; }
   .scard h3 { font-size: clamp(24px, 4.6vw, 40px); font-weight: 800; letter-spacing: -.025em; line-height: 1.15; margin: 0; max-width: 18em; }
-  .scard .cap { font-size: clamp(16px, 2.4vw, 22px); font-weight: 600; color: var(--body); margin: 0; max-width: 30em; }
-  .schema { width: min(620px, 92vw); max-height: 42vh; height: auto; }
+  .scard .cap { font-size: clamp(16px, 2.4vw, 22px); font-weight: 600; color: var(--body); margin: 0 0 6px; max-width: 30em; }
+  .schema { width: min(640px, 92vw); max-height: 46vh; height: auto; }
   .schema text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
 
-  /* scène alignée à gauche (Souvent, l'IA) */
-  .scene-left > h2, .scene-left .kicker { text-align: left; }
-  .scard-split { align-items: stretch; text-align: left; justify-content: flex-start; gap: 28px; }
-  @media (min-width: 761px) {
-    .scard-split { flex-direction: row; align-items: center; align-items: safe center; gap: 40px; }
-    .scard-split > h3 { flex: 1.1; }
-    .scard-split > .encart { flex: 1; }
-  }
-  .scard-split h3 { max-width: none; }
-  .encart { background: var(--card); border-radius: 20px; padding: 22px 24px; box-shadow: 0 2px 14px rgba(0,0,0,.06);
-            display: flex; flex-direction: column; gap: 16px; }
-  .bullet { display: flex; gap: 14px; align-items: center; }
-  .bullet p { margin: 0; font-size: clamp(14.5px, 1.9vw, 17px); font-weight: 600; color: var(--ink); line-height: 1.4; }
-  .bico { width: 42px; height: 42px; flex: none; border-radius: 12px; display: grid; place-items: center; }
-  .bico svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  /* scène alignée à gauche */
+  .scene-left > h2 { text-align: left; }
+
+  /* mot / bout de phrase qui change dans le titre épinglé */
+  .swap { display: inline-grid; }
+  .swapw { grid-area: 1 / 1; white-space: nowrap; padding-bottom: .08em; }
+  .swap-flow { max-width: 100%; }
+  .swap-flow .swapw { white-space: normal; }
+  html.js .swapw { opacity: 0; will-change: opacity, transform; }
+  html:not(.js) .swapw:not(:first-child) { display: none; }
+  .rm-title { display: none; }
+  html:not(.js) .rm-title { display: block; }
+
+  /* grande carte pleine largeur (Souvent, l'IA) */
+  .encart-wide { width: 100%; background: var(--card); border-radius: 22px; padding: 26px 28px;
+                 box-shadow: 0 2px 16px rgba(0,0,0,.06); display: flex; flex-direction: column; gap: 18px; text-align: left; }
+  @media (min-width: 761px) { .encart-wide { padding: 34px 40px; gap: 22px; } }
+  .bullet { display: flex; gap: 16px; align-items: center; }
+  .bullet p { margin: 0; font-size: clamp(15.5px, 2.3vw, 20px); font-weight: 600; color: var(--ink); line-height: 1.4; }
+  .bico { width: 46px; height: 46px; flex: none; border-radius: 13px; display: grid; place-items: center; }
+  @media (min-width: 761px) { .encart-wide .bico { width: 54px; height: 54px; border-radius: 15px; } }
+  .bico svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .i1 { background: linear-gradient(135deg, #0090ff, #7a5cff); }
   .i2 { background: linear-gradient(135deg, #38bdf8, #34d399); }
   .i3 { background: linear-gradient(135deg, #f472b6, #fb923c); }
   .i4 { background: linear-gradient(135deg, #2dd4bf, #a3e635); }
   .i5 { background: linear-gradient(135deg, #6366f1, #ec4899); }
   .i6 { background: linear-gradient(135deg, #a78bfa, #fbbf24); }
-
-  /* mot qui change dans le titre épinglé */
-  .swap { display: inline-grid; }
-  .swapw { grid-area: 1 / 1; white-space: nowrap; }
-  html.js .swapw { opacity: 0; will-change: opacity, transform; }
-  html:not(.js) .swapw:not(:first-child) { display: none; }
-  .rm-title { display: none; }
-  html:not(.js) .rm-title { display: block; }
 
   /* schéma mémoire (HTML) */
   .mem { width: min(680px, 94vw); display: flex; flex-direction: column; gap: 10px; }
@@ -139,7 +120,7 @@
   .t-grey { background: #f5f5f7; color: var(--muted); }
 
   /* schéma connexions (HTML) */
-  .connect { width: min(760px, 94vw); display: flex; flex-direction: column; gap: 14px; align-items: stretch; }
+  .connect { width: min(780px, 94vw); display: flex; flex-direction: column; gap: 14px; align-items: stretch; }
   @media (min-width: 761px) { .connect { flex-direction: row; align-items: center; gap: 0; } }
   .tools { flex: 1.15; display: flex; flex-direction: column; gap: 9px; }
   .toolrow { display: flex; align-items: center; gap: 12px; background: var(--card); border-radius: 13px;
@@ -147,54 +128,53 @@
   .toolrow p { margin: 0; flex: 1; font-size: clamp(13.5px, 1.8vw, 16px); font-weight: 700; text-align: left; }
   .tiles { display: flex; gap: 6px; }
   .apptile { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
-             font-size: 12px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
-  .link-line { flex: none; align-self: center; width: 2px; height: 22px; background: linear-gradient(#0090ff, #7a5cff); border-radius: 2px; }
-  @media (min-width: 761px) { .link-line { width: 56px; height: 3px; background: linear-gradient(90deg, #0090ff, #7a5cff); } }
-  .second-box { flex: 1; background: linear-gradient(135deg, #0090ff, #7a5cff); border-radius: 18px;
+             font-size: 12px; font-weight: 800; color: #fff; letter-spacing: -.02em; flex: none; }
+  svg.apptile { display: block; }
+  .link-line { flex: none; align-self: center; width: 2px; height: 22px; background: linear-gradient(#f472b6, #fb923c); border-radius: 2px; }
+  @media (min-width: 761px) { .link-line { width: 56px; height: 3px; background: linear-gradient(90deg, #f472b6, #fb923c); } }
+  .second-box { flex: 1; background: linear-gradient(135deg, #f472b6, #fb923c); border-radius: 18px;
                 padding: 22px 24px; color: #fff; text-align: left; }
   .second-box h4 { margin: 0 0 6px; font-size: clamp(19px, 2.6vw, 24px); font-weight: 800; letter-spacing: -.02em; }
   .second-box p { margin: 0; font-size: clamp(13.5px, 1.9vw, 16px); line-height: 1.45; }
 
-  /* déroulé progressif (paramétrage, étapes) */
+  /* déroulé progressif (paramétrage, besoins, étapes) */
   .stepflow { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center;
               justify-content: safe center; gap: 12px; }
   html.js [data-steps] .stepitem { opacity: .14; transform: translateY(20px); will-change: opacity, transform; }
   .stepitem { background: var(--card); border-radius: 16px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.05);
               display: flex; gap: 16px; align-items: center; }
-  .stepitem.dark { background: #1d1d1f; }
-  .stepitem.dark h3, .stepitem.dark p { color: #f5f5f7; }
-  .stepitem.dark p.sd { color: #a1a1a6; }
   .stepitem.hl { background: linear-gradient(120deg, #0090ff, #7a5cff); }
   .stepitem.hl h3, .stepitem.hl p { color: #fff; }
   .stepitem h3 { margin: 0; font-size: clamp(16.5px, 2.4vw, 20px); letter-spacing: -.01em; }
   .stepitem p { margin: 0; font-size: clamp(13.5px, 1.9vw, 15.5px); color: var(--body); line-height: 1.45; }
   .stepitem .stxt { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .stepitem small { color: var(--muted); font-size: 13px; font-weight: 600; }
-  .stepitem.dark small { color: #7ab8ff; }
-  .num { flex: none; font-size: clamp(26px, 4vw, 34px); font-weight: 800; width: 44px; text-align: center;
+  .num { flex: none; font-size: clamp(28px, 4.5vw, 40px); font-weight: 800; width: 52px; text-align: center;
          background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-  /* mots géants (Second, c'est) */
-  .giant { font-size: clamp(40px, min(9.5vw, 13vh), 104px) !important; line-height: 1.02 !important; letter-spacing: -.04em !important; max-width: none !important; }
+  /* étapes en gros texte dégradé */
+  .stept { font-size: clamp(26px, 4.8vw, 42px) !important; font-weight: 800 !important; letter-spacing: -.025em !important;
+           line-height: 1.1 !important; padding-bottom: .06em; }
+  .step-big { padding: 18px 26px; }
 
-  /* boucle amélioration */
-  .loop { display: flex; flex-wrap: wrap; gap: 8px 6px; align-items: center; justify-content: center; margin: 26px 0 14px; }
-  .loop .pill { background: var(--card); border-radius: 980px; padding: 11px 22px; font-weight: 700;
-                font-size: clamp(14px, 2vw, 17px); box-shadow: 0 1px 3px rgba(0,0,0,.05); }
-  .loop .pill.on { background: linear-gradient(135deg, #0090ff, #7a5cff); color: #fff; }
-  .loop .arr { color: #7a5cff; font-weight: 700; padding: 0 2px; }
-  .loop .again { color: var(--muted); font-weight: 600; font-size: 15px; }
-
-  /* cartes besoins */
-  .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (min-width: 761px) { .grid4 { grid-template-columns: repeat(4, 1fr); } }
-  .card { background: var(--card); border-radius: 16px; padding: 22px 22px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
-  .card h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: -.01em; }
-  .card p { margin: 0; font-size: 14px; color: var(--body); }
-  .ico { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 14px; }
+  /* besoins en ligne */
+  @media (min-width: 761px) {
+    .steprow { flex-direction: row; align-items: stretch; gap: 14px; }
+    .steprow .stepitem { flex: 1; flex-direction: column; align-items: flex-start; gap: 10px; padding: 24px; }
+  }
+  .steprow .stepitem h3 { font-size: clamp(16px, 2.2vw, 19px); }
+  .ico { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; flex: none; }
   .ico svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-  section { padding: 60px 0; }
+  /* mots géants (Second, c'est) */
+  .giant { font-size: clamp(40px, min(9.5vw, 13vh), 104px) !important; line-height: 1.08 !important;
+           letter-spacing: -.04em !important; max-width: none !important; padding-bottom: .08em; }
+
+  /* section amélioration continue */
+  .tall { min-height: 90vh; display: flex; align-items: center; }
+  .cycle { width: min(460px, 88vw); height: auto; display: block; margin: 4px auto 10px; }
+  .cycle text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+  section { padding: 70px 0; }
   section h2 { font-size: clamp(30px, 5.5vw, 48px); line-height: 1.12; font-weight: 800;
        letter-spacing: -.03em; color: var(--ink); margin: 0 0 12px; text-align: center; text-wrap: balance; }
   .sub { text-align: center; color: var(--body); max-width: 42em; margin: 0 auto 26px; font-size: clamp(16px, 2.2vw, 19px); }
@@ -256,54 +236,41 @@
   </div>
 </header>
 
-<!-- 1. Hero centré -->
+<!-- 1. Hero centré (reprend la slide 1 du deck) -->
 <div class="wrap hero">
   <h1 class="grad">Second</h1>
   <p class="sub1">Votre bras droit IA.</p>
-  <p class="lede">Il connaît votre métier, voit vos outils et travaille selon vos procédures — installé chez vous, sous votre contrôle.</p>
-  <div class="hero-cta">
-    <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Réserver un échange de 30 min</a>
-    <a class="btn btn-ghost" href="#fonctionnement">Comment ça marche</a>
-  </div>
+  <p class="sub2">Il connaît votre métier, voit vos outils et travaille selon vos méthodes.</p>
 </div>
 
-<!-- 2. La promesse (slide 2) -->
-<div class="wrap statement">
-  <h2 class="fill-text" data-fill>Les modèles IA peuvent changer tous les trois mois.</h2>
-  <h2 class="l2 grad">Votre Second restera.</h2>
-</div>
-
-<!-- 3. Souvent, l'IA… (slides 3-5) -->
+<!-- 2. Souvent, l'IA… : la phrase continue dans le titre, la grande carte défile -->
 <div class="stack" data-stack style="--n:3">
   <div class="stack-viewport">
     <div class="scene scene-left">
-      <h2 class="bigline">Souvent, l'IA</h2>
+      <h2 class="bigline">Souvent, l'IA <span class="swap swap-flow"><span class="swapw grad">ne connaît ni votre métier, ni votre actualité.</span><span class="swapw grad2">ne voit pas vos outils.</span><span class="swapw grad3">oublie tout.</span></span></h2>
       <div class="slides">
 
-        <article class="scard scard-split">
-          <h3 class="bigline grad">ne connaît ni votre métier, ni&nbsp;votre actualité.</h3>
-          <div class="encart">
+        <article class="scard">
+          <div class="encart-wide">
             <div class="bullet"><span class="bico i1"><svg><use href="#i-users"/></svg></span><p>Difficile pour elle de connaître votre actualité précise, vos dossiers en cours, leurs enjeux…</p></div>
             <div class="bullet"><span class="bico i2"><svg><use href="#i-clock"/></svg></span><p>Elle ne capitalise pas sur l'historique de ce qui s'est dit ou décidé.</p></div>
             <div class="bullet"><span class="bico i3"><svg><use href="#i-chat"/></svg></span><p>Résultat : des réponses génériques.</p></div>
           </div>
         </article>
 
-        <article class="scard scard-split">
-          <h3 class="bigline grad2">ne voit pas vos&nbsp;outils.</h3>
-          <div class="encart">
+        <article class="scard">
+          <div class="encart-wide">
             <div class="bullet"><span class="bico i3"><svg><use href="#i-link"/></svg></span><p>Logiciels métier, mails, agenda, documents lui sont invisibles.</p></div>
             <div class="bullet"><span class="bico i1"><svg><use href="#i-warn"/></svg></span><p>Tout passe par du transfert de fichiers ou du copier-coller.</p></div>
             <div class="bullet"><span class="bico i4"><svg><use href="#i-tool"/></svg></span><p>Elle ne capitalise pas sur ce que vous réalisez hors de son champ de vision.</p></div>
           </div>
         </article>
 
-        <article class="scard scard-split">
-          <h3 class="bigline grad3">oublie tout.</h3>
-          <div class="encart">
+        <article class="scard">
+          <div class="encart-wide">
             <div class="bullet"><span class="bico i5"><svg><use href="#i-clock"/></svg></span><p>Le contexte de chaque conversation repart de zéro.</p></div>
             <div class="bullet"><span class="bico i6"><svg><use href="#i-search"/></svg></span><p>Ce qu'elle a appris hier a disparu.</p></div>
-            <div class="bullet"><span class="bico i3"><svg><use href="#i-users"/></svg></span><p>Sa mémoire, c'est vous — et c'est frustrant à l'usage.</p></div>
+            <div class="bullet"><span class="bico i3"><svg><use href="#i-users"/></svg></span><p>Sa mémoire, c'est vous, et c'est frustrant à l'usage.</p></div>
           </div>
         </article>
 
@@ -312,11 +279,10 @@
   </div>
 </div>
 
-<!-- 4. Alors que… votre Second sait / voit / fait (slides 7-9) -->
+<!-- 3. Votre Second sait / voit / fait (slides 7-9) -->
 <div class="stack" id="fonctionnement" data-stack style="--n:3">
   <div class="stack-viewport">
     <div class="scene">
-      <p class="kicker" style="text-align:center">Alors que…</p>
       <h2 class="bigline" style="text-align:center">Votre <span class="grad">Second</span> <span class="swap"><span class="swapw grad">sait.</span><span class="swapw grad2">voit.</span><span class="swapw grad3">fait.</span></span></h2>
       <div class="slides">
 
@@ -329,7 +295,6 @@
             <div class="mem-row"><p>Des notes de détail</p><span class="tag t-green">à la demande</span></div>
             <div class="mem-row"><p>Archives</p><span class="tag t-grey">rarement</span></div>
           </div>
-          <p class="cap" style="font-size:15px; font-weight:500">Chaque échange l'enrichit. Des notes reliées entre elles, qui s'organisent toutes seules.</p>
         </article>
 
         <article class="scard">
@@ -337,40 +302,38 @@
           <p class="cap">Branché sur vos outils, vous gardez vos habitudes.</p>
           <div class="connect" role="img" aria-label="Boîte mail, agenda, logiciel métier et documents connectés à Second">
             <div class="tools">
-              <div class="toolrow"><p>Boîte mail</p><span class="tiles"><span class="apptile" style="background:#ea4335">M</span><span class="apptile" style="background:#0f6cbd">O</span></span></div>
-              <div class="toolrow"><p>Agenda</p><span class="tiles"><span class="apptile" style="background:#fff; color:#ea4335; border:1px solid #e8e8ed">31</span><span class="apptile" style="background:#1d1d1f">17</span></span></div>
-              <div class="toolrow"><p>Logiciel métier</p><span class="tiles"><span class="apptile" style="background:#00a1e0">SF</span><span class="apptile" style="background:#fff; color:#1d1d1f; border:1px solid #e8e8ed">N</span><span class="apptile" style="background:#ff7a59">H</span></span></div>
-              <div class="toolrow"><p>Documents</p><span class="tiles"><span class="apptile" style="background:#217346">X</span><span class="apptile" style="background:#2b579a">W</span><span class="apptile" style="background:#e5252a">PDF</span><span class="apptile" style="background:#4b4b50">M↓</span></span></div>
+              <div class="toolrow"><p>Boîte mail</p><span class="tiles"><svg class="apptile" viewBox="0 0 28 28" aria-label="Gmail"><rect width="28" height="28" rx="8" fill="#fff" stroke="#e8e8ed"/><path d="M6 20V9l8 5.6L22 9v11h-3.4v-6.2L14 17l-4.6-3.2V20z" fill="#ea4335"/></svg><svg class="apptile" viewBox="0 0 28 28" aria-label="Outlook"><rect width="28" height="28" rx="8" fill="#0f6cbd"/><circle cx="11.5" cy="14" r="4.6" fill="none" stroke="#fff" stroke-width="2.4"/><rect x="17.5" y="8.5" width="5.5" height="11" rx="1.2" fill="#fff" opacity=".92"/></svg></span></div>
+              <div class="toolrow"><p>Agenda</p><span class="tiles"><svg class="apptile" viewBox="0 0 28 28" aria-label="Google Agenda"><rect width="28" height="28" rx="8" fill="#fff" stroke="#e8e8ed"/><rect x="5" y="5" width="18" height="5.5" rx="2" fill="#4285f4"/><text x="14" y="21.5" font-size="10" font-weight="700" fill="#4285f4" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif">31</text></svg><svg class="apptile" viewBox="0 0 28 28" aria-label="Calendrier"><rect width="28" height="28" rx="8" fill="#fff" stroke="#e8e8ed"/><rect x="5" y="5" width="18" height="4" rx="2" fill="#ff3b30"/><text x="14" y="21.5" font-size="10.5" font-weight="700" fill="#1d1d1f" text-anchor="middle" font-family="-apple-system,Segoe UI,Roboto,sans-serif">17</text></svg></span></div>
+              <div class="toolrow"><p>Logiciel métier</p><span class="tiles"><svg class="apptile" viewBox="0 0 28 28" aria-label="Salesforce"><rect width="28" height="28" rx="8" fill="#00a1e0"/><path d="M9.4 19a3.1 3.1 0 0 1-.4-6.2 4.1 4.1 0 0 1 7.6-1.2 3 3 0 0 1 4.1 2.9 3.2 3.2 0 0 1-1.6 4.5z" fill="#fff"/></svg><svg class="apptile" viewBox="0 0 28 28" aria-label="Notion"><rect width="28" height="28" rx="8" fill="#fff" stroke="#e8e8ed"/><text x="14" y="19.5" font-size="15" font-weight="700" fill="#1d1d1f" text-anchor="middle" font-family="Georgia,serif">N</text></svg><svg class="apptile" viewBox="0 0 28 28" aria-label="HubSpot"><rect width="28" height="28" rx="8" fill="#ff7a59"/><circle cx="15" cy="16" r="3.6" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M15 12.4V7.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="15" cy="6.8" r="1.5" fill="#fff"/><path d="m10 20.5-1.8 1.8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+              <div class="toolrow"><p>Documents</p><span class="tiles"><span class="apptile" style="background:#217346">X</span><span class="apptile" style="background:#2b579a">W</span><span class="apptile" style="background:#e5252a; font-size:9px">PDF</span><span class="apptile" style="background:#4b4b50">M↓</span></span></div>
             </div>
             <span class="link-line" aria-hidden="true"></span>
             <div class="second-box">
               <h4>Second</h4>
-              <p>Voit ce qui arrive — mails, rendez-vous, dossiers. <b>Rien à transférer, rien à copier-coller.</b></p>
+              <p>Voit ce qui arrive : mails, rendez-vous, dossiers. <b>Rien à transférer, rien à copier-coller.</b></p>
             </div>
           </div>
-          <p class="cap" style="font-size:15px; font-weight:500">Vos outils restent vos outils. Les droits d'écriture se décident avec vous.</p>
         </article>
 
         <article class="scard">
           <h3 class="rm-title">Votre Second fait.</h3>
           <p class="cap">Un simple mot déclenche vos procédures métier.</p>
           <svg class="schema" viewBox="0 0 640 320" role="img" aria-label="Vous dites rendez-vous terminé : compte rendu rédigé, mail prêt à relire, fiches à jour">
-            <defs><linearGradient id="sg6" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0090ff"/><stop offset="1" stop-color="#7a5cff"/></linearGradient></defs>
-            <rect x="30" y="118" width="240" height="84" rx="18" fill="#1d1d1f"/>
-            <text x="150" y="152" font-size="13" font-weight="700" fill="#7ab8ff" text-anchor="middle" letter-spacing="2">VOUS DITES</text>
-            <text x="150" y="180" font-size="18" font-weight="700" fill="#f5f5f7" text-anchor="middle">« Rendez-vous terminé. »</text>
-            <path d="M282 160h60" stroke="url(#sg6)" stroke-width="4"/><path d="m332 150 12 10-12 10" fill="none" stroke="#7a5cff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="366" y="52" width="244" height="56" rx="14" fill="#ffffff" stroke="#e8e8ed"/>
-            <circle cx="394" cy="80" r="12" fill="#eaf3fe"/><path d="m388.5 80.5 4 4 7-8" fill="none" stroke="#0071e3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="416" y="86" font-size="15.5" fill="#1d1d1f">Compte rendu rédigé à votre format</text>
-            <rect x="366" y="132" width="244" height="56" rx="14" fill="#ffffff" stroke="#e8e8ed"/>
-            <circle cx="394" cy="160" r="12" fill="#ecfdf5"/><path d="m388.5 160.5 4 4 7-8" fill="none" stroke="#047857" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="416" y="166" font-size="15.5" fill="#1d1d1f">Mail de suite prêt à relire</text>
-            <rect x="366" y="212" width="244" height="56" rx="14" fill="#ffffff" stroke="#e8e8ed"/>
-            <circle cx="394" cy="240" r="12" fill="#fdf2f8"/><path d="m388.5 240.5 4 4 7-8" fill="none" stroke="#db2777" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="416" y="246" font-size="15.5" fill="#1d1d1f">CRM, agenda et fiches à jour</text>
+            <defs><linearGradient id="sg6" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+            <rect x="20" y="118" width="230" height="84" rx="18" fill="#1d1d1f"/>
+            <text x="135" y="152" font-size="13" font-weight="700" fill="#7ab8ff" text-anchor="middle" letter-spacing="2">VOUS DITES</text>
+            <text x="135" y="180" font-size="17.5" font-weight="700" fill="#f5f5f7" text-anchor="middle">« Rendez-vous terminé. »</text>
+            <path d="M262 160h56" stroke="url(#sg6)" stroke-width="4"/><path d="m308 150 12 10-12 10" fill="none" stroke="#ec4899" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="344" y="52" width="276" height="56" rx="14" fill="#ffffff" stroke="#e8e8ed"/>
+            <circle cx="372" cy="80" r="12" fill="#eaf3fe"/><path d="m366.5 80.5 4 4 7-8" fill="none" stroke="#0071e3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="394" y="86" font-size="15" fill="#1d1d1f">Compte rendu à votre format</text>
+            <rect x="344" y="132" width="276" height="56" rx="14" fill="#ffffff" stroke="#e8e8ed"/>
+            <circle cx="372" cy="160" r="12" fill="#ecfdf5"/><path d="m366.5 160.5 4 4 7-8" fill="none" stroke="#047857" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="394" y="166" font-size="15" fill="#1d1d1f">Mail de suite prêt à relire</text>
+            <rect x="344" y="212" width="276" height="56" rx="14" fill="#ffffff" stroke="#e8e8ed"/>
+            <circle cx="372" cy="240" r="12" fill="#fdf2f8"/><path d="m366.5 240.5 4 4 7-8" fill="none" stroke="#db2777" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="394" y="246" font-size="15" fill="#1d1d1f">CRM, agenda et fiches à jour</text>
           </svg>
-          <p class="cap" style="font-size:15px; font-weight:500">Une commande, c'est votre procédure qui s'exécute. Il prépare — vous validez.</p>
         </article>
 
       </div>
@@ -378,15 +341,15 @@
   </div>
 </div>
 
-<!-- 5. Ce que l'on paramètre (slide 10) -->
+<!-- 4. Ce que l'on paramètre (slide 10) -->
 <div class="stack steps-stack" data-steps style="--n:5">
   <div class="stack-viewport">
     <div class="scene scene-left">
-      <h2>Ce que l'on paramètre <span class="grad">pour vous</span></h2>
+      <h2 class="bigline">Ce que l'on paramètre <span class="grad">pour vous</span></h2>
       <div class="stepflow">
         <div class="stepitem hl">
           <span class="bico" style="background:rgba(255,255,255,.2)"><svg><use href="#i-db"/></svg></span>
-          <div class="stxt"><h3>La mémoire : le socle de tout</h3><p style="color:#eaf3fe">On crée le système sur lequel chaque geste s'appuie — et chaque action l'enrichit.</p></div>
+          <div class="stxt"><h3>La mémoire : le socle de tout</h3><p style="color:#eaf3fe">On crée le système sur lequel chaque geste s'appuie, et chaque action l'enrichit.</p></div>
         </div>
         <div class="stepitem">
           <span class="bico i3"><svg><use href="#i-bolt"/></svg></span>
@@ -409,47 +372,59 @@
   </div>
 </div>
 
-<!-- 6. Amélioration en continu (slide 18) -->
-<section>
-  <div class="wrap">
-    <h2><span class="grad">Second</span> s'améliore en continu</h2>
-    <p class="sub">Chaque semaine, il relit son propre travail — ce qui a bien marché, ce qui a coincé, vos corrections — et propose des améliorations de ses skills. Vous validez ou vous rejetez.</p>
-    <div class="loop reveal" role="img" aria-label="Boucle : travailler, relire, proposer, vous validez, et ça recommence">
-      <span class="pill">Travailler</span><span class="arr">→</span>
-      <span class="pill">Relire</span><span class="arr">→</span>
-      <span class="pill">Proposer</span><span class="arr">→</span>
-      <span class="pill on">Vous validez</span><span class="arr">↻</span>
-      <span class="again">et ça recommence</span>
-    </div>
-    <p class="sub reveal" style="font-weight:700; color:var(--ink); margin-top:18px">Le Second du troisième mois est meilleur que celui du premier jour.</p>
+<!-- 5. Second, l'amélioration en continu (slide 18) -->
+<section class="tall">
+  <div class="wrap" style="width:100%">
+    <h2 class="bigline"><span class="grad">Second</span>, l'amélioration en continu</h2>
+    <svg class="cycle reveal" viewBox="0 0 600 460" role="img" aria-label="Boucle : travailler, relire, proposer, vous validez, et ça recommence">
+      <defs>
+        <linearGradient id="cyc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0090ff"/><stop offset="1" stop-color="#7a5cff"/></linearGradient>
+        <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 8 4.5 0 9z" fill="#7a5cff"/></marker>
+      </defs>
+      <path d="M387 79 A175 175 0 0 1 459 156" fill="none" stroke="url(#cyc)" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arr)"/>
+      <path d="M459 304 A175 175 0 0 1 387 381" fill="none" stroke="url(#cyc)" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arr)"/>
+      <path d="M212 381 A175 175 0 0 1 141 304" fill="none" stroke="url(#cyc)" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arr)"/>
+      <path d="M141 156 A175 175 0 0 1 212 79" fill="none" stroke="url(#cyc)" stroke-width="3.5" stroke-linecap="round" marker-end="url(#arr)"/>
+      <circle cx="300" cy="230" r="48" fill="url(#cyc)"/>
+      <text x="300" y="247" font-size="44" font-weight="700" fill="#ffffff" text-anchor="middle">↻</text>
+      <rect x="215" y="46" width="170" height="48" rx="24" fill="#ffffff" stroke="#e8e8ed"/>
+      <text x="300" y="77" font-size="18" font-weight="700" fill="#1d1d1f" text-anchor="middle">Travailler</text>
+      <rect x="420" y="206" width="150" height="48" rx="24" fill="#ffffff" stroke="#e8e8ed"/>
+      <text x="495" y="237" font-size="18" font-weight="700" fill="#1d1d1f" text-anchor="middle">Relire</text>
+      <rect x="215" y="366" width="170" height="48" rx="24" fill="#ffffff" stroke="#e8e8ed"/>
+      <text x="300" y="397" font-size="18" font-weight="700" fill="#1d1d1f" text-anchor="middle">Proposer</text>
+      <rect x="25" y="206" width="170" height="48" rx="24" fill="url(#cyc)"/>
+      <text x="110" y="237" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">Vous validez</text>
+    </svg>
+    <p class="sub reveal" style="font-weight:700; color:var(--ink); font-size:clamp(17px, 2.5vw, 22px); max-width:34em; margin-bottom:0">Chaque semaine, il relit son propre travail : ce qui a bien marché, ce qui a coincé, vos corrections. Puis il propose des améliorations de ses skills. Vous validez ou vous rejetez.</p>
   </div>
 </section>
 
-<!-- 7. Ce dont Second a besoin (slide 19 + orchestrateur) -->
-<section style="padding-top:10px">
-  <div class="wrap">
-    <h2>Ce dont <span class="grad">Second</span> a besoin</h2>
-    <div class="grid4">
-      <div class="card reveal"><div class="ico i1"><svg><use href="#i-home"/></svg></div><h3>Un PC ou un Mac</h3><p>Le vôtre. Tout vit dessus — vos fichiers, sa mémoire, ses procédures.</p></div>
-      <div class="card reveal"><div class="ico i3"><svg><use href="#i-mic"/></svg></div><h3>Un outil de transcription</h3><p>Vos réunions et vos notes vocales deviennent du texte exploitable.</p></div>
-      <div class="card reveal"><div class="ico i2"><svg><use href="#i-bolt"/></svg></div><h3>Claude Code ou Codex</h3><p>Le moteur IA, installé chez vous. C'est par lui que vous parlez à votre Second.</p></div>
-      <div class="card reveal"><div class="ico i4"><svg><use href="#i-flow"/></svg></div><h3>Un orchestrateur</h3><p>Type n8n — pour les automatisations qui tournent en fond.</p></div>
-    </div>
-    <p class="sub reveal" style="margin-top:22px; margin-bottom:0">C'est tout. Pas de serveur, pas de nouveau logiciel à apprendre — et vos outils actuels, branchés.</p>
-  </div>
-</section>
-
-<!-- 8. Second, c'est… (slide 20 en mots géants) -->
-<div class="stack stack-fast" data-stack style="--n:6">
+<!-- 6. Ce dont Second a besoin (slide 19 + orchestrateur) -->
+<div class="stack steps-stack" data-steps style="--n:4">
   <div class="stack-viewport">
     <div class="scene">
-      <p class="kicker" style="text-align:center">En résumé</p>
-      <h2 style="text-align:center">Votre <span class="grad">Second</span>, c'est…</h2>
+      <h2 class="bigline" style="text-align:center">Ce dont <span class="grad">Second</span> a besoin</h2>
+      <div class="stepflow steprow">
+        <div class="stepitem"><div class="ico i1"><svg><use href="#i-home"/></svg></div><div class="stxt"><h3>Un PC ou un Mac</h3><p>Le vôtre. Tout vit dessus : vos fichiers, sa mémoire, ses procédures.</p></div></div>
+        <div class="stepitem"><div class="ico i3"><svg><use href="#i-mic"/></svg></div><div class="stxt"><h3>Un outil de transcription</h3><p>Vos réunions et vos notes vocales deviennent du texte exploitable.</p></div></div>
+        <div class="stepitem"><div class="ico i2"><svg><use href="#i-bolt"/></svg></div><div class="stxt"><h3>Claude Code ou Codex</h3><p>Le moteur IA, installé chez vous. C'est par lui que vous parlez à votre Second.</p></div></div>
+        <div class="stepitem"><div class="ico i4"><svg><use href="#i-flow"/></svg></div><div class="stxt"><h3>Un orchestrateur</h3><p>Type n8n, pour les automatisations qui tournent en fond.</p></div></div>
+      </div>
+      <p class="sub" style="margin:20px auto 0">C'est tout. Pas de serveur, pas de nouveau logiciel à apprendre. Et vos outils actuels, branchés.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 7. Second, c'est… (mots géants) -->
+<div class="stack stack-fast" data-stack style="--n:5">
+  <div class="stack-viewport">
+    <div class="scene">
+      <h2 class="bigline" style="text-align:center"><span class="grad">Second</span>, c'est…</h2>
       <div class="slides">
         <article class="scard"><h3 class="giant grad">Une IA interchangeable</h3><p class="cap">Le moteur change tous les trois mois. Votre Second reste.</p></article>
-        <article class="scard"><h3 class="giant grad3">Des données construites</h3><p class="cap">Chaque échange l'enrichit — et votre Second s'en sert tous les jours.</p></article>
-        <article class="scard"><h3 class="giant grad4">Un cerveau numérique</h3><p class="cap">Il vit chez vous. Il vous appartient.</p></article>
-        <article class="scard"><h3 class="giant grad2">Des agents illimités</h3><p class="cap">Une nouvelle commande se crée vite et facilement — vous gardez la main.</p></article>
+        <article class="scard"><h3 class="giant grad4">Un cerveau numérique qui vous appartient</h3><p class="cap">Chaque échange l'enrichit. Il vit chez vous, il vous appartient.</p></article>
+        <article class="scard"><h3 class="giant grad2">Des agents illimités</h3><p class="cap">Une nouvelle commande se crée vite et facilement, et vous gardez la main.</p></article>
         <article class="scard"><h3 class="giant grad5">Une productivité accrue</h3><p class="cap">Le travail de fond se fait. Vous relisez, vous validez.</p></article>
         <article class="scard"><h3 class="giant grad6">La passation résolue</h3><p class="cap">Départ, absence : la façon de travailler est historisée, rien ne part avec personne.</p></article>
       </div>
@@ -457,28 +432,28 @@
   </div>
 </div>
 
-<!-- 9. Comment on s'y prend (slide 21) -->
+<!-- 8. Comment on s'y prend (slide 21) -->
 <div class="stack steps-stack" data-steps style="--n:5">
   <div class="stack-viewport">
     <div class="scene scene-left">
-      <h2>Comment on s'y prend</h2>
+      <h2 class="bigline">Comment on s'y prend</h2>
       <div class="stepflow">
-        <div class="stepitem"><span class="num">1</span><div class="stxt"><h3>Diagnostic <small>· ½ journée</small></h3><p>Dans votre quotidien : où partent vos heures, quelles procédures valent de l'or.</p></div></div>
-        <div class="stepitem"><span class="num">2</span><div class="stxt"><h3>Installation <small>· 1 journée</small></h3><p>Sur votre machine : la mémoire, la fiche d'identité, les branchements.</p></div></div>
-        <div class="stepitem"><span class="num">3</span><div class="stxt"><h3>Vos procédures <small>· 1 à 2 jours</small></h3><p>Écrites à partir de vos vrais documents, testées avec vous sur des cas réels.</p></div></div>
-        <div class="stepitem"><span class="num">4</span><div class="stxt"><h3>Formation <small>· ½ journée</small></h3><p>Quatre ou cinq gestes simples. Dicter, déclencher, relire, clôturer.</p></div></div>
-        <div class="stepitem dark"><span class="bico i1"><svg><use href="#i-refresh"/></svg></span><div class="stxt"><h3>Puis 30 jours de suivi</h3><p class="sd">Ajustements au réel, et un point de valeur : les heures rendues, mesurées.</p></div></div>
+        <div class="stepitem step-big"><span class="num">1</span><h3 class="stept grad">Diagnostic</h3></div>
+        <div class="stepitem step-big"><span class="num">2</span><h3 class="stept grad2">Installation</h3></div>
+        <div class="stepitem step-big"><span class="num">3</span><h3 class="stept grad3">Création des procédures</h3></div>
+        <div class="stepitem step-big"><span class="num">4</span><h3 class="stept grad4">Formation</h3></div>
+        <div class="stepitem step-big"><span class="bico i1"><svg><use href="#i-refresh"/></svg></span><h3 class="stept grad6">Puis 30 jours de suivi</h3></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 10. Rendez-vous -->
+<!-- 9. Rendez-vous -->
 <section>
   <div class="wrap">
     <div class="cta-final">
       <h2>La prochaine étape : <span class="grad">une demi-journée de diagnostic.</span></h2>
-      <p>Nous cartographions votre semaine réelle, ensemble, dans votre quotidien. Vous repartez avec la carte de vos heures et les 3 à 5 commandes qui peuvent les rendre — utile, que nous poursuivions ensemble ou non.</p>
+      <p>Nous cartographions votre semaine réelle, ensemble, dans votre quotidien. Vous repartez avec la carte de vos heures et les 3 à 5 commandes qui peuvent les rendre. Utile, que nous poursuivions ensemble ou non.</p>
       <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Réserver un échange de 30 min</a>
     </div>
   </div>
@@ -486,7 +461,7 @@
 
 <footer>
   <div class="wrap">
-    Second est une offre <a href="/">Hailp</a> — Alexandre Wattel · Lyon · <a href="mailto:alexandre.wattel1@gmail.com">alexandre.wattel1@gmail.com</a>
+    Second est une offre <a href="/">Hailp</a> · Alexandre Wattel · Lyon · <a href="mailto:alexandre.wattel1@gmail.com">alexandre.wattel1@gmail.com</a>
   </div>
 </footer>
 
@@ -497,7 +472,6 @@
 
   var stacks = Array.prototype.slice.call(document.querySelectorAll('[data-stack]'));
   var stepStacks = Array.prototype.slice.call(document.querySelectorAll('[data-steps]'));
-  var fills = Array.prototype.slice.call(document.querySelectorAll('[data-fill]'));
   var hero = document.querySelector('.hero h1');
 
   var ticking = false;
@@ -547,12 +521,6 @@
         items[i].style.opacity = (0.14 + 0.86 * o).toFixed(3);
         items[i].style.transform = 'translateY(' + ((1 - o) * 20).toFixed(1) + 'px)';
       }
-    });
-
-    fills.forEach(function(el){
-      var r = el.getBoundingClientRect();
-      var p = clamp((vh * 0.85 - r.top) / (vh * 0.55), 0, 1);
-      el.style.backgroundSize = (p * 100).toFixed(1) + '% 100%';
     });
 
     if (hero){
