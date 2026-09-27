@@ -49,13 +49,12 @@
   .grad6 { background: linear-gradient(120deg, #a78bfa, #f0abfc 55%, #fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .ai { background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-  /* ---- hero centré ---- */
-  .hero { padding: 90px 0 min(30vh, 300px); text-align: center; }
-  @media (min-width: 761px) { .hero { padding: 120px 0 min(32vh, 340px); } }
-  h1 { font-size: clamp(64px, 14vw, 130px); line-height: 1.05; font-weight: 800;
-       letter-spacing: -.04em; margin: 0 0 12px; padding-bottom: .05em; }
-  .hero .sub1 { font-size: clamp(23px, 4vw, 36px); font-weight: 700; letter-spacing: -.02em; margin: 0 0 10px; }
-  .hero .sub2 { font-size: clamp(23px, 4vw, 36px); font-weight: 700; letter-spacing: -.02em; margin: 0; color: var(--body); }
+  /* ---- hero centré plein écran ---- */
+  .hero { min-height: calc(100svh - 170px); display: flex; flex-direction: column; align-items: center;
+          justify-content: center; padding: 40px 0 90px; text-align: center; }
+  h1 { font-size: clamp(84px, 18vw, 200px); line-height: 1.02; font-weight: 800;
+       letter-spacing: -.045em; margin: 0 0 18px; padding-bottom: .05em; }
+  .hero .sub1 { font-size: clamp(28px, 5vw, 48px); font-weight: 700; letter-spacing: -.025em; margin: 0; }
 
   /* ---- scènes épinglées ---- */
   html.js .stack { height: calc(var(--n) * 110vh + 50vh); position: relative; }
@@ -79,6 +78,9 @@
 
   /* scène alignée à gauche */
   .scene-left > h2 { text-align: left; }
+
+  /* cartes rapprochées du titre (Souvent, l'IA) */
+  html.js .stack.tight .scard { justify-content: flex-start; padding-top: 6vh; }
 
   /* mot / bout de phrase qui change dans le titre épinglé */
   .swap { display: inline-grid; }
@@ -141,6 +143,7 @@
   .stepflow { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center;
               justify-content: safe center; gap: 12px; }
   html.js [data-steps] .stepitem { opacity: .14; transform: translateY(20px); will-change: opacity, transform; }
+  html.js [data-steps] .fadeitem { opacity: 0; transform: translateY(24px); will-change: opacity, transform; }
   .stepitem { background: var(--card); border-radius: 16px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.05);
               display: flex; gap: 16px; align-items: center; }
   .stepitem.hl { background: linear-gradient(120deg, #0090ff, #7a5cff); }
@@ -156,12 +159,12 @@
            line-height: 1.1 !important; padding-bottom: .06em; }
   .step-big { padding: 18px 26px; }
 
-  /* besoins en ligne */
+  /* besoins en grille 2×2 */
   @media (min-width: 761px) {
-    .steprow { flex-direction: row; align-items: stretch; gap: 14px; }
-    .steprow .stepitem { flex: 1; flex-direction: column; align-items: flex-start; gap: 10px; padding: 24px; }
+    .steprow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: center; }
+    .steprow .stepitem { flex-direction: column; align-items: flex-start; gap: 10px; padding: 26px 28px; }
   }
-  .steprow .stepitem h3 { font-size: clamp(16px, 2.2vw, 19px); }
+  .steprow .stepitem h3 { font-size: clamp(16.5px, 2.4vw, 21px); }
   .ico { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; flex: none; }
   .ico svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -169,9 +172,8 @@
   .giant { font-size: clamp(40px, min(9.5vw, 13vh), 104px) !important; line-height: 1.08 !important;
            letter-spacing: -.04em !important; max-width: none !important; padding-bottom: .08em; }
 
-  /* section amélioration continue */
-  .tall { min-height: 90vh; display: flex; align-items: center; }
-  .cycle { width: min(460px, 88vw); height: auto; display: block; margin: 4px auto 10px; }
+  /* boucle amélioration continue */
+  .cycle { width: min(440px, 88vw); max-height: 50vh; height: auto; display: block; margin: 0 auto; }
   .cycle text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
 
   section { padding: 70px 0; }
@@ -201,7 +203,7 @@
     html.js .swapw { opacity: 1; }
     html.js .swap .swapw:not(:first-child) { display: none; }
     .rm-title { display: block; }
-    html.js [data-steps] .stepitem { opacity: 1; transform: none; }
+    html.js [data-steps] .stepitem, html.js [data-steps] .fadeitem { opacity: 1; transform: none; }
   }
 </style>
 </head>
@@ -236,15 +238,14 @@
   </div>
 </header>
 
-<!-- 1. Hero centré (reprend la slide 1 du deck) -->
+<!-- 1. Hero centré plein écran (reprend la slide 1 du deck) -->
 <div class="wrap hero">
   <h1 class="grad">Second</h1>
   <p class="sub1">Votre bras droit IA.</p>
-  <p class="sub2">Il connaît votre métier, voit vos outils et travaille selon vos méthodes.</p>
 </div>
 
 <!-- 2. Souvent, l'IA… : la phrase continue dans le titre, la grande carte défile -->
-<div class="stack" data-stack style="--n:3">
+<div class="stack tight" data-stack style="--n:3">
   <div class="stack-viewport">
     <div class="scene scene-left">
       <h2 class="bigline">Souvent, l'IA <span class="swap swap-flow"><span class="swapw grad">ne connaît ni votre métier, ni votre actualité.</span><span class="swapw grad2">ne voit pas vos outils.</span><span class="swapw grad3">oublie tout.</span></span></h2>
@@ -373,10 +374,12 @@
 </div>
 
 <!-- 5. Second, l'amélioration en continu (slide 18) -->
-<section class="tall">
-  <div class="wrap" style="width:100%">
-    <h2 class="bigline"><span class="grad">Second</span>, l'amélioration en continu</h2>
-    <svg class="cycle reveal" viewBox="0 0 600 460" role="img" aria-label="Boucle : travailler, relire, proposer, vous validez, et ça recommence">
+<div class="stack steps-stack" data-steps style="--n:2">
+  <div class="stack-viewport">
+    <div class="scene">
+      <h2 class="bigline" style="text-align:center"><span class="grad">Second</span>, l'amélioration en continu</h2>
+      <div class="stepflow" style="gap:10px">
+      <svg class="cycle fadeitem" viewBox="0 0 600 460" role="img" aria-label="Boucle : travailler, relire, proposer, vous validez, et ça recommence">
       <defs>
         <linearGradient id="cyc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0090ff"/><stop offset="1" stop-color="#7a5cff"/></linearGradient>
         <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 8 4.5 0 9z" fill="#7a5cff"/></marker>
@@ -396,9 +399,11 @@
       <rect x="25" y="206" width="170" height="48" rx="24" fill="url(#cyc)"/>
       <text x="110" y="237" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">Vous validez</text>
     </svg>
-    <p class="sub reveal" style="font-weight:700; color:var(--ink); font-size:clamp(17px, 2.5vw, 22px); max-width:34em; margin-bottom:0">Chaque semaine, il relit son propre travail : ce qui a bien marché, ce qui a coincé, vos corrections. Puis il propose des améliorations de ses skills. Vous validez ou vous rejetez.</p>
+      <p class="sub fadeitem" style="font-weight:700; color:var(--ink); font-size:clamp(16px, 2.4vw, 21px); max-width:34em; margin-bottom:0">Chaque semaine, il relit son propre travail : ce qui a bien marché, ce qui a coincé, vos corrections. Puis il propose des améliorations de ses skills. Vous validez ou vous rejetez.</p>
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
 <!-- 6. Ce dont Second a besoin (slide 19 + orchestrateur) -->
 <div class="stack steps-stack" data-steps style="--n:4">
@@ -510,7 +515,7 @@
     });
 
     stepStacks.forEach(function(st){
-      var items = st.querySelectorAll('.stepitem');
+      var items = st.querySelectorAll('.stepitem, .fadeitem');
       var n = items.length;
       var r = st.getBoundingClientRect();
       var denom = r.height - vh; if (denom <= 0) denom = 1;
