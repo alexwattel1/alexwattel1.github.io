@@ -36,6 +36,22 @@
   .brand:hover { text-decoration: none; }
   .brand-icon { width: 26px; height: 26px; }
   .spacer { flex: 1; }
+  /* bandeau de navigation commun (accueil, Second, AI-MPCT) : en ligne sur ordinateur, pastilles défilantes sur mobile */
+  nav.menu { display: flex; gap: 20px; font-size: 14px; }
+  nav.menu a { color: var(--body); white-space: nowrap; }
+  nav.menu a.on { color: var(--ink); font-weight: 600; }
+  @media (max-width: 899px) { nav.menu { gap: 14px; } }
+  @media (max-width: 760px) {
+    header { padding: 10px 0 9px; }
+    header .wrap { flex-wrap: wrap; row-gap: 9px; }
+    nav.menu { order: 3; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+               margin: 0 -16px; padding: 0 16px; width: calc(100% + 32px); }
+    nav.menu::-webkit-scrollbar { display: none; }
+    nav.menu a { background: #ececf0; border-radius: 980px; padding: 5px 13px; font-size: 13.5px; }
+    nav.menu a:hover { text-decoration: none; }
+    nav.menu a.on { background: var(--ink); color: #fff; }
+  }
+  @media (max-width: 760px) { header .btn { padding: 7px 14px; font-size: 14px; min-height: 36px; } }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 980px;
          font-weight: 500; font-size: 16px; transition: filter .15s; min-height: 46px; }
   .btn:hover { filter: brightness(1.07); text-decoration: none; }
@@ -61,9 +77,9 @@
   html.js .stack.stack-fast { height: calc(var(--n) * 72vh + 55vh); }
   html.js .stack.steps-stack { height: calc(var(--n) * 48vh + 65vh); }
   html.js .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-  .scene { height: 100%; max-width: 980px; margin: 0 auto; padding: 90px 16px 24px;
+  .scene { height: 100%; max-width: 980px; margin: 0 auto; padding: calc(var(--hh, 104px) + 2px) 16px 10px;
            display: flex; flex-direction: column; }
-  @media (min-width: 761px) { .scene { padding: 100px 24px 32px; } }
+  @media (min-width: 761px) { .scene { padding: calc(var(--hh, 64px) + 36px) 24px 32px; } }
   .scene > h2 { font-size: clamp(30px, 5.5vw, 48px); line-height: 1.12; font-weight: 800;
                 letter-spacing: -.03em; margin: 0 0 8px; flex: none; text-wrap: balance; }
   .bigline { font-size: clamp(34px, min(7vw, 9vh), 72px) !important; line-height: 1.08 !important; letter-spacing: -.035em !important; }
@@ -234,6 +250,7 @@
       <span>H<span class="ai">ai</span>lp</span>
     </a>
     <div class="spacer"></div>
+    <nav class="menu" aria-label="Navigation"><a href="/">Accueil</a><a href="/#services">Services</a><a href="/second.html" class="on" aria-current="page">Second</a><a href="/ai-mpct.html">AI-MPCT</a><a href="/#methode">Méthode</a><a href="/#contact">Contact</a></nav>
     <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Échanger 30 min</a>
   </div>
 </header>
@@ -478,6 +495,9 @@
   var stacks = Array.prototype.slice.call(document.querySelectorAll('[data-stack]'));
   var stepStacks = Array.prototype.slice.call(document.querySelectorAll('[data-steps]'));
   var hero = document.querySelector('.hero h1');
+  var header = document.querySelector('header');
+  function setHH(){ document.documentElement.style.setProperty('--hh', header.offsetHeight + 'px'); }  // bandeau sur 2 lignes en mobile
+  setHH(); addEventListener('resize', setHH);
 
   var ticking = false;
   function update(){

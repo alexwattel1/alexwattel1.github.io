@@ -5,7 +5,7 @@
 <script>
 if(location.protocol==="http:"&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1")location.replace("https://"+location.host+location.pathname+location.search+location.hash);
 document.documentElement.classList.add('js');
-(function(){var q=matchMedia('(min-width: 761px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');var s=function(){document.documentElement.classList.toggle('pin',q.matches)};s();q.addEventListener&&q.addEventListener('change',s);addEventListener('resize',s);})();
+(function(){var q=matchMedia('(min-height: 560px) and (prefers-reduced-motion: no-preference)');var s=function(){document.documentElement.classList.toggle('pin',q.matches)};s();q.addEventListener&&q.addEventListener('change',s);addEventListener('resize',s);})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI-MPCT — Votre agent de prospection | Hailp</title>
@@ -39,6 +39,22 @@ document.documentElement.classList.add('js');
   .brand:hover { text-decoration: none; }
   .brand-icon { width: 26px; height: 26px; }
   .spacer { flex: 1; }
+  /* bandeau de navigation commun (accueil, Second, AI-MPCT) : en ligne sur ordinateur, pastilles défilantes sur mobile */
+  nav.menu { display: flex; gap: 20px; font-size: 14px; }
+  nav.menu a { color: var(--body); white-space: nowrap; }
+  nav.menu a.on { color: var(--ink); font-weight: 600; }
+  @media (max-width: 899px) { nav.menu { gap: 14px; } }
+  @media (max-width: 760px) {
+    header { padding: 10px 0 9px; }
+    header .wrap { flex-wrap: wrap; row-gap: 9px; }
+    nav.menu { order: 3; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+               margin: 0 -16px; padding: 0 16px; width: calc(100% + 32px); }
+    nav.menu::-webkit-scrollbar { display: none; }
+    nav.menu a { background: #ececf0; border-radius: 980px; padding: 5px 13px; font-size: 13.5px; }
+    nav.menu a:hover { text-decoration: none; }
+    nav.menu a.on { background: var(--ink); color: #fff; }
+  }
+  @media (max-width: 760px) { header .btn { padding: 7px 14px; font-size: 14px; min-height: 36px; } }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 980px;
          font-weight: 500; font-size: 16px; transition: filter .15s; min-height: 46px; }
   .btn:hover { filter: brightness(1.07); text-decoration: none; }
@@ -60,9 +76,9 @@ document.documentElement.classList.add('js');
   /* ---- scènes : empilées sur mobile, épinglées au scroll sur grand écran ---- */
   .stack { position: relative; }
   .scene { max-width: 980px; margin: 0 auto; padding: 56px 16px; display: flex; flex-direction: column; }
-  html.pin .stack { height: calc(var(--n) * var(--per, 45vh) + 70vh); }
-  html.pin .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-  html.pin .scene { height: 100%; padding: 90px 24px 24px; justify-content: center; justify-content: safe center; }
+  html.pin .stack:not(.nopin) { height: calc(var(--n) * var(--per, 45vh) + 70vh); }
+  html.pin .stack:not(.nopin) .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  html.pin .stack:not(.nopin) .scene { height: 100%; padding: calc(var(--hh, 64px) + 18px) 24px 24px; justify-content: center; justify-content: safe center; }
 
   h2 { font-size: clamp(32px, 5.5vw, 56px); line-height: 1.08; font-weight: 800; letter-spacing: -.035em; margin: 0 0 12px; text-wrap: balance; }
   .lead { font-size: clamp(16px, 2.1vw, 19px); color: var(--body); margin: 0 0 18px; max-width: 34em; }
@@ -73,7 +89,7 @@ document.documentElement.classList.add('js');
   html.pin .swapw { opacity: 0; will-change: opacity, transform; }
   html:not(.pin) .swap { display: none; }
   .slides { position: relative; flex: 1; min-height: 0; }
-  html.pin [data-stack] .scene { padding-top: 130px; }
+  html.pin [data-stack] .scene { padding-top: calc(var(--hh, 64px) + 58px); }
   html.pin .scard { position: absolute; inset: 0; opacity: 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 5vh; }
   html:not(.pin) .scard { margin-top: 20px; }
   .rm-title { display: none; font-size: 22px; font-weight: 800; letter-spacing: -.02em; margin: 0 0 10px; }
@@ -104,7 +120,7 @@ document.documentElement.classList.add('js');
   .panel-h { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; margin-bottom: 2px; }
   .panel-h span:last-child { font-weight: 600; letter-spacing: 0; }
 
-  html.pin [data-steps] .si { opacity: .12; transform: translateY(16px); will-change: opacity, transform; }
+  html.pin [data-steps]:not(.nopin) .si { opacity: .12; transform: translateY(16px); will-change: opacity, transform; }
   html.js:not(.pin) .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
   html.js:not(.pin) .reveal.in { opacity: 1; transform: none; }
 
@@ -168,6 +184,29 @@ document.documentElement.classList.add('js');
   .center { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
   footer { padding: 34px 0 46px; font-size: 13px; color: var(--muted); text-align: center; }
   footer a { color: var(--muted); }
+
+  /* ---- mobile épinglé : texte resserré, liste de points masquée (reprise dans le texte), maquettes compactes ---- */
+  @media (max-width: 760px) {
+    html.pin .stack:not(.nopin) .scene { padding: calc(var(--hh, 104px) + 10px) 16px 12px; }
+    html.pin [data-stack] .scene { padding-top: calc(var(--hh, 104px) + 36px); }
+    html.pin [data-stack] h2 { font-size: 34px; }
+    html.pin [data-steps]:not(.nopin) .stage { gap: 14px; }
+    html.pin [data-steps]:not(.nopin) .kicker { margin-bottom: 6px; font-size: 12.5px; }
+    html.pin [data-steps]:not(.nopin) .kicker b { width: 26px; height: 26px; font-size: 13px; }
+    html.pin [data-steps]:not(.nopin) h2 { font-size: 27px; margin-bottom: 8px; }
+    html.pin [data-steps]:not(.nopin) .lead { font-size: 14.5px; line-height: 1.5; margin: 0; }
+    html.pin [data-steps]:not(.nopin) .points { display: none; }
+    html.pin [data-steps]:not(.nopin) .panel { padding: 12px; gap: 6px; border-radius: 16px; }
+    html.pin [data-steps]:not(.nopin) .sig { padding: 7px 10px; gap: 10px; }
+    html.pin [data-steps]:not(.nopin) .sig p { font-size: 13px; }
+    html.pin [data-steps]:not(.nopin) .sum { padding: 8px 12px; font-size: 13.5px; }
+    html.pin [data-steps]:not(.nopin) .crit { padding: 8px 10px; }
+    html.pin [data-steps]:not(.nopin) .crit p { display: none; }
+    html.pin [data-steps]:not(.nopin) .verdicts div { padding: 7px 8px; font-size: 11px; }
+    html.pin [data-steps]:not(.nopin) .who { padding: 7px 10px; }
+    html.pin [data-steps]:not(.nopin) .msg { padding: 9px 11px; font-size: 12.5px; line-height: 1.45; }
+    html.pin [data-steps]:not(.nopin) .draft { padding: 9px 12px; font-size: 13px; }
+  }
 </style>
 </head>
 <body>
@@ -188,6 +227,7 @@ document.documentElement.classList.add('js');
       <span>H<span class="ai">ai</span>lp</span>
     </a>
     <div class="spacer"></div>
+    <nav class="menu" aria-label="Navigation"><a href="/">Accueil</a><a href="/#services">Services</a><a href="/second.html">Second</a><a href="/ai-mpct.html" class="on" aria-current="page">AI-MPCT</a><a href="/#methode">Méthode</a><a href="/#contact">Contact</a></nav>
     <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Demander une démo</a>
   </div>
 </header>
@@ -238,7 +278,7 @@ document.documentElement.classList.add('js');
         <div>
           <div class="kicker"><b>1</b>SIGNAL D'ACHAT</div>
           <h2>Il repère les entreprises qui ont <span class="grad">un besoin maintenant.</span></h2>
-          <p class="lead">Chaque jour, l'agent lit l'actualité économique et ne garde que les signaux qui révèlent un besoin chez vos cibles. Dans cet exemple, les levées de fonds.</p>
+          <p class="lead">Chaque jour, l'agent lit l'actualité économique et repère les signaux qui révèlent un besoin chez vos cibles. Le signal pertinent se définit avec vous. Ici, les levées de fonds.</p>
           <ul class="points">
             <li>Le signal pertinent est défini avec vous, selon votre offre et votre cible</li>
             <li>Actualités économiques et annonces publiques, partout en France</li>
@@ -375,6 +415,18 @@ document.documentElement.classList.add('js');
   var stacks = Array.prototype.slice.call(document.querySelectorAll('[data-stack]'));
   var stepStacks = Array.prototype.slice.call(document.querySelectorAll('[data-steps]'));
   var hero = document.querySelector('.hero');
+  var header = document.querySelector('header');
+
+  // Hauteur réelle du bandeau (2 lignes sur mobile) + épinglage seulement si l'étape tient dans l'écran
+  function layout(){
+    root.style.setProperty('--hh', header.offsetHeight + 'px');
+    stepStacks.forEach(function(st){ st.classList.remove('nopin'); });
+    if (!root.classList.contains('pin')) return;
+    stepStacks.forEach(function(st){
+      var sc = st.querySelector('.scene');
+      if (sc.scrollHeight > sc.clientHeight + 4) st.classList.add('nopin');
+    });
+  }
 
   function clear(){
     document.querySelectorAll('.scard, .swapw, [data-steps] .si').forEach(function(el){ el.style.opacity = ''; el.style.transform = ''; el.style.pointerEvents = ''; });
@@ -409,6 +461,7 @@ document.documentElement.classList.add('js');
 
     // éléments qui s'allument à tour de rôle
     stepStacks.forEach(function(st){
+      if (st.classList.contains('nopin')){ st.querySelectorAll('.si').forEach(function(el){ el.style.opacity = ''; el.style.transform = ''; }); return; }
       var items = st.querySelectorAll('.si');
       var n = items.length;
       var r = st.getBoundingClientRect();
@@ -429,8 +482,10 @@ document.documentElement.classList.add('js');
   }
   function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
   addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', onScroll);
-  update();
+  function onResize(){ layout(); onScroll(); }
+  addEventListener('resize', onResize);
+  addEventListener('load', onResize);
+  layout(); update();
 
   var revealed = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
   if ('IntersectionObserver' in window){

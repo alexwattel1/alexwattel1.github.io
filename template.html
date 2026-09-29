@@ -5,7 +5,7 @@
 <script>
 if(location.protocol==="http:"&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1")location.replace("https://"+location.host+location.pathname+location.search+location.hash);
 document.documentElement.classList.add('js');
-(function(){var q=matchMedia('(min-width: 761px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');var s=function(){document.documentElement.classList.toggle('pin',q.matches)};s();q.addEventListener&&q.addEventListener('change',s);addEventListener('resize',s);})();
+(function(){var q=matchMedia('(min-height: 560px) and (prefers-reduced-motion: no-preference)');var s=function(){document.documentElement.classList.toggle('pin',q.matches)};s();q.addEventListener&&q.addEventListener('change',s);addEventListener('resize',s);})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{name} — {tagline}</title>
@@ -42,9 +42,21 @@ document.documentElement.classList.add('js');
   .brand-icon { width: 30px; height: 30px; }
   .ai { background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .spacer { flex: 1; }
-  nav.menu { display: none; gap: 22px; font-size: 14px; }
-  nav.menu a { color: var(--body); }
-  @media (min-width: 900px) { nav.menu { display: flex; } }
+  /* bandeau de navigation commun (accueil, Second, AI-MPCT) : en ligne sur ordinateur, pastilles défilantes sur mobile */
+  nav.menu { display: flex; gap: 20px; font-size: 14px; }
+  nav.menu a { color: var(--body); white-space: nowrap; }
+  nav.menu a.on { color: var(--ink); font-weight: 600; }
+  @media (max-width: 899px) { nav.menu { gap: 14px; } }
+  @media (max-width: 760px) {
+    header { padding: 10px 0 9px; }
+    header .wrap { flex-wrap: wrap; row-gap: 9px; }
+    nav.menu { order: 3; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+               margin: 0 -16px; padding: 0 16px; width: calc(100% + 32px); }
+    nav.menu::-webkit-scrollbar { display: none; }
+    nav.menu a { background: #ececf0; border-radius: 980px; padding: 5px 13px; font-size: 13.5px; }
+    nav.menu a:hover { text-decoration: none; }
+    nav.menu a.on { background: var(--ink); color: #fff; }
+  }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 980px;
          font-weight: 500; font-size: 16px; transition: filter .15s; min-height: 46px; }
   .btn:hover { filter: brightness(1.07); text-decoration: none; }
@@ -88,30 +100,30 @@ document.documentElement.classList.add('js');
   /* ---- scènes : empilées sur mobile, épinglées au scroll sur grand écran ---- */
   .stack { position: relative; }
   .scene { max-width: 980px; margin: 0 auto; padding: 64px 16px; display: flex; flex-direction: column; }
-  html.pin .stack { height: calc(var(--n) * var(--per, 42vh) + 75vh); }
-  html.pin .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-  html.pin .scene { height: 100%; padding: 84px 24px 20px; justify-content: center; justify-content: safe center; }
+  html.pin .stack:not(.nopin) { height: calc(var(--n) * var(--per, 42vh) + 75vh); }
+  html.pin .stack:not(.nopin) .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  html.pin .stack:not(.nopin) .scene { height: 100%; padding: calc(var(--hh, 72px) + 12px) 24px 20px; justify-content: center; justify-content: safe center; }
   /* scènes produit : plus denses, on resserre pour tenir dans un écran de portable */
-  html.pin .prodscene h2 { font-size: clamp(30px, min(5vw, 6vh), 52px); margin-bottom: 10px; }
-  html.pin .prodscene .sub { font-size: 16.5px; max-width: 50em; margin-bottom: 20px; }
-  html.pin .prodscene .prod { margin-bottom: 20px; }
-  html.pin .prodscene .demo { padding: 16px 18px; }
-  html.pin .prodscene .demo-desc { margin-bottom: 10px; }
-  html.pin .prodscene { padding-top: 78px; padding-bottom: 12px; }
-  html.pin .prodscene .sd { padding: 12px 14px; gap: 6px; }
-  html.pin .prodscene .say { margin-bottom: 3px; padding: 5px 12px; }
-  html.pin .prodscene .sd-blk { padding: 8px 12px; }
-  html.pin .prodscene .pipe li { padding: 11px 16px; }
-  html.pin .prodscene .crit { padding: 8px 11px; }
-  html.pin .prodscene .dm, html.pin .prodscene .demo-msg { margin-top: 9px; }
-  html.pin .prodscene .done { margin-top: 2px; }
-  html.pin .scene > .body { flex: none; }
+  html.pin .stack:not(.nopin) .prodscene h2 { font-size: clamp(30px, min(5vw, 6vh), 52px); margin-bottom: 10px; }
+  html.pin .stack:not(.nopin) .prodscene .sub { font-size: 16.5px; max-width: 50em; margin-bottom: 20px; }
+  html.pin .stack:not(.nopin) .prodscene .prod { margin-bottom: 20px; }
+  html.pin .stack:not(.nopin) .prodscene .demo { padding: 16px 18px; }
+  html.pin .stack:not(.nopin) .prodscene .demo-desc { margin-bottom: 10px; }
+  html.pin .stack:not(.nopin) .prodscene { padding-top: calc(var(--hh, 72px) + 6px); padding-bottom: 12px; }
+  html.pin .stack:not(.nopin) .prodscene .sd { padding: 12px 14px; gap: 6px; }
+  html.pin .stack:not(.nopin) .prodscene .say { margin-bottom: 3px; padding: 5px 12px; }
+  html.pin .stack:not(.nopin) .prodscene .sd-blk { padding: 8px 12px; }
+  html.pin .stack:not(.nopin) .prodscene .pipe li { padding: 11px 16px; }
+  html.pin .stack:not(.nopin) .prodscene .crit { padding: 8px 11px; }
+  html.pin .stack:not(.nopin) .prodscene .dm, html.pin .stack:not(.nopin) .prodscene .demo-msg { margin-top: 9px; }
+  html.pin .stack:not(.nopin) .prodscene .done { margin-top: 2px; }
+  html.pin .stack:not(.nopin) .scene > .body { flex: none; }
 
   /* éléments pilotés par le scroll (valeurs de départ, le JS les anime) */
-  html.pin [data-steps] .si { will-change: opacity, transform; }
+  html.pin [data-steps]:not(.nopin) .si { will-change: opacity, transform; }
   html.pin [data-steps="ghost"] .si { opacity: .14; transform: translateY(20px); }
   html.pin [data-steps="fade"] .si { opacity: 0; transform: translateY(28px); }
-  html.pin [data-steps] [data-k] { opacity: .22; transition: opacity .25s ease; }
+  html.pin [data-steps]:not(.nopin) [data-k] { opacity: .22; transition: opacity .25s ease; }
 
   /* apparition simple quand pas d'épinglage (mobile) */
   html.js:not(.pin) .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
@@ -241,6 +253,48 @@ document.documentElement.classList.add('js');
   .dock a:first-child { background: linear-gradient(135deg, #0090ff, #7a5cff); color: #fff; }
   .dock svg { width: 18px; height: 18px; }
   @media (min-width: 761px) { .dock { display: none; } }
+
+  /* ---- mobile épinglé : un cadre à la fois, contenus resserrés ---- */
+  .dock { transition: transform .3s ease; }
+  @media (max-width: 760px) {
+    html.pin .stack:not(.nopin) .scene, html.pin .stack:not(.nopin) .prodscene { padding: calc(var(--hh, 110px) + 12px) 16px 14px; }
+    html.pin .stack:not(.nopin) .swapgrid { display: grid; grid-template-columns: 1fr; }
+    html.pin .stack:not(.nopin) .swapgrid > .si { grid-area: 1 / 1; transition: opacity .35s ease, transform .35s ease; }
+    html.pin .stack:not(.nopin) h2 { font-size: 31px; }
+    html.pin #services h2 { margin-bottom: 20px; }
+    html.pin .stack:not(.nopin) .sub { font-size: 15px; margin-bottom: 16px; }
+    html.pin .stack:not(.nopin) .prodscene h2 { font-size: 27px; margin-bottom: 8px; }
+    html.pin .stack:not(.nopin) .prodscene .sub { font-size: 14.5px; line-height: 1.45; margin-bottom: 12px; }
+    html.pin .stack:not(.nopin) .prodscene .prod { gap: 10px; margin-bottom: 14px; }
+    html.pin .stack:not(.nopin) .prodscene .demo { padding: 14px; }
+    html.pin .stack:not(.nopin) .demo-desc, html.pin .stack:not(.nopin) .tags { display: none; }
+    html.pin .stack:not(.nopin) .sd-blk p, html.pin .stack:not(.nopin) .done { font-size: 13px; }
+    html.pin .stack:not(.nopin) .chips { gap: 7px; }
+    html.pin .stack:not(.nopin) .chip { font-size: 13px; padding: 6px 12px; }
+    html.pin .stack:not(.nopin) .legend { margin-top: 12px; }
+    /* métiers : cas d'usage en 2 colonnes */
+    html.pin .stack:not(.nopin) .chips { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    html.pin .stack:not(.nopin) .chip { font-size: 12.5px; line-height: 1.3; padding: 7px 10px; border-radius: 12px; display: flex; align-items: center; }
+    html.pin .stack:not(.nopin) .chip.sec::before { flex: none; }
+    html.pin #usages .sub { font-size: 14.5px; line-height: 1.45; }
+    /* produits : boutons sur une ligne, détails secondaires masqués */
+    html.pin .stack:not(.nopin) .prodscene .sub { font-size: 14px; }
+    html.pin .stack:not(.nopin) .center { flex-wrap: nowrap; gap: 8px; }
+    html.pin .stack:not(.nopin) .center .btn { padding: 9px 14px; font-size: 14.5px; min-height: 42px; white-space: nowrap; }
+    html.pin .stack:not(.nopin) .prodscene .pipe li { padding: 10px 14px; font-size: 13.5px; }
+    html.pin .stack:not(.nopin) .crit p, html.pin .stack:not(.nopin) .sd-bar { display: none; }
+    html.pin .stack:not(.nopin) .sd-blk small { margin-bottom: 3px; }
+    html.pin .stack:not(.nopin) .scene, html.pin .stack:not(.nopin) .prodscene { padding-top: calc(var(--hh, 110px) + 8px); padding-bottom: 10px; }
+    html.pin .stack:not(.nopin) .chip { font-size: 12px; padding: 5px 9px; }
+    html.pin .stack:not(.nopin) .prodscene .pipe li { padding: 8px 12px; font-size: 13px; line-height: 1.4; }
+    html.pin .stack:not(.nopin) .prodscene .sd { gap: 5px; padding: 10px 12px; }
+    html.pin .stack:not(.nopin) .prodscene .sd-blk { padding: 7px 10px; }
+    html.pin .stack:not(.nopin) .sd .tiles { display: none; }
+    html.pin .stack:not(.nopin) .prodscene .demo { padding: 12px; }
+    html.pin .stack:not(.nopin) .prodscene .dm, html.pin .stack:not(.nopin) .prodscene .demo-msg { margin-top: 7px; }
+    html.pin .stack:not(.nopin) .demo-msg { padding: 7px 11px; font-size: 12.5px; }
+    body.instory .dock { transform: translateY(110%); }
+  }
 </style>
 </head>
 <body>
@@ -264,7 +318,7 @@ document.documentElement.classList.add('js');
   <div class="wrap">
     <a class="brand" href="#top" aria-label="{name}, accueil"><svg class="brand-icon"><use href="#logo"/></svg><span>H<span class="ai">ai</span>lp</span></a>
     <div class="spacer"></div>
-    <nav class="menu" aria-label="Sections"><a href="#services">Services</a><a href="#second">Second</a><a href="/ai-mpct.html">AI-MPCT</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
+    <nav class="menu" aria-label="Navigation"><a href="/" class="on" aria-current="page">Accueil</a><a href="#services">Services</a><a href="/second.html">Second</a><a href="/ai-mpct.html">AI-MPCT</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
     <a class="btn btn-primary btn-sm" href="{calendly}" target="_blank" rel="noopener">Prendre rendez-vous</a>
   </div>
 </header>
@@ -285,11 +339,11 @@ document.documentElement.classList.add('js');
   </div>
 
   <!-- 2. Services : les cadres apparaissent un à un -->
-  <div class="stack" id="services" data-steps="fade" style="--n:6; --per:34vh">
+  <div class="stack" id="services" data-steps="fade" data-mobile="swap" style="--n:6; --per:34vh">
     <div class="stack-viewport">
       <div class="scene">
         <h2 class="g1">Nos services de <em>conseil en IA</em></h2>
-        <div class="grid3 body">
+        <div class="grid3 body swapgrid">
           <div class="card si reveal"><div class="ico i1"><svg><use href="#i-search"/></svg></div><h3>Audit IA</h3><p>On cartographie vos process, on repère les tâches où l'IA fait gagner du temps, et on vous remet une feuille de route priorisée et chiffrée.</p></div>
           <div class="card si reveal"><div class="ico i2"><svg><use href="#i-code"/></svg></div><h3>Développement sur-mesure</h3><p>Agents IA et automatisations branchés sur vos outils existants (mail, CRM, ERP, fichiers) pour traiter, trier, rédiger et relancer à votre place.</p></div>
           <div class="card si reveal"><div class="ico i3"><svg><use href="#i-team"/></svg></div><h3>Conduite du changement</h3><p>Un outil ne vaut que s'il est utilisé. On accompagne vos équipes dans la prise en main, on recueille leurs retours et on ajuste.</p></div>
@@ -323,13 +377,13 @@ document.documentElement.classList.add('js');
   </div>
 
   <!-- 4. Second : même principe, la maquette se remplit -->
-  <div class="stack lite" id="second" data-steps="ghost" style="--n:4; --per:48vh">
+  <div class="stack lite" id="second" data-steps="ghost" data-mobile="swap" style="--n:4; --per:48vh">
     <div class="stack-viewport">
       <div class="scene prodscene">
         <h2 class="g7">Second, <em>l'assistant personnel</em></h2>
         <p class="sub">Votre bras droit IA. Il connaît votre métier, voit vos outils et travaille selon vos méthodes. Il est installé chez vous et reste sous votre contrôle.</p>
         <div class="prod body">
-          <ol class="pipe">
+          <ol class="pipe swapgrid">
             <li class="si"><span class="n">1</span><div><b>Il sait</b>Une mémoire de vos dossiers, de votre métier et de vos méthodes</div></li>
             <li class="si"><span class="n">2</span><div><b>Il voit</b>Branché sur vos mails, votre agenda et vos logiciels</div></li>
             <li class="si"><span class="n">3</span><div><b>Il fait</b>Un simple mot déclenche vos procédures</div></li>
@@ -352,13 +406,13 @@ document.documentElement.classList.add('js');
   </div>
 
   <!-- 5. AI-MPCT : la fiche se construit étape par étape -->
-  <div class="stack dark" id="ai-mpct" data-steps="ghost" style="--n:4; --per:48vh">
+  <div class="stack dark" id="ai-mpct" data-steps="ghost" data-mobile="swap" style="--n:4; --per:48vh">
     <div class="stack-viewport">
       <div class="scene prodscene">
         <h2 class="g1">AI-MPCT, <em>l'agent de prospection</em></h2>
         <p class="sub">Notre agent sur étagère détecte les entreprises qui ont un besoin maintenant, les qualifie, identifie les bons décideurs et rédige le message d'approche. Vos commerciaux ne perdent plus de temps à chercher : ils se concentrent sur la conversation.</p>
         <div class="prod body">
-          <ol class="pipe">
+          <ol class="pipe swapgrid">
             <li class="si"><span class="n">1</span><div><b>Signal d'achat</b>Un signal d'achat qui correspond à vos cibles</div></li>
             <li class="si"><span class="n">2</span><div><b>Qualification</b>Vérification de l'entreprise, analyse de son site et score d'adéquation</div></li>
             <li class="si"><span class="n">3</span><div><b>Décideurs</b>Identification des personas pertinents pour votre entreprise</div></li>
@@ -388,12 +442,12 @@ document.documentElement.classList.add('js');
   </div>
 
   <!-- 6. Méthode : les étapes s'allument à tour de rôle -->
-  <div class="stack" id="methode" data-steps="ghost" style="--n:4; --per:40vh">
+  <div class="stack" id="methode" data-steps="ghost" data-mobile="swap" style="--n:4; --per:40vh">
     <div class="stack-viewport">
       <div class="scene">
         <h2 class="g3">Comment <em>collaborer avec nous ?</em></h2>
         <p class="sub">On commence petit, on mesure, puis on étend. Pas de grand projet de transformation avant d'avoir prouvé la valeur.</p>
-        <div class="steps body">
+        <div class="steps body swapgrid">
           <div class="card step si reveal"><span class="clock">30 min · offert</span><h3>Premier échange</h3><p>Vous nous parlez de votre activité et de ce qui vous prend du temps. On voit ensemble où l'IA peut vous aider.</p></div>
           <div class="card step si reveal"><span class="clock">Quelques jours</span><h3>Audit et feuille de route</h3><p>Les cas d'usage priorisés, avec le gain attendu, le coût et le délai pour chacun.</p></div>
           <div class="card step si reveal"><span class="clock">Quelques semaines</span><h3>Pilote</h3><p>Un premier agent sur un process précis, avec un objectif mesurable et un prix fixé à l'avance.</p></div>
@@ -448,29 +502,52 @@ document.documentElement.classList.add('js');
   var clamp = function(v, a, b){ return Math.max(a, Math.min(b, v)); };
   var stacks = Array.prototype.slice.call(document.querySelectorAll('[data-steps]'));
   var heroIn = document.querySelector('.hero-in');
+  var header = document.querySelector('header');
+  var narrow = matchMedia('(max-width: 760px)');
 
-  // Remet à zéro les styles posés par le JS quand on repasse en mode non épinglé
-  function clear(){
+  function clearStack(st){
+    st.querySelectorAll('.si, [data-k]').forEach(function(el){ el.style.opacity = ''; el.style.transform = ''; el.style.pointerEvents = ''; });
+  }
+
+  // Hauteur réelle du bandeau (2 lignes sur mobile) + épinglage seulement si la scène tient dans l'écran
+  function layout(){
+    root.style.setProperty('--hh', header.offsetHeight + 'px');
+    stacks.forEach(function(st){ st.classList.remove('nopin'); });
+    if (!root.classList.contains('pin')) return;
     stacks.forEach(function(st){
-      st.querySelectorAll('.si, [data-k]').forEach(function(el){ el.style.opacity = ''; el.style.transform = ''; });
+      var sc = st.querySelector('.scene');
+      if (sc.scrollHeight > sc.clientHeight + 4) st.classList.add('nopin');
     });
-    if (heroIn){ heroIn.style.opacity = ''; heroIn.style.transform = ''; }
   }
 
   var ticking = false;
   function update(){
     ticking = false;
-    if (!root.classList.contains('pin')){ clear(); return; }
-    var vh = window.innerHeight;
+    var pin = root.classList.contains('pin');
+    var vh = window.innerHeight, story = false;
 
     stacks.forEach(function(st){
+      if (!pin || st.classList.contains('nopin')){ clearStack(st); return; }
       var ghost = st.getAttribute('data-steps') === 'ghost';
+      var swap = narrow.matches && st.hasAttribute('data-mobile');
       var items = st.querySelectorAll('.si');
       var keys = st.querySelectorAll('[data-k]');
       var n = items.length;
       var r = st.getBoundingClientRect();
+      if (r.top <= 1 && r.bottom >= vh - 1) story = true;
       var denom = r.height - vh; if (denom <= 0) denom = 1;
       var p = clamp(-r.top / denom, 0, 1);
+
+      if (swap){                                   // mobile : un seul élément visible à la fois
+        var cur = Math.min(n - 1, Math.floor(p * n));
+        for (var j = 0; j < n; j++){
+          items[j].style.opacity = j === cur ? '1' : '0';
+          items[j].style.transform = j === cur ? 'none' : 'translateY(' + (j < cur ? -14 : 14) + 'px)';
+          items[j].style.pointerEvents = j === cur ? 'auto' : 'none';
+          if (keys[j]) keys[j].style.opacity = j <= cur ? '1' : '0.22';
+        }
+        return;
+      }
       for (var i = 0; i < n; i++){
         var t = p * (n + 0.6) - i;              // chaque élément s'allume à son tour
         var o = clamp(t * 2.2, 0, 1);
@@ -478,22 +555,27 @@ document.documentElement.classList.add('js');
         items[i].style.transform = ghost
           ? 'translateY(' + ((1 - o) * 20).toFixed(1) + 'px)'
           : 'translateY(' + ((1 - o) * 28).toFixed(1) + 'px) scale(' + (0.96 + 0.04 * o).toFixed(3) + ')';
+        items[i].style.pointerEvents = '';
         if (keys[i]) keys[i].style.opacity = (0.22 + 0.78 * o).toFixed(3);   // la partie de la maquette liée à l'étape
       }
     });
+    document.body.classList.toggle('instory', story);   // la barre de contact mobile s'efface pendant les scènes
 
     if (heroIn){
+      if (!pin){ heroIn.style.opacity = ''; heroIn.style.transform = ''; return; }
       var y = window.scrollY || 0;
       heroIn.style.opacity = clamp(1 - y / (vh * 0.8), 0.1, 1);
       heroIn.style.transform = 'translateY(' + (y * 0.15).toFixed(1) + 'px)';
     }
   }
   function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  function onResize(){ layout(); onScroll(); }
   addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', onScroll);
-  update();
+  addEventListener('resize', onResize);
+  addEventListener('load', onResize);
+  layout(); update();
 
-  // Mobile : apparition simple à l'entrée dans l'écran
+  // Scènes non épinglées : apparition simple à l'entrée dans l'écran
   var revealed = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
   if ('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
