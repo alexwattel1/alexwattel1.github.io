@@ -5,7 +5,7 @@
 <script>
 if(location.protocol==="http:"&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1")location.replace("https://"+location.host+location.pathname+location.search+location.hash);
 document.documentElement.classList.add('js');
-(function(){var q=matchMedia('(min-width: 761px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');var s=function(){document.documentElement.classList.toggle('pin',q.matches)};s();q.addEventListener&&q.addEventListener('change',s);})();
+(function(){var q=matchMedia('(min-width: 761px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');var s=function(){document.documentElement.classList.toggle('pin',q.matches)};s();q.addEventListener&&q.addEventListener('change',s);addEventListener('resize',s);})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hailp — Conseil et agents IA sur-mesure</title>
@@ -264,7 +264,7 @@ document.documentElement.classList.add('js');
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Hailp, accueil"><svg class="brand-icon"><use href="#logo"/></svg><span>H<span class="ai">ai</span>lp</span></a>
     <div class="spacer"></div>
-    <nav class="menu" aria-label="Sections"><a href="#services">Services</a><a href="#second">Second</a><a href="#ai-mpct">AI-MPCT</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
+    <nav class="menu" aria-label="Sections"><a href="#services">Services</a><a href="#second">Second</a><a href="/ai-mpct.html">AI-MPCT</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
     <a class="btn btn-primary btn-sm" href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
   </div>
 </header>
@@ -380,7 +380,7 @@ document.documentElement.classList.add('js');
           </div>
         </div>
         <div class="center">
-          <a class="btn btn-primary" href="https://ai-mpct.com" target="_blank" rel="noopener">Découvrir AI-MPCT</a>
+          <a class="btn btn-primary" href="/ai-mpct.html">Découvrir AI-MPCT</a>
           <a class="btn btn-ghost" href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener">Demander une démo</a>
         </div>
       </div>

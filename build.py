@@ -18,7 +18,7 @@ CONFIG = {
     "email": "alexandre.wattel1@gmail.com",  # → alexandre@<domaine> une fois la redirection OVH active
     "linkedin": "https://www.linkedin.com/in/alexandre-wattel-652303a8/",
     "city": "Lyon",
-    "aimpct": "https://ai-mpct.com",
+    "aimpct": "/ai-mpct.html",          # page produit sur le site (ex-lien vers ai-mpct.com, le site de Mathieu)
     "calendly": "https://calendly.com/alexandre-wattel1/30min",
 }
 

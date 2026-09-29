@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>
+if(location.protocol==="http:"&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1")location.replace("https://"+location.host+location.pathname+location.search+location.hash);
+document.documentElement.classList.add('js');
+(function(){var q=matchMedia('(min-width: 761px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');var s=function(){document.documentElement.classList.toggle('pin',q.matches)};s();q.addEventListener&&q.addEventListener('change',s);addEventListener('resize',s);})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-MPCT — Votre agent de prospection | Hailp</title>
+<meta name="description" content="AI-MPCT repère les entreprises qui ont un besoin maintenant, les qualifie, identifie les bons décideurs et prépare le message d'approche. Par Hailp, Lyon.">
+<meta property="og:title" content="AI-MPCT — Votre agent de prospection">
+<meta property="og:description" content="Signal d'achat, qualification, décideurs, message. Vos commerciaux ne cherchent plus, ils se concentrent sur la conversation.">
+<meta name="theme-color" content="#f5f5f7">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='32' y2='32' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='.35' stop-color='%23a78bfa'/%3E%3Cstop offset='.65' stop-color='%23f472b6'/%3E%3Cstop offset='1' stop-color='%23fbbf24'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='url(%23g)' stroke-width='6' stroke-dasharray='12.3 5' stroke-dashoffset='6'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f5f5f7; --card: #fff; --ink: #1d1d1f; --muted: #86868b; --body: #4b4b50;
+    --line: #e8e8ed; --accent: #0071e3; --accent-soft: #eaf3fe;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 17px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 761px) { .wrap { padding: 0 24px; } }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  header { padding: 14px 0; background: rgba(255,255,255,.85);
+           backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+           position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; gap: 14px; }
+  .brand { font-size: 24px; font-weight: 700; letter-spacing: -.02em; color: var(--ink); display: flex; align-items: center; gap: 9px; }
+  .brand:hover { text-decoration: none; }
+  .brand-icon { width: 26px; height: 26px; }
+  .spacer { flex: 1; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 980px;
+         font-weight: 500; font-size: 16px; transition: filter .15s; min-height: 46px; }
+  .btn:hover { filter: brightness(1.07); text-decoration: none; }
+  .btn-primary { background: linear-gradient(135deg, #0090ff, #7a5cff); color: #fff; }
+  .btn-ghost { background: #3a3a3c; color: #fff; }
+
+  .grad  { background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grad2 { background: linear-gradient(120deg, #f472b6, #fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grad3 { background: linear-gradient(120deg, #6366f1, #ec4899); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grad4 { background: linear-gradient(120deg, #38bdf8, #34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .ai { background: linear-gradient(120deg, #0090ff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* ---- hero ---- */
+  .hero { min-height: calc(100svh - 70px); display: flex; flex-direction: column; align-items: center;
+          justify-content: center; padding: 40px 0 90px; text-align: center; }
+  h1 { font-size: clamp(64px, 15vw, 176px); line-height: 1.02; font-weight: 800; letter-spacing: -.045em; margin: 0 0 18px; padding-bottom: .05em; }
+  .hero .sub1 { font-size: clamp(26px, 4.6vw, 46px); font-weight: 700; letter-spacing: -.025em; margin: 0; }
+
+  /* ---- scènes : empilées sur mobile, épinglées au scroll sur grand écran ---- */
+  .stack { position: relative; }
+  .scene { max-width: 980px; margin: 0 auto; padding: 56px 16px; display: flex; flex-direction: column; }
+  html.pin .stack { height: calc(var(--n) * var(--per, 45vh) + 70vh); }
+  html.pin .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  html.pin .scene { height: 100%; padding: 90px 24px 24px; justify-content: center; justify-content: safe center; }
+
+  h2 { font-size: clamp(32px, 5.5vw, 56px); line-height: 1.08; font-weight: 800; letter-spacing: -.035em; margin: 0 0 12px; text-wrap: balance; }
+  .lead { font-size: clamp(16px, 2.1vw, 19px); color: var(--body); margin: 0 0 18px; max-width: 34em; }
+
+  /* phrase qui change (intro) */
+  .swap { display: inline-grid; }
+  .swapw { grid-area: 1 / 1; padding-bottom: .08em; }
+  html.pin .swapw { opacity: 0; will-change: opacity, transform; }
+  html:not(.pin) .swap { display: none; }
+  .slides { position: relative; flex: 1; min-height: 0; }
+  html.pin [data-stack] .scene { padding-top: 130px; }
+  html.pin .scard { position: absolute; inset: 0; opacity: 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 5vh; }
+  html:not(.pin) .scard { margin-top: 20px; }
+  .rm-title { display: none; font-size: 22px; font-weight: 800; letter-spacing: -.02em; margin: 0 0 10px; }
+  html:not(.pin) .rm-title { display: block; }
+  .encart { width: 100%; background: var(--card); border-radius: 22px; padding: 24px 26px; box-shadow: 0 2px 16px rgba(0,0,0,.06);
+            display: flex; flex-direction: column; gap: 16px; }
+  @media (min-width: 761px) { .encart { padding: 32px 40px; gap: 20px; } }
+  .bullet { display: flex; gap: 16px; align-items: center; }
+  .bullet p { margin: 0; font-size: clamp(15.5px, 2.2vw, 20px); font-weight: 600; line-height: 1.4; }
+  .bico { width: 46px; height: 46px; flex: none; border-radius: 13px; display: grid; place-items: center; }
+  .bico svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .i1 { background: linear-gradient(135deg, #0090ff, #7a5cff); }
+  .i2 { background: linear-gradient(135deg, #38bdf8, #34d399); }
+  .i3 { background: linear-gradient(135deg, #f472b6, #fb923c); }
+  .i5 { background: linear-gradient(135deg, #6366f1, #ec4899); }
+
+  /* ---- étapes : texte à gauche, visuel qui se construit à droite ---- */
+  .stage { display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
+  @media (min-width: 761px) { .stage { grid-template-columns: .9fr 1.1fr; gap: 40px; } }
+  .kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; letter-spacing: .06em; color: var(--muted); margin-bottom: 10px; }
+  .kicker b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; font-size: 14px; letter-spacing: 0;
+              background: linear-gradient(135deg, #0090ff, #7a5cff); }
+  .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .points li { display: flex; gap: 10px; font-size: 15.5px; color: var(--body); line-height: 1.45; }
+  .points li::before { content: "✓"; flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+                       display: grid; place-items: center; font-size: 11px; font-weight: 800; margin-top: 2px; }
+  .panel { background: var(--card); border-radius: 20px; padding: 18px; box-shadow: 0 12px 40px rgba(0,0,0,.08); display: flex; flex-direction: column; gap: 8px; }
+  .panel-h { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; margin-bottom: 2px; }
+  .panel-h span:last-child { font-weight: 600; letter-spacing: 0; }
+
+  html.pin [data-steps] .si { opacity: .12; transform: translateY(16px); will-change: opacity, transform; }
+  html.js:not(.pin) .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+  html.js:not(.pin) .reveal.in { opacity: 1; transform: none; }
+
+  /* 1. signaux */
+  .sig { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; }
+  .sig .tag { flex: none; font-size: 11px; font-weight: 700; border-radius: 980px; padding: 3px 9px; background: var(--accent-soft); color: var(--accent); }
+  .sig p { margin: 0; flex: 1; font-size: 14px; line-height: 1.35; }
+  .sig p small { display: block; color: var(--muted); font-size: 12px; }
+  .sig.out { background: #fafafa; }
+  .sig.out p { color: var(--muted); text-decoration: line-through; }
+  .sig.out .tag { background: #f5f5f7; color: var(--muted); }
+  .sum { border-radius: 14px; padding: 11px 14px; font-size: 14px; font-weight: 700; color: #fff; background: linear-gradient(120deg, #0090ff, #7a5cff); }
+
+  /* 2. qualification */
+  .crits { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .crit { border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; }
+  .crit small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #7c3aed; margin-bottom: 4px; }
+  .crit b { display: flex; align-items: center; gap: 6px; font-size: 14.5px; }
+  .crit p { font-size: 12px; color: var(--muted); margin: 3px 0 0; line-height: 1.4; }
+  .ok { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; flex: none; background: #dcfce7; color: #16a34a; }
+  .ok.mid { background: #fef3c7; color: #b45309; }
+  .ok.no { background: #f5f5f7; color: var(--muted); }
+  .src { display: flex; flex-wrap: wrap; gap: 6px; }
+  .src span { font-size: 12px; border: 1px solid var(--line); border-radius: 980px; padding: 3px 10px; color: var(--body); }
+  .verdicts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .verdicts div { border-radius: 12px; padding: 9px 10px; font-size: 12px; color: var(--body); line-height: 1.35; background: #f5f5f7; }
+  .verdicts b { display: block; font-size: 13px; color: var(--ink); }
+  .verdicts .v-fit { background: #16a34a; color: #eafff0; }
+  .verdicts .v-fit b { color: #fff; }
+
+  /* 3. décideurs */
+  .personas { display: flex; flex-wrap: wrap; gap: 6px; }
+  .personas span { font-size: 12px; font-weight: 600; border-radius: 980px; padding: 4px 11px; background: #f3eefe; color: #6d28d9; }
+  .who { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 14px; padding: 9px 12px; }
+  .who i { width: 34px; height: 34px; border-radius: 50%; color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 12px; flex: none;
+           background: linear-gradient(135deg, #a78bfa, #fb923c); }
+  .who p { margin: 0; flex: 1; font-size: 14px; line-height: 1.3; }
+  .who p small { display: block; color: var(--muted); font-size: 12px; }
+  .st { flex: none; font-size: 11px; font-weight: 700; border-radius: 980px; padding: 3px 10px; }
+  .st.keep { background: #16a34a; color: #fff; }
+  .st.back { background: #fef3c7; color: #b45309; }
+  .st.drop { background: #f5f5f7; color: var(--muted); }
+  .who.dim i { background: #d2d2d7; }
+  .who.dim p { color: var(--muted); }
+
+  /* 4. message */
+  .msg { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; font-size: 14px; color: var(--body); line-height: 1.5; }
+  .msg small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #7c3aed; margin-bottom: 5px; }
+  .msg .obj { color: var(--ink); font-weight: 700; margin-bottom: 4px; }
+  .msg mark { background: #eef4ff; color: var(--ink); border-radius: 4px; padding: 0 3px; }
+  .draft { display: flex; align-items: center; gap: 10px; border-radius: 14px; padding: 11px 14px; font-size: 14px; font-weight: 700;
+           background: #1d1d1f; color: #f5f5f7; }
+  .draft span { font-weight: 500; color: #a1a1a6; }
+
+  /* ---- fin ---- */
+  section { padding: 70px 0; }
+  .cta-final { background: #1d1d1f; border-radius: 24px; padding: 44px 28px; text-align: center; color: #f5f5f7; }
+  @media (min-width: 761px) { .cta-final { padding: 60px 48px; } }
+  .cta-final h2 { color: #f5f5f7; }
+  .cta-final p { color: #a1a1a6; max-width: 38em; margin: 12px auto 26px; }
+  .center { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  footer { padding: 34px 0 46px; font-size: 13px; color: var(--muted); text-align: center; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 5 5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.4"/><path d="M3.5 19.5c.6-3.4 2.8-5 5.5-5s4.9 1.6 5.5 5"/><path d="M15.5 5.2a3.4 3.4 0 0 1 0 5.9M17.5 14.7c2 .5 3.2 1.9 3.6 4.3"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H9l-5 4z"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 4 21 20H3z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.4" r=".3"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#38bdf8"/><stop offset=".35" stop-color="#a78bfa"/><stop offset=".65" stop-color="#f472b6"/><stop offset="1" stop-color="#fbbf24"/></linearGradient></defs><circle cx="16" cy="16" r="11" fill="none" stroke="url(#hg)" stroke-width="6" stroke-dasharray="12.3 5" stroke-dashoffset="6"/></svg>
+      <span>H<span class="ai">ai</span>lp</span>
+    </a>
+    <div class="spacer"></div>
+    <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Demander une démo</a>
+  </div>
+</header>
+
+<!-- 1. Hero -->
+<div class="wrap hero">
+  <h1 class="grad">AI-MPCT</h1>
+  <p class="sub1">Votre agent de prospection.</p>
+</div>
+
+<!-- 2. Le problème : la phrase continue, la carte change -->
+<div class="stack" data-stack style="--n:3; --per:55vh">
+  <div class="stack-viewport">
+    <div class="scene">
+      <h2>Vos commerciaux passent leur temps <span class="swap"><span class="swapw grad">à chercher qui appeler.</span><span class="swapw grad2">à deviner si ça vaut le coup.</span><span class="swapw grad3">à écrire le même message.</span></span></h2>
+      <div class="slides">
+        <article class="scard">
+          <div class="encart">
+            <p class="rm-title">À chercher qui appeler.</p>
+            <div class="bullet"><span class="bico i1"><svg><use href="#i-search"/></svg></span><p>Des fichiers achetés, des listes sans contexte, des heures sur LinkedIn.</p></div>
+            <div class="bullet"><span class="bico i2"><svg><use href="#i-clock"/></svg></span><p>On contacte des entreprises qui n'ont aucun besoin en ce moment.</p></div>
+          </div>
+        </article>
+        <article class="scard">
+          <div class="encart">
+            <p class="rm-title">À deviner si ça vaut le coup.</p>
+            <div class="bullet"><span class="bico i3"><svg><use href="#i-warn"/></svg></span><p>Trop petite, filiale d'un grand groupe, hors cible : on le découvre au premier appel.</p></div>
+            <div class="bullet"><span class="bico i5"><svg><use href="#i-users"/></svg></span><p>Et on ne sait pas toujours à qui parler.</p></div>
+          </div>
+        </article>
+        <article class="scard">
+          <div class="encart">
+            <p class="rm-title">À écrire le même message.</p>
+            <div class="bullet"><span class="bico i1"><svg><use href="#i-copy"/></svg></span><p>Un message générique, envoyé à tout le monde.</p></div>
+            <div class="bullet"><span class="bico i3"><svg><use href="#i-chat"/></svg></span><p>Résultat : peu de réponses, et beaucoup de temps perdu.</p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Étape 1 : signal d'achat -->
+<div class="stack" id="signal" data-steps style="--n:6; --per:22vh">
+  <div class="stack-viewport">
+    <div class="scene">
+      <div class="stage">
+        <div>
+          <div class="kicker"><b>1</b>SIGNAL D'ACHAT</div>
+          <h2>Il repère les entreprises qui ont <span class="grad">un besoin maintenant.</span></h2>
+          <p class="lead">Chaque jour, l'agent surveille les signaux publics qui révèlent un besoin, et ne garde que ceux qui correspondent à vos cibles.</p>
+          <ul class="points">
+            <li>Offres d'emploi publiées partout en France</li>
+            <li>Signal paramétré selon votre offre et votre cible</li>
+            <li>Cabinets de recrutement, annonces anonymes et doublons écartés</li>
+          </ul>
+        </div>
+        <div class="panel reveal" aria-label="Exemple de signaux détectés, données fictives">
+          <div class="panel-h"><span>SIGNAUX DU JOUR</span><span>Exemple</span></div>
+          <div class="sig si"><span class="tag">Offre</span><p>Commercial terrain H/F<small>Solvéa Services · Lyon · il y a 2 jours</small></p></div>
+          <div class="sig si"><span class="tag">Offre</span><p>Technico-commercial industrie<small>Atelier Ferrand · Saint-Étienne · hier</small></p></div>
+          <div class="sig si"><span class="tag">Offre</span><p>Responsable développement<small>Nexeo Industrie · Grenoble · aujourd'hui</small></p></div>
+          <div class="sig out si"><span class="tag">Écarté</span><p>Commercial B2B<small>Cabinet de recrutement, client inconnu</small></p></div>
+          <div class="sig out si"><span class="tag">Écarté</span><p>Business developer<small>Annonce anonyme</small></p></div>
+          <div class="sum si">3 entreprises à analyser</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Étape 2 : qualification -->
+<div class="stack" id="qualification" data-steps style="--n:7; --per:20vh">
+  <div class="stack-viewport">
+    <div class="scene">
+      <div class="stage">
+        <div>
+          <div class="kicker"><b>2</b>QUALIFICATION</div>
+          <h2>Il vérifie que l'entreprise <span class="grad">est vraiment pour vous.</span></h2>
+          <p class="lead">L'agent croise le registre officiel des entreprises et l'analyse de leur site. Puis il note l'adéquation avec votre cible, et il justifie sa note.</p>
+          <ul class="points">
+            <li>Identité, taille et dirigeants vérifiés dans le registre officiel</li>
+            <li>Site web lu et analysé, activité réelle comprise</li>
+            <li>Les cas douteux, c'est vous qui tranchez</li>
+          </ul>
+        </div>
+        <div class="panel reveal" aria-label="Exemple de qualification, données fictives">
+          <div class="panel-h"><span>SOLVÉA SERVICES</span><span>Exemple · données fictives</span></div>
+          <div class="src si"><span>Registre officiel</span><span>Site web analysé</span><span>Offre d'emploi</span></div>
+          <div class="crits">
+            <div class="crit si"><small>ACTIVITÉ B2B</small><b><span class="ok">✓</span>Confirmée</b><p>100 % clients professionnels</p></div>
+            <div class="crit si"><small>TAILLE</small><b><span class="ok">✓</span>Dans la cible</b><p>20 à 49 salariés</p></div>
+            <div class="crit si"><small>AUTONOMIE</small><b><span class="ok">✓</span>Indépendante</b><p>Aucun groupe identifié</p></div>
+            <div class="crit si"><small>DYNAMIQUE</small><b><span class="ok mid">~</span>Positive</b><p>Recrutement en cours</p></div>
+          </div>
+          <div class="verdicts si">
+            <div class="v-fit"><b>Dans la cible</b>FIT 8/10</div>
+            <div><b>À trier</b>Vous décidez</div>
+            <div><b>Hors cible</b>Écartée</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. Étape 3 : décideurs -->
+<div class="stack" id="decideurs" data-steps style="--n:6; --per:22vh">
+  <div class="stack-viewport">
+    <div class="scene">
+      <div class="stage">
+        <div>
+          <div class="kicker"><b>3</b>DÉCIDEURS</div>
+          <h2>Il trouve <span class="grad">les bonnes personnes</span> à contacter.</h2>
+          <p class="lead">Vous définissez les personas pertinents pour votre offre. L'agent cherche qui occupe ces postes dans l'entreprise et retient les profils les plus pertinents.</p>
+          <ul class="points">
+            <li>Personas paramétrés selon votre entreprise</li>
+            <li>Chaque profil évalué : pertinence haute, moyenne ou écarté</li>
+            <li>Un contact de réserve si le premier ne répond pas</li>
+          </ul>
+        </div>
+        <div class="panel reveal" aria-label="Exemple de décideurs identifiés, données fictives">
+          <div class="panel-h"><span>VOS PERSONAS</span><span>Exemple</span></div>
+          <div class="personas si"><span>Dirigeant</span><span>Directeur commercial</span><span>Responsable développement</span></div>
+          <div class="who si"><i>CM</i><p>C. Martin<small>Directrice générale</small></p><span class="st keep">Retenue</span></div>
+          <div class="who si"><i>PG</i><p>P. Garnier<small>Directeur commercial</small></p><span class="st keep">Retenu</span></div>
+          <div class="who si"><i>LB</i><p>L. Bernard<small>Responsable ADV</small></p><span class="st back">Réserve</span></div>
+          <div class="who dim si"><i>SR</i><p>S. Roux<small>Comptable</small></p><span class="st drop">Écarté</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. Étape 4 : message -->
+<div class="stack" id="message" data-steps style="--n:3; --per:40vh">
+  <div class="stack-viewport">
+    <div class="scene">
+      <div class="stage">
+        <div>
+          <div class="kicker"><b>4</b>MESSAGE</div>
+          <h2>Il prépare <span class="grad">une approche personnalisée.</span></h2>
+          <p class="lead">Pour chaque décideur retenu, un message qui parle de son entreprise et de son actualité. Pas un modèle générique.</p>
+          <ul class="points">
+            <li>Une demande de connexion LinkedIn courte</li>
+            <li>Un mail avec son objet, prêt à relire</li>
+            <li>Rien ne part sans vous : vous relisez, vous envoyez</li>
+          </ul>
+        </div>
+        <div class="panel reveal" aria-label="Exemple de messages préparés, données fictives">
+          <div class="panel-h"><span>POUR C. MARTIN</span><span>Exemple</span></div>
+          <div class="msg si"><small>DEMANDE DE CONNEXION</small>Bonjour Madame Martin, j'ai vu que <mark>Solvéa Services</mark> recrute <mark>un commercial terrain à Lyon</mark>. J'accompagne des PME dans cette phase de croissance. Au plaisir d'échanger.</div>
+          <div class="msg si"><small>MAIL</small><div class="obj">Votre recrutement commercial à Lyon</div>Bonjour Madame Martin, <mark>Solvéa Services</mark> recrute un <mark>commercial terrain</mark>. Souvent, c'est le signe qu'il faut remplir le carnet de commandes vite. C'est justement là que nous aidons des PME comme la vôtre. Seriez-vous ouverte à un échange de 15 minutes ?</div>
+          <div class="draft si">✓ Brouillon prêt <span>dans votre boîte mail</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. Rendez-vous -->
+<section>
+  <div class="wrap">
+    <div class="cta-final">
+      <h2>Et si on le lançait <span class="grad">sur vos cibles ?</span></h2>
+      <p>En 30 minutes, vous nous décrivez vos clients idéaux et les personnes à qui vous voulez parler. On vous montre l'agent en action et ce qu'il peut trouver sur votre marché.</p>
+      <div class="center">
+        <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Réserver un échange de 30 min</a>
+        <a class="btn btn-ghost" href="/#contact">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    AI-MPCT est un agent <a href="/">Hailp</a> · Alexandre Wattel · Lyon · <a href="mailto:alexandre.wattel1@gmail.com">alexandre.wattel1@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var clamp = function(v, a, b){ return Math.max(a, Math.min(b, v)); };
+  var stacks = Array.prototype.slice.call(document.querySelectorAll('[data-stack]'));
+  var stepStacks = Array.prototype.slice.call(document.querySelectorAll('[data-steps]'));
+  var hero = document.querySelector('.hero');
+
+  function clear(){
+    document.querySelectorAll('.scard, .swapw, [data-steps] .si').forEach(function(el){ el.style.opacity = ''; el.style.transform = ''; el.style.pointerEvents = ''; });
+    if (hero){ hero.style.opacity = ''; hero.style.transform = ''; }
+  }
+
+  var ticking = false;
+  function update(){
+    ticking = false;
+    if (!root.classList.contains('pin')){ clear(); return; }
+    var vh = window.innerHeight;
+
+    // cartes qui se remplacent (même logique que la page Second)
+    stacks.forEach(function(st){
+      var cards = st.querySelectorAll('.scard');
+      var words = st.querySelectorAll('.swapw');
+      var n = cards.length;
+      var r = st.getBoundingClientRect();
+      var denom = r.height - vh; if (denom <= 0) denom = 1;
+      var p = clamp(-r.top / denom, 0, 1);
+      for (var i = 0; i < n; i++){
+        var t = p * n - i, o, ty;
+        if (t < 0){ o = clamp(1 + t * 8, 0, 1); ty = (1 - o) * 54; }
+        else if (t <= 0.62 || i === n - 1){ o = 1; ty = 0; }
+        else { var u = clamp((t - 0.62) / 0.24, 0, 1); o = 1 - u; ty = -40 * u; }
+        cards[i].style.opacity = o;
+        cards[i].style.transform = 'translateY(' + ty.toFixed(1) + 'px)';
+        cards[i].style.pointerEvents = o > 0.5 ? 'auto' : 'none';
+        if (words[i]){ words[i].style.opacity = o; words[i].style.transform = 'translateY(' + (ty * 0.35).toFixed(1) + 'px)'; }
+      }
+    });
+
+    // éléments qui s'allument à tour de rôle
+    stepStacks.forEach(function(st){
+      var items = st.querySelectorAll('.si');
+      var n = items.length;
+      var r = st.getBoundingClientRect();
+      var denom = r.height - vh; if (denom <= 0) denom = 1;
+      var p = clamp(-r.top / denom, 0, 1);
+      for (var i = 0; i < n; i++){
+        var o = clamp((p * (n + 0.6) - i) * 2.2, 0, 1);
+        items[i].style.opacity = (0.12 + 0.88 * o).toFixed(3);
+        items[i].style.transform = 'translateY(' + ((1 - o) * 16).toFixed(1) + 'px)';
+      }
+    });
+
+    if (hero){
+      var y = window.scrollY || 0;
+      hero.style.opacity = clamp(1 - y / (vh * 0.9), 0.15, 1);
+      hero.style.transform = 'translateY(' + (y * 0.12).toFixed(1) + 'px)';
+    }
+  }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+
+  var revealed = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealed.forEach(function(el){ io.observe(el); });
+  } else {
+    revealed.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+
+</body>
+</html>
