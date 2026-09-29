@@ -40,8 +40,11 @@ def vcard(c):
 
 
 def page(c):
-    e = {k: html.escape(v) for k, v in c.items()}
-    return (ROOT / "template.html").read_text(encoding="utf-8").format(**e)
+    # Remplacement ciblé des {clé} de CONFIG : le CSS et le JS du template gardent leurs accolades simples.
+    out = (ROOT / "template.html").read_text(encoding="utf-8")
+    for k, v in c.items():
+        out = out.replace("{" + k + "}", html.escape(v))
+    return out
 
 
 def qr(c):

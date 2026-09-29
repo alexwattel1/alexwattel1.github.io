@@ -2,7 +2,11 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<script>if(location.protocol==="http:"&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1")location.replace("https://"+location.host+location.pathname+location.search+location.hash)</script>
+<script>
+if(location.protocol==="http:"&&location.hostname!=="localhost"&&location.hostname!=="127.0.0.1")location.replace("https://"+location.host+location.pathname+location.search+location.hash);
+document.documentElement.classList.add('js');
+(function(){var q=matchMedia('(min-width: 761px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');var s=function(){document.documentElement.classList.toggle('pin',q.matches)};s();q.addEventListener&&q.addEventListener('change',s);})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hailp — Conseil et agents IA sur-mesure</title>
 <meta name="description" content="Hailp accompagne les entreprises dans l'intégration de l'IA : audit, agents IA sur-mesure, accompagnement des équipes. Basé à Lyon.">
@@ -49,19 +53,17 @@
   .btn-sm { padding: 8px 18px; font-size: 14px; min-height: 38px; }
   @media (max-width: 760px) { header .btn { display: none; } }
 
-  .hero { padding-top: 56px; padding-bottom: 36px; }
-  @media (min-width: 761px) { .hero { padding-top: 84px; padding-bottom: 44px; } }
-  .eyebrow { display: inline-block; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft);
-             border-radius: 980px; padding: 4px 12px; margin: 0 0 18px; }
-  h1 { font-size: clamp(36px, 7vw, 60px); line-height: 1.06; font-weight: 700;
-       letter-spacing: -.03em; margin: 0 0 18px; text-wrap: balance; }
+  /* ---- hero plein écran ---- */
+  .hero { min-height: calc(100svh - 70px); display: flex; flex-direction: column; justify-content: center;
+          padding-top: 48px; padding-bottom: 48px; }
+  h1 { font-size: clamp(44px, 9vw, 96px); line-height: 1.02; font-weight: 800;
+       letter-spacing: -.04em; margin: 0 0 22px; text-wrap: balance; }
   h1 em { font-style: normal; background: linear-gradient(120deg, #0090ff, #7a5cff);
-          -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .lede { font-size: clamp(18px, 2.4vw, 21px); color: var(--body); max-width: 40em; margin: 0 0 28px; }
-  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .hero-note { font-size: 13px; color: var(--muted); margin: 14px 0 0; }
+          -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .05em; }
+  .lede { font-size: clamp(18px, 2.4vw, 22px); color: var(--body); max-width: 38em; margin: 0 0 36px; }
+  .hero-in { will-change: opacity, transform; }
 
-  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px 0 8px; }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   @media (min-width: 761px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 14px; } }
   .stat { border-radius: 18px; padding: 18px 20px; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
   .stat b { display: block; font-size: clamp(19px, 5vw, 24px); hyphens: none; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 4px; }
@@ -71,24 +73,57 @@
   .stat:nth-child(3) { background: linear-gradient(120deg, #f472b6, #fb923c); }
   .stat:nth-child(4) { background: linear-gradient(120deg, #2dd4bf, #a3e635); }
 
-  section { padding: 48px 0; }
-  section h2 { font-size: clamp(34px, 6.5vw, 60px); line-height: 1.1; font-weight: 700;
-       letter-spacing: -.03em; color: var(--ink); margin: 0 0 14px; text-align: center; text-wrap: balance; }
-  section h2 em { font-style: normal; background-image: var(--hg);
-       -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .sub { text-align: center; color: var(--body); max-width: 38em; margin: 0 auto 32px; font-size: 18px; }
+  /* ---- titres ---- */
+  h2 { font-size: clamp(34px, 6vw, 60px); line-height: 1.08; font-weight: 800;
+       letter-spacing: -.035em; color: var(--ink); margin: 0 0 14px; text-align: center; text-wrap: balance; }
+  h2 em { font-style: normal; background-image: var(--hg);
+          -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .05em; }
+  .sub { text-align: center; color: var(--body); max-width: 40em; margin: 0 auto 28px; font-size: clamp(16px, 2.2vw, 19px); }
   .g1 { --hg: linear-gradient(120deg, #0090ff, #7a5cff); }
   .g2 { --hg: linear-gradient(120deg, #db2777, #ea580c); }
   .g3 { --hg: linear-gradient(120deg, #0284c7, #059669); }
-  .g4 { --hg: linear-gradient(120deg, #8b5cf6, #d946ef 55%, #d97706); }
-  .g5 { --hg: linear-gradient(120deg, #0d9488, #65a30d); }
   .g6 { --hg: linear-gradient(120deg, #6366f1, #ec4899); }
+  .g7 { --hg: linear-gradient(120deg, #f472b6, #fb923c); }
+
+  /* ---- scènes : empilées sur mobile, épinglées au scroll sur grand écran ---- */
+  .stack { position: relative; }
+  .scene { max-width: 980px; margin: 0 auto; padding: 64px 16px; display: flex; flex-direction: column; }
+  html.pin .stack { height: calc(var(--n) * var(--per, 42vh) + 75vh); }
+  html.pin .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  html.pin .scene { height: 100%; padding: 84px 24px 20px; justify-content: center; justify-content: safe center; }
+  /* scènes produit : plus denses, on resserre pour tenir dans un écran de portable */
+  html.pin .prodscene h2 { font-size: clamp(30px, min(5vw, 6vh), 52px); margin-bottom: 10px; }
+  html.pin .prodscene .sub { font-size: 16.5px; max-width: 50em; margin-bottom: 20px; }
+  html.pin .prodscene .prod { margin-bottom: 20px; }
+  html.pin .prodscene .demo { padding: 16px 18px; }
+  html.pin .prodscene .demo-desc { margin-bottom: 10px; }
+  html.pin .prodscene { padding-top: 78px; padding-bottom: 12px; }
+  html.pin .prodscene .sd { padding: 12px 14px; gap: 6px; }
+  html.pin .prodscene .say { margin-bottom: 3px; padding: 5px 12px; }
+  html.pin .prodscene .sd-blk { padding: 8px 12px; }
+  html.pin .prodscene .pipe li { padding: 11px 16px; }
+  html.pin .prodscene .crit { padding: 8px 11px; }
+  html.pin .prodscene .dm, html.pin .prodscene .demo-msg { margin-top: 9px; }
+  html.pin .prodscene .done { margin-top: 2px; }
+  html.pin .scene > .body { flex: none; }
+
+  /* éléments pilotés par le scroll (valeurs de départ, le JS les anime) */
+  html.pin [data-steps] .si { will-change: opacity, transform; }
+  html.pin [data-steps="ghost"] .si { opacity: .14; transform: translateY(20px); }
+  html.pin [data-steps="fade"] .si { opacity: 0; transform: translateY(28px); }
+  html.pin [data-steps] [data-k] { opacity: .22; transition: opacity .25s ease; }
+
+  /* apparition simple quand pas d'épinglage (mobile) */
+  html.js:not(.pin) .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+  html.js:not(.pin) .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1 !important; transform: none !important; } }
 
   .card { background: var(--card); border-radius: 16px; padding: 24px 26px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
-  .grid3 { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  @media (min-width: 761px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
   .card h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.01em; }
   .card p { margin: 0; font-size: 15px; color: var(--body); }
+  .grid3 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 761px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
+  html.pin #services h2 { margin-bottom: 36px; }
   .ico { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 14px; color: #fff; }
   .ico svg { width: 22px; height: 22px; }
   .i1 { background: linear-gradient(135deg, #0090ff, #7a5cff); }
@@ -97,59 +132,86 @@
   .i4 { background: linear-gradient(135deg, #2dd4bf, #a3e635); }
   .i5 { background: linear-gradient(135deg, #a78bfa, #f0abfc 50%, #fbbf24); }
   .i6 { background: linear-gradient(135deg, #6366f1, #ec4899); }
-  .card ul { margin: 12px 0 0; padding-left: 18px; font-size: 14px; color: var(--body); }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 10px; font-size: 15px; font-weight: 600; }
 
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 820px; margin: 0 auto; }
-  .chip { background: var(--card); border: 1px solid var(--line); border-radius: 980px; padding: 7px 15px; font-size: 14px; box-shadow: 0 1px 2px rgba(0,0,0,.03); }
+  /* ---- métiers ---- */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 900px; margin: 0 auto; }
+  .chip { background: var(--card); border: 1px solid var(--line); border-radius: 980px; padding: 9px 18px;
+          font-size: clamp(14px, 1.8vw, 17px); box-shadow: 0 1px 2px rgba(0,0,0,.03); }
+  .chip.sec { border-color: #fbcfe8; background: linear-gradient(120deg, #fff5fa, #fff7ed); }
+  .chip.sec::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: 1px;
+                      background: linear-gradient(135deg, #f472b6, #fb923c); }
+  .legend { text-align: center; font-size: 13px; color: var(--muted); margin: 22px 0 0; }
+  .legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px;
+              background: linear-gradient(135deg, #f472b6, #fb923c); }
 
-  .product { background: #1d1d1f; color: #f5f5f7; border-radius: 24px; padding: 32px 22px; }
-  @media (min-width: 761px) { .product { padding: 48px; } }
-  .product h2 { color: #f5f5f7; }
-  .product .sub { color: #a1a1a6; }
-  .pipe { list-style: none; margin: 0 0 28px; padding: 0; display: grid; grid-template-columns: 1fr; gap: 12px; counter-reset: p; }
-  @media (min-width: 761px) { .pipe { grid-template-columns: repeat(4, 1fr); } }
-  .pipe li { background: #2c2c2e; border-radius: 16px; padding: 18px 20px; font-size: 14px; color: #c7c7cc; }
-  .pipe li::before { counter-increment: p; content: counter(p); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
-                      background: linear-gradient(135deg, #0090ff, #7a5cff); color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 10px; }
-  .pipe b { display: block; color: #fff; font-size: 16px; margin-bottom: 2px; }
-  .demo { background: #fff; color: var(--ink); border-radius: 18px; padding: 22px; margin: 0 0 28px; text-align: left; box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+  /* ---- produits (AI-MPCT, Second) ---- */
+  .dark { background: #0b0b0d; color: #f5f5f7; }
+  .dark h2 { color: #f5f5f7; }
+  .dark .sub { color: #a1a1a6; }
+  .dark .btn-ghost { background: #3a3a3c; color: #fff; }
+  .white { background: #fff; }
+  .prod { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 28px; }
+  @media (min-width: 761px) { .prod { grid-template-columns: .82fr 1.18fr; gap: 26px; align-items: center; } }
+  .pipe { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .pipe li { border-radius: 16px; padding: 14px 18px; font-size: 14px; display: flex; gap: 14px; align-items: flex-start; }
+  .pipe .n { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+             background: linear-gradient(135deg, #0090ff, #7a5cff); color: #fff; font-weight: 700; font-size: 13px; margin-top: 1px; }
+  .pipe b { display: block; font-size: 16px; margin-bottom: 1px; }
+  .dark .pipe li { background: #1c1c1e; color: #c7c7cc; }
+  .dark .pipe b { color: #fff; }
+  .lite .pipe li { background: var(--card); color: var(--body); box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .lite .pipe b { color: var(--ink); }
+  .lite .pipe .n { background: linear-gradient(135deg, #f472b6, #fb923c); }
+  .center { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+  .demo { background: #fff; color: var(--ink); border-radius: 18px; padding: 20px; text-align: left; box-shadow: 0 10px 40px rgba(0,0,0,.35); }
   .demo-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-bottom: 6px; }
-  .demo-name { font-size: 24px; font-weight: 800; letter-spacing: -.02em; background: linear-gradient(120deg,#a78bfa,#f472b6 55%,#fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .demo-name { font-size: 22px; font-weight: 800; letter-spacing: -.02em; background: linear-gradient(120deg,#a78bfa,#f472b6 55%,#fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .pill { font-size: 11px; font-weight: 700; border-radius: 980px; padding: 3px 10px; letter-spacing: .03em; }
   .pill.fit { background: #16a34a; color: #fff; } .pill.sc { background: #ede9fe; color: #6d28d9; } .pill.ex { background: #f5f5f7; color: var(--muted); margin-left: auto; }
-  .demo-desc { font-size: 14px; color: var(--body); margin: 0 0 16px; }
-  .demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  @media (min-width: 761px) { .demo-grid { grid-template-columns: repeat(4, 1fr); } }
-  .crit { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
-  .crit small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #7c3aed; margin-bottom: 6px; }
-  .crit b { display: flex; align-items: center; gap: 6px; font-size: 15px; }
-  .crit p { font-size: 12px; color: var(--muted); margin: 4px 0 0; line-height: 1.4; }
+  .demo-desc { font-size: 14px; color: var(--body); margin: 0 0 14px; }
+  .demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .crit { border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; }
+  .crit small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #7c3aed; margin-bottom: 4px; }
+  .crit b { display: flex; align-items: center; gap: 6px; font-size: 14.5px; }
+  .crit p { font-size: 12px; color: var(--muted); margin: 3px 0 0; line-height: 1.4; }
   .ok { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; flex: none; background: #dcfce7; color: #16a34a; }
   .ok.mid { background: #fef3c7; color: #b45309; }
   .dm { display: flex; align-items: center; gap: 10px; margin-top: 12px; background: #f5f5f7; border-radius: 12px; padding: 10px 12px; font-size: 14px; }
   .dm i { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#a78bfa,#fb923c); color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 12px; flex: none; }
   .dm span { color: var(--muted); font-size: 12px; display: block; }
-  .demo-msg { margin-top: 12px; border-left: 3px solid #7a5cff; background: #faf8ff; border-radius: 0; padding: 10px 14px; font-size: 13px; color: var(--body); }
-  .center { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-  .product .btn-ghost { background: #3a3a3c; color: #fff; }
+  .demo-msg { margin-top: 12px; border-left: 3px solid #7a5cff; background: #faf8ff; padding: 10px 14px; font-size: 13px; color: var(--body); }
 
+  /* maquette Second */
+  .sd { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.08);
+        display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+  .sd-bar { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); font-weight: 600; }
+  .sd-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, #f472b6, #fb923c); }
+  .sd-blk { background: var(--bg); border-radius: 12px; padding: 10px 12px; }
+  .sd-blk small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #db2777; margin-bottom: 5px; }
+  .sd-blk p { margin: 0; color: var(--body); line-height: 1.45; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+  .tags span { background: #fff; border: 1px solid var(--line); border-radius: 980px; padding: 2px 10px; font-size: 12px; color: var(--body); }
+  .tiles { display: flex; gap: 6px; margin-top: 7px; }
+  .apptile { width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; font-size: 11px; font-weight: 800; color: #fff; flex: none; }
+  .say { align-self: flex-start; background: #1d1d1f; color: #f5f5f7; border-radius: 12px; padding: 7px 12px; font-weight: 600; margin-bottom: 6px; }
+  .done { display: flex; align-items: center; gap: 8px; color: var(--ink); margin-top: 4px; }
+  .done .ok { background: #fce7f3; color: #db2777; }
+  .sd-prop { background: linear-gradient(120deg, #fff5fa, #fff7ed); border: 1px solid #fbcfe8; }
+  .acts { display: flex; gap: 6px; margin-top: 8px; }
+  .acts span { font-size: 12px; font-weight: 700; border-radius: 980px; padding: 3px 12px; }
+  .acts .yes { background: linear-gradient(135deg, #f472b6, #fb923c); color: #fff; }
+  .acts .no { background: #fff; border: 1px solid var(--line); color: var(--muted); }
+
+  /* ---- méthode ---- */
   .steps { display: grid; grid-template-columns: 1fr; gap: 14px; }
   @media (min-width: 761px) { .steps { grid-template-columns: repeat(4, 1fr); } }
   .step .clock { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 980px;
                  padding: 3px 12px; font-size: 13px; font-weight: 600; margin-bottom: 12px; }
 
-  .why { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  @media (min-width: 761px) { .why { grid-template-columns: repeat(3, 1fr); } }
-  .why b.big { display: block; font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 6px; }
-
-  .faq { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
-  .faq details { background: var(--card); border-radius: 16px; padding: 18px 22px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
-  .faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
-  .faq summary::-webkit-details-marker { display: none; }
-  .faq summary::after { content: "+"; color: var(--accent); font-size: 22px; line-height: 1; }
-  .faq details[open] summary::after { content: "–"; }
-  .faq p { margin: 12px 0 0; color: var(--body); font-size: 15px; }
-
+  /* ---- contact ---- */
+  section { padding: 64px 0; }
   .contact { display: grid; grid-template-columns: 1fr; gap: 14px; max-width: 880px; margin: 0 auto; }
   @media (min-width: 761px) { .contact { grid-template-columns: 1.15fr 1fr; } }
   .who { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
@@ -202,124 +264,146 @@
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Hailp, accueil"><svg class="brand-icon"><use href="#logo"/></svg><span>H<span class="ai">ai</span>lp</span></a>
     <div class="spacer"></div>
-    <nav class="menu" aria-label="Sections"><a href="#services">Services</a><a href="#ai-mpct">AI-MPCT</a><a href="/second.html">Second</a><a href="#methode">Méthode</a><a href="#faq">FAQ</a></nav>
+    <nav class="menu" aria-label="Sections"><a href="#services">Services</a><a href="#second">Second</a><a href="#ai-mpct">AI-MPCT</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
     <a class="btn btn-primary btn-sm" href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
   </div>
 </header>
 
 <main id="top">
+  <!-- 1. Hero plein écran -->
   <div class="wrap hero">
-    <span class="eyebrow">Conseil et agents IA sur-mesure</span>
-    <h1>L'IA qui vous <em>aide vraiment.</em></h1>
-    <p class="lede">Hailp accompagne les entreprises dans l'intégration concrète de l'IA : on identifie où elle vous fait gagner du temps, on conçoit les agents IA qui font le travail, et on accompagne vos équipes jusqu'à ce qu'elles s'en servent au quotidien.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener">Réserver un premier échange</a>
-      <a class="btn btn-ghost" href="contact.vcf" download>Enregistrer le contact</a>
+    <div class="hero-in">
+      <h1>L'IA qui vous <em>aide vraiment.</em></h1>
+      <p class="lede">Hailp accompagne votre entreprise dans l'intégration de l'IA, identifie où elle vous fait gagner du temps, conçoit les agents IA qui font le travail et forme vos équipes jusqu'à ce qu'elles s'en servent au quotidien.</p>
     </div>
     <div class="stats" aria-label="En bref">
       <div class="stat"><b>Conseil</b><small>Audit et feuille de route IA</small></div>
       <div class="stat"><b>Sur-mesure</b><small>Agents IA conçus pour vos process</small></div>
-      <div class="stat"><b>Sur étagère</b><small>AI-MPCT, l'agent de prospection</small></div>
+      <div class="stat"><b>Sur étagère</b><small>Second, l'assistant personnel, et AI-MPCT, l'agent de prospection</small></div>
       <div class="stat"><b>Adoption</b><small>Vos équipes accompagnées</small></div>
     </div>
   </div>
 
-  <section id="services">
-    <div class="wrap">
-      <h2 class="g1">Nos services de <em>conseil en IA</em></h2>
-      <p class="sub">Du premier échange à l'agent en production, un seul interlocuteur qui conseille <b>et</b> construit.</p>
-      <div class="grid3">
-        <div class="card"><div class="ico i1"><svg><use href="#i-search"/></svg></div><h3>Audit IA</h3><p>On cartographie vos process, on repère les tâches où l'IA fait gagner du temps, et on vous remet une feuille de route priorisée et chiffrée.</p></div>
-        <div class="card"><div class="ico i2"><svg><use href="#i-code"/></svg></div><h3>Développement sur-mesure</h3><p>Agents IA et automatisations branchés sur vos outils existants (mail, CRM, ERP, fichiers) pour traiter, trier, rédiger et relancer à votre place.</p></div>
-        <div class="card"><div class="ico i3"><svg><use href="#i-team"/></svg></div><h3>Conduite du changement</h3><p>Un outil ne vaut que s'il est utilisé. On accompagne vos équipes dans la prise en main, on recueille leurs retours et on ajuste.</p></div>
-        <div class="card"><div class="ico i4"><svg><use href="#i-key"/></svg></div><h3>Choix des outils IA</h3><p>ChatGPT, Claude, Copilot, Mistral… On vous aide à choisir les bons outils et les bonnes licences, puis à les déployer de façon sécurisée.</p></div>
-        <div class="card"><div class="ico i5"><svg><use href="#i-compass"/></svg></div><h3>Coaching dirigeant</h3><p>Des sessions en tête-à-tête pour comprendre ce que l'IA change pour votre entreprise, et prendre les bonnes décisions sans se perdre dans le bruit.</p></div>
-        <div class="card"><div class="ico i6"><svg><use href="#i-bolt"/></svg></div><h3>Agents prêts à l'emploi</h3><p>Pour les besoins courants, pas besoin de tout développer : nos agents sur étagère se paramètrent en quelques jours. <a href="#ai-mpct">Découvrir AI-MPCT</a></p></div>
+  <!-- 2. Services : les cadres apparaissent un à un -->
+  <div class="stack" id="services" data-steps="fade" style="--n:6; --per:34vh">
+    <div class="stack-viewport">
+      <div class="scene">
+        <h2 class="g1">Nos services de <em>conseil en IA</em></h2>
+        <div class="grid3 body">
+          <div class="card si reveal"><div class="ico i1"><svg><use href="#i-search"/></svg></div><h3>Audit IA</h3><p>On cartographie vos process, on repère les tâches où l'IA fait gagner du temps, et on vous remet une feuille de route priorisée et chiffrée.</p></div>
+          <div class="card si reveal"><div class="ico i2"><svg><use href="#i-code"/></svg></div><h3>Développement sur-mesure</h3><p>Agents IA et automatisations branchés sur vos outils existants (mail, CRM, ERP, fichiers) pour traiter, trier, rédiger et relancer à votre place.</p></div>
+          <div class="card si reveal"><div class="ico i3"><svg><use href="#i-team"/></svg></div><h3>Conduite du changement</h3><p>Un outil ne vaut que s'il est utilisé. On accompagne vos équipes dans la prise en main, on recueille leurs retours et on ajuste.</p></div>
+          <div class="card si reveal"><div class="ico i4"><svg><use href="#i-key"/></svg></div><h3>Choix des outils IA</h3><p>ChatGPT, Claude, Copilot, Mistral… On vous aide à choisir les bons outils et les bonnes licences, puis à les déployer de façon sécurisée.</p></div>
+          <div class="card si reveal"><div class="ico i5"><svg><use href="#i-compass"/></svg></div><h3>Coaching dirigeant</h3><p>Des sessions en tête-à-tête pour comprendre ce que l'IA change pour votre entreprise, et prendre les bonnes décisions sans se perdre dans le bruit.</p></div>
+          <div class="card si reveal"><div class="ico i6"><svg><use href="#i-bolt"/></svg></div><h3>Agents prêts à l'emploi</h3><p>Pour les besoins courants, pas besoin de tout développer. Nos agents sur étagère se paramètrent en quelques jours.</p><div class="links"><a href="#second">Découvrir Second</a><a href="#ai-mpct">Découvrir AI-MPCT</a></div></div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="usages">
-    <div class="wrap">
-      <h2 class="g2">L'IA, <em>pour tous les métiers</em></h2>
-      <p class="sub">Quel que soit votre secteur, les mêmes tâches répétitives mangent le temps de vos équipes. Quelques exemples de ce qu'un agent peut prendre en charge :</p>
-      <div class="chips">
-        <span class="chip">Prospection et qualification de leads</span><span class="chip">Réponses aux demandes clients</span><span class="chip">Devis et propositions commerciales</span>
-        <span class="chip">Saisie et traitement des commandes</span><span class="chip">Tri et classement des emails</span><span class="chip">Relances clients et impayés</span>
-        <span class="chip">Comptes rendus de réunion</span><span class="chip">Veille concurrentielle et appels d'offres</span><span class="chip">Tri de CV et recrutement</span>
-        <span class="chip">Recherche dans vos documents internes</span><span class="chip">Reporting et tableaux de bord</span><span class="chip">Rédaction de contenus</span>
+  <!-- 3. Métiers : les cas d'usage s'allument au scroll -->
+  <div class="stack white" id="usages" data-steps="fade" style="--n:18; --per:9vh">
+    <div class="stack-viewport">
+      <div class="scene">
+        <h2 class="g2">L'IA, <em>pour tous les métiers</em></h2>
+        <p class="sub">Quel que soit votre secteur, les mêmes tâches répétitives mangent le temps de vos équipes. Quelques exemples de ce qu'un agent peut prendre en charge :</p>
+        <div class="body">
+          <div class="chips">
+            <span class="chip si">Prospection et qualification de leads</span><span class="chip si">Réponses aux demandes clients</span><span class="chip si sec">Préparation de vos rendez-vous</span>
+            <span class="chip si">Devis et propositions commerciales</span><span class="chip si sec">Compte rendu et mail de suite après chaque réunion</span><span class="chip si">Saisie et traitement des commandes</span>
+            <span class="chip si">Tri et classement des emails</span><span class="chip si sec">Mise à jour du CRM après chaque échange</span><span class="chip si">Relances clients et impayés</span>
+            <span class="chip si sec">Synthèse de vos dossiers en cours</span><span class="chip si">Veille concurrentielle et appels d'offres</span><span class="chip si">Tri de CV et recrutement</span>
+            <span class="chip si sec">Brouillons de réponses à vos mails</span><span class="chip si">Recherche dans vos documents internes</span><span class="chip si">Reporting et tableaux de bord</span>
+            <span class="chip si sec">Passation d'un dossier à un collègue</span><span class="chip si">Rédaction de contenus</span><span class="chip si sec">Suivi de vos actions de la semaine</span>
+          </div>
+          <p class="legend"><i></i>Ce que fait Second, l'assistant personnel</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="ai-mpct">
-    <div class="wrap">
-      <div class="product">
+  <!-- 4. Second : même principe, la maquette se remplit -->
+  <div class="stack lite" id="second" data-steps="ghost" style="--n:4; --per:48vh">
+    <div class="stack-viewport">
+      <div class="scene prodscene">
+        <h2 class="g7">Second, <em>l'assistant personnel</em></h2>
+        <p class="sub">Votre bras droit IA. Il connaît votre métier, voit vos outils et travaille selon vos méthodes. Il est installé chez vous et reste sous votre contrôle.</p>
+        <div class="prod body">
+          <ol class="pipe">
+            <li class="si"><span class="n">1</span><div><b>Il sait</b>Une mémoire de vos dossiers, de votre métier et de vos méthodes</div></li>
+            <li class="si"><span class="n">2</span><div><b>Il voit</b>Branché sur vos mails, votre agenda et vos logiciels</div></li>
+            <li class="si"><span class="n">3</span><div><b>Il fait</b>Un simple mot déclenche vos procédures</div></li>
+            <li class="si"><span class="n">4</span><div><b>Il s'améliore</b>Chaque semaine il propose, vous validez</div></li>
+          </ol>
+          <div class="sd reveal" aria-label="Exemple d'une journée avec Second, données fictives">
+            <div class="sd-bar"><span class="dot"></span>Second · mardi, 9 h 12<span class="pill ex">Exemple</span></div>
+            <div class="sd-blk" data-k="0"><small>MÉMOIRE</small><p>Dossier Solvéa Services : 14 échanges, dernier rendez-vous le 2 octobre.</p><div class="tags"><span>Fiche client</span><span>Historique</span><span>Vos méthodes</span></div></div>
+            <div class="sd-blk" data-k="1"><small>VOS OUTILS</small><p>Nouveau mail de C. Martin. Rendez-vous à 14 h dans l'agenda.</p><div class="tiles"><span class="apptile" style="background:#ea4335">M</span><span class="apptile" style="background:#4285f4">31</span><span class="apptile" style="background:#00a1e0">CRM</span><span class="apptile" style="background:#217346">X</span><span class="apptile" style="background:#e5252a; font-size:8px">PDF</span></div></div>
+            <div class="sd-blk" data-k="2"><small>VOUS DITES</small><div class="say">« Rendez-vous terminé. »</div><div class="done"><span class="ok">✓</span>Compte rendu à votre format</div><div class="done"><span class="ok">✓</span>Mail de suite prêt à relire</div><div class="done"><span class="ok">✓</span>CRM et agenda à jour</div></div>
+            <div class="sd-blk sd-prop" data-k="3"><small>PROPOSITION DE LA SEMAINE</small><p>Ajouter une relance à J+7 dans votre procédure de suivi client.</p><div class="acts"><span class="yes">Valider</span><span class="no">Rejeter</span></div></div>
+          </div>
+        </div>
+        <div class="center">
+          <a class="btn btn-primary" href="/second.html">Découvrir Second</a>
+          <a class="btn btn-ghost" href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener">Échanger 30 min</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. AI-MPCT : la fiche se construit étape par étape -->
+  <div class="stack dark" id="ai-mpct" data-steps="ghost" style="--n:4; --per:48vh">
+    <div class="stack-viewport">
+      <div class="scene prodscene">
         <h2 class="g1">AI-MPCT, <em>l'agent de prospection</em></h2>
         <p class="sub">Notre agent sur étagère détecte les entreprises qui ont un besoin maintenant, les qualifie, identifie les bons décideurs et rédige le message d'approche. Vos commerciaux ne perdent plus de temps à chercher : ils se concentrent sur la conversation.</p>
-        <div class="demo" aria-label="Exemple de fiche prospect produite par AI-MPCT, données fictives">
-          <div class="demo-top"><span class="demo-name">EXEMPLE SAS</span><span class="pill fit">FIT 8/10</span><span class="pill sc">82</span><span class="pill ex">Exemple · données fictives</span></div>
-          <p class="demo-desc">PME de services B2B de 20 à 49 salariés, indépendante, en croissance : elle recrute un commercial terrain, signe d'un besoin de développement.</p>
-          <div class="demo-grid">
-            <div class="crit"><small>ACTIVITÉ B2B</small><b><span class="ok">✓</span>Confirmée</b><p>100 % clients professionnels</p></div>
-            <div class="crit"><small>TAILLE</small><b><span class="ok">✓</span>Dans la cible</b><p>20 à 49 salariés</p></div>
-            <div class="crit"><small>AUTONOMIE</small><b><span class="ok">✓</span>Indépendante</b><p>Aucun groupe identifié</p></div>
-            <div class="crit"><small>DYNAMIQUE</small><b><span class="ok mid">~</span>Positive</b><p>Recrutement en cours</p></div>
+        <div class="prod body">
+          <ol class="pipe">
+            <li class="si"><span class="n">1</span><div><b>Signal d'achat</b>Un signal d'achat qui correspond à vos cibles</div></li>
+            <li class="si"><span class="n">2</span><div><b>Qualification</b>Vérification de l'entreprise, analyse de son site et score d'adéquation</div></li>
+            <li class="si"><span class="n">3</span><div><b>Décideurs</b>Identification des personas pertinents pour votre entreprise</div></li>
+            <li class="si"><span class="n">4</span><div><b>Message</b>Une approche personnalisée, prête à envoyer</div></li>
+          </ol>
+          <div class="demo reveal" aria-label="Exemple de fiche prospect produite par AI-MPCT, données fictives">
+            <div data-k="0">
+              <div class="demo-top"><span class="demo-name">SOLVÉA SERVICES</span><span class="pill fit">FIT 8/10</span><span class="pill sc">82</span><span class="pill ex">Exemple · données fictives</span></div>
+              <p class="demo-desc">PME de services B2B de 20 à 49 salariés, indépendante, en croissance : elle recrute un commercial terrain, signe d'un besoin de développement.</p>
+            </div>
+            <div class="demo-grid" data-k="1">
+              <div class="crit"><small>ACTIVITÉ B2B</small><b><span class="ok">✓</span>Confirmée</b><p>100 % clients professionnels</p></div>
+              <div class="crit"><small>TAILLE</small><b><span class="ok">✓</span>Dans la cible</b><p>20 à 49 salariés</p></div>
+              <div class="crit"><small>AUTONOMIE</small><b><span class="ok">✓</span>Indépendante</b><p>Aucun groupe identifié</p></div>
+              <div class="crit"><small>DYNAMIQUE</small><b><span class="ok mid">~</span>Positive</b><p>Recrutement en cours</p></div>
+            </div>
+            <div class="dm" data-k="2"><i>CM</i><div><b>C. Martin</b><span>Directrice générale · décideuse identifiée</span></div></div>
+            <div class="demo-msg" data-k="3">« Bonjour, j'ai vu que vous recrutiez un commercial terrain… » Message d'approche personnalisé, prêt à envoyer.</div>
           </div>
-          <div class="dm"><i>CM</i><div><b>C. Martin</b><span>Directrice générale · décideuse identifiée</span></div></div>
-          <div class="demo-msg">« Bonjour, j'ai vu que vous recrutiez un commercial terrain… » Message d'approche personnalisé, prêt à envoyer.</div>
         </div>
-        <ol class="pipe">
-          <li><b>Signal d'achat</b>Offres d'emploi et signaux publics qui révèlent un besoin</li>
-          <li><b>Qualification</b>Vérification de l'entreprise, analyse de son site et score d'adéquation</li>
-          <li><b>Décideurs</b>Identification des bonnes personnes à contacter</li>
-          <li><b>Message</b>Une approche personnalisée, prête à envoyer</li>
-        </ol>
         <div class="center">
           <a class="btn btn-primary" href="https://ai-mpct.com" target="_blank" rel="noopener">Découvrir AI-MPCT</a>
           <a class="btn btn-ghost" href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener">Demander une démo</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="methode">
-    <div class="wrap">
-      <h2 class="g3">Comment <em>collaborer avec nous ?</em></h2>
-      <p class="sub">On commence petit, on mesure, puis on étend. Pas de grand projet de transformation avant d'avoir prouvé la valeur.</p>
-      <div class="steps">
-        <div class="card step"><span class="clock">30 min · offert</span><h3>Premier échange</h3><p>Vous nous parlez de votre activité et de ce qui vous prend du temps. On voit ensemble où l'IA peut vous aider.</p></div>
-        <div class="card step"><span class="clock">Quelques jours</span><h3>Audit et feuille de route</h3><p>Les cas d'usage priorisés, avec le gain attendu, le coût et le délai pour chacun.</p></div>
-        <div class="card step"><span class="clock">Quelques semaines</span><h3>Pilote</h3><p>Un premier agent sur un process précis, avec un objectif mesurable et un prix fixé à l'avance.</p></div>
-        <div class="card step"><span class="clock">Dans la durée</span><h3>Déploiement et suivi</h3><p>On étend si les résultats sont là, et on fait le point avec vous à 30 et 90 jours.</p></div>
+  <!-- 6. Méthode : les étapes s'allument à tour de rôle -->
+  <div class="stack" id="methode" data-steps="ghost" style="--n:4; --per:40vh">
+    <div class="stack-viewport">
+      <div class="scene">
+        <h2 class="g3">Comment <em>collaborer avec nous ?</em></h2>
+        <p class="sub">On commence petit, on mesure, puis on étend. Pas de grand projet de transformation avant d'avoir prouvé la valeur.</p>
+        <div class="steps body">
+          <div class="card step si reveal"><span class="clock">30 min · offert</span><h3>Premier échange</h3><p>Vous nous parlez de votre activité et de ce qui vous prend du temps. On voit ensemble où l'IA peut vous aider.</p></div>
+          <div class="card step si reveal"><span class="clock">Quelques jours</span><h3>Audit et feuille de route</h3><p>Les cas d'usage priorisés, avec le gain attendu, le coût et le délai pour chacun.</p></div>
+          <div class="card step si reveal"><span class="clock">Quelques semaines</span><h3>Pilote</h3><p>Un premier agent sur un process précis, avec un objectif mesurable et un prix fixé à l'avance.</p></div>
+          <div class="card step si reveal"><span class="clock">Dans la durée</span><h3>Déploiement et suivi</h3><p>On étend si les résultats sont là, et on fait le point avec vous à 30 et 90 jours.</p></div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="pourquoi">
-    <div class="wrap">
-      <h2 class="g4">Pourquoi <em>choisir Hailp ?</em></h2>
-      <div class="why" style="margin-top:32px">
-        <div class="card"><b class="big">Conseil + code</b><p>La même personne vous conseille et construit vos agents. Pas de perte d'information entre le consultant et le développeur, pas de promesse impossible à livrer.</p></div>
-        <div class="card"><b class="big">En production</b><p>Nos agents ne sont pas des démos : AI-MPCT tourne en conditions réelles. On vous montre des outils qui fonctionnent, pas des slides.</p></div>
-        <div class="card"><b class="big">8 ans de terrain</b><p>Un parcours dans la vente de services et de logiciels IT (ESN, recrutement IT, éditeur). On comprend votre métier avant de parler technologie.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq">
-    <div class="wrap">
-      <h2 class="g5">Questions <em>fréquentes</em></h2>
-      <div class="faq" style="margin-top:32px">
-        <details><summary>Je n'y connais rien en IA. Est-ce que c'est pour moi ?</summary><p>Oui, c'est même le cas le plus fréquent. Vous connaissez votre métier, on connaît l'IA. Le premier échange sert justement à traduire l'un dans l'autre, sans jargon.</p></details>
-        <details><summary>Par où commencer ?</summary><p>Par un premier échange de 30 minutes, offert. Selon ce qui en ressort, on part soit sur un audit pour avoir une vision d'ensemble, soit directement sur un pilote si un cas d'usage évident se dégage.</p></details>
-        <details><summary>Combien ça coûte ?</summary><p>Chaque pilote a un périmètre et un prix fixés à l'avance, après notre premier échange. Pas de régie qui dérive : vous savez ce que vous payez et ce que vous obtenez.</p></details>
-        <details><summary>Quelle différence avec ChatGPT ?</summary><p>ChatGPT répond à une question quand on la lui pose. Un agent IA exécute une tâche de bout en bout, branché sur vos outils : il lit vos emails, remplit votre CRM, prépare vos devis, relance vos clients.</p></details>
-        <details><summary>Et mes données ?</summary><p>On choisit avec vous des outils adaptés à la sensibilité de vos données, et rien n'est connecté à vos systèmes sans votre accord explicite. L'humain garde la validation finale sur ce que l'agent produit.</p></details>
-      </div>
-    </div>
-  </section>
-
+  <!-- 7. Contact -->
   <section id="contact">
     <div class="wrap">
       <h2 class="g6">Échangeons sur <em>votre projet</em></h2>
@@ -357,5 +441,74 @@
   <a href="tel:+33658438824"><svg><use href="#i-phone"/></svg>Appeler</a>
   <a href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener"><svg><use href="#i-cal"/></svg>RDV</a>
 </nav>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var clamp = function(v, a, b){ return Math.max(a, Math.min(b, v)); };
+  var stacks = Array.prototype.slice.call(document.querySelectorAll('[data-steps]'));
+  var heroIn = document.querySelector('.hero-in');
+
+  // Remet à zéro les styles posés par le JS quand on repasse en mode non épinglé
+  function clear(){
+    stacks.forEach(function(st){
+      st.querySelectorAll('.si, [data-k]').forEach(function(el){ el.style.opacity = ''; el.style.transform = ''; });
+    });
+    if (heroIn){ heroIn.style.opacity = ''; heroIn.style.transform = ''; }
+  }
+
+  var ticking = false;
+  function update(){
+    ticking = false;
+    if (!root.classList.contains('pin')){ clear(); return; }
+    var vh = window.innerHeight;
+
+    stacks.forEach(function(st){
+      var ghost = st.getAttribute('data-steps') === 'ghost';
+      var items = st.querySelectorAll('.si');
+      var keys = st.querySelectorAll('[data-k]');
+      var n = items.length;
+      var r = st.getBoundingClientRect();
+      var denom = r.height - vh; if (denom <= 0) denom = 1;
+      var p = clamp(-r.top / denom, 0, 1);
+      for (var i = 0; i < n; i++){
+        var t = p * (n + 0.6) - i;              // chaque élément s'allume à son tour
+        var o = clamp(t * 2.2, 0, 1);
+        items[i].style.opacity = (ghost ? 0.14 + 0.86 * o : o).toFixed(3);
+        items[i].style.transform = ghost
+          ? 'translateY(' + ((1 - o) * 20).toFixed(1) + 'px)'
+          : 'translateY(' + ((1 - o) * 28).toFixed(1) + 'px) scale(' + (0.96 + 0.04 * o).toFixed(3) + ')';
+        if (keys[i]) keys[i].style.opacity = (0.22 + 0.78 * o).toFixed(3);   // la partie de la maquette liée à l'étape
+      }
+    });
+
+    if (heroIn){
+      var y = window.scrollY || 0;
+      heroIn.style.opacity = clamp(1 - y / (vh * 0.8), 0.1, 1);
+      heroIn.style.transform = 'translateY(' + (y * 0.15).toFixed(1) + 'px)';
+    }
+  }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+
+  // Mobile : apparition simple à l'entrée dans l'écran
+  var revealed = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealed.forEach(function(el){ io.observe(el); });
+  } else {
+    revealed.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
 </body>
 </html>
