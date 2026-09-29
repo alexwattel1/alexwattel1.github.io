@@ -238,20 +238,20 @@ document.documentElement.classList.add('js');
         <div>
           <div class="kicker"><b>1</b>SIGNAL D'ACHAT</div>
           <h2>Il repère les entreprises qui ont <span class="grad">un besoin maintenant.</span></h2>
-          <p class="lead">Chaque jour, l'agent surveille les signaux publics qui révèlent un besoin, et ne garde que ceux qui correspondent à vos cibles.</p>
+          <p class="lead">Chaque jour, l'agent lit l'actualité économique et ne garde que les signaux qui révèlent un besoin chez vos cibles. Dans cet exemple, les levées de fonds.</p>
           <ul class="points">
-            <li>Offres d'emploi publiées partout en France</li>
-            <li>Signal paramétré selon votre offre et votre cible</li>
-            <li>Cabinets de recrutement, annonces anonymes et doublons écartés</li>
+            <li>Le signal pertinent est défini avec vous, selon votre offre et votre cible</li>
+            <li>Actualités économiques et annonces publiques, partout en France</li>
+            <li>Ce qui ne correspond pas à votre signal ou à votre cible est écarté</li>
           </ul>
         </div>
         <div class="panel reveal" aria-label="Exemple de signaux détectés, données fictives">
-          <div class="panel-h"><span>SIGNAUX DU JOUR</span><span>Exemple</span></div>
-          <div class="sig si"><span class="tag">Offre</span><p>Commercial terrain H/F<small>Solvéa Services · Lyon · il y a 2 jours</small></p></div>
-          <div class="sig si"><span class="tag">Offre</span><p>Technico-commercial industrie<small>Atelier Ferrand · Saint-Étienne · hier</small></p></div>
-          <div class="sig si"><span class="tag">Offre</span><p>Responsable développement<small>Nexeo Industrie · Grenoble · aujourd'hui</small></p></div>
-          <div class="sig out si"><span class="tag">Écarté</span><p>Commercial B2B<small>Cabinet de recrutement, client inconnu</small></p></div>
-          <div class="sig out si"><span class="tag">Écarté</span><p>Business developer<small>Annonce anonyme</small></p></div>
+          <div class="panel-h"><span>SIGNAL : LEVÉES DE FONDS</span><span>Exemple</span></div>
+          <div class="sig si"><span class="tag">Levée</span><p>Solvéa Services lève 4 M€ pour accélérer en France<small>Actualité économique · Lyon · il y a 2 jours</small></p></div>
+          <div class="sig si"><span class="tag">Levée</span><p>Atelier Ferrand boucle un tour de 1,5 M€<small>Presse régionale · Saint-Étienne · hier</small></p></div>
+          <div class="sig si"><span class="tag">Levée</span><p>Nexeo Industrie annonce 8 M€ pour son développement<small>Communiqué · Grenoble · aujourd'hui</small></p></div>
+          <div class="sig out si"><span class="tag">Écarté</span><p>Un groupe coté publie ses résultats annuels<small>Hors cible : grand groupe</small></p></div>
+          <div class="sig out si"><span class="tag">Écarté</span><p>Ouverture d'une boutique à Annecy<small>Hors signal : pas une levée de fonds</small></p></div>
           <div class="sum si">3 entreprises à analyser</div>
         </div>
       </div>
@@ -276,12 +276,12 @@ document.documentElement.classList.add('js');
         </div>
         <div class="panel reveal" aria-label="Exemple de qualification, données fictives">
           <div class="panel-h"><span>SOLVÉA SERVICES</span><span>Exemple · données fictives</span></div>
-          <div class="src si"><span>Registre officiel</span><span>Site web analysé</span><span>Offre d'emploi</span></div>
+          <div class="src si"><span>Registre officiel</span><span>Site web analysé</span><span>Actualité économique</span></div>
           <div class="crits">
             <div class="crit si"><small>ACTIVITÉ B2B</small><b><span class="ok">✓</span>Confirmée</b><p>100 % clients professionnels</p></div>
             <div class="crit si"><small>TAILLE</small><b><span class="ok">✓</span>Dans la cible</b><p>20 à 49 salariés</p></div>
             <div class="crit si"><small>AUTONOMIE</small><b><span class="ok">✓</span>Indépendante</b><p>Aucun groupe identifié</p></div>
-            <div class="crit si"><small>DYNAMIQUE</small><b><span class="ok mid">~</span>Positive</b><p>Recrutement en cours</p></div>
+            <div class="crit si"><small>DYNAMIQUE</small><b><span class="ok">✓</span>Positive</b><p>4 M€ levés ce mois-ci</p></div>
           </div>
           <div class="verdicts si">
             <div class="v-fit"><b>Dans la cible</b>FIT 8/10</div>
@@ -339,8 +339,8 @@ document.documentElement.classList.add('js');
         </div>
         <div class="panel reveal" aria-label="Exemple de messages préparés, données fictives">
           <div class="panel-h"><span>POUR C. MARTIN</span><span>Exemple</span></div>
-          <div class="msg si"><small>DEMANDE DE CONNEXION</small>Bonjour Madame Martin, j'ai vu que <mark>Solvéa Services</mark> recrute <mark>un commercial terrain à Lyon</mark>. J'accompagne des PME dans cette phase de croissance. Au plaisir d'échanger.</div>
-          <div class="msg si"><small>MAIL</small><div class="obj">Votre recrutement commercial à Lyon</div>Bonjour Madame Martin, <mark>Solvéa Services</mark> recrute un <mark>commercial terrain</mark>. Souvent, c'est le signe qu'il faut remplir le carnet de commandes vite. C'est justement là que nous aidons des PME comme la vôtre. Seriez-vous ouverte à un échange de 15 minutes ?</div>
+          <div class="msg si"><small>DEMANDE DE CONNEXION</small>Bonjour Madame Martin, félicitations pour <mark>la levée de fonds de Solvéa Services</mark> ! J'accompagne des PME dans cette phase de croissance. Au plaisir d'échanger.</div>
+          <div class="msg si"><small>MAIL</small><div class="obj">Votre levée de fonds</div>Bonjour Madame Martin, félicitations pour <mark>les 4 M€ levés par Solvéa Services</mark>. Une levée, c'est souvent le moment d'<mark>accélérer le développement commercial</mark>. C'est justement là que nous aidons des PME comme la vôtre. Seriez-vous ouverte à un échange de 15 minutes ?</div>
           <div class="draft si">✓ Brouillon prêt <span>dans votre boîte mail</span></div>
         </div>
       </div>
