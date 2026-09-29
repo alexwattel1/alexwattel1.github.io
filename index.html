@@ -47,15 +47,21 @@ document.documentElement.classList.add('js');
   nav.menu a { color: var(--body); white-space: nowrap; }
   nav.menu a.on { color: var(--ink); font-weight: 600; }
   @media (max-width: 899px) { nav.menu { gap: 14px; } }
+  /* mobile : menu burger, le menu se déplie sous le bandeau */
+  .burger { display: none; }
   @media (max-width: 760px) {
-    header { padding: 10px 0 9px; }
-    header .wrap { flex-wrap: wrap; row-gap: 9px; }
-    nav.menu { order: 3; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
-               margin: 0 -16px; padding: 0 16px; width: calc(100% + 32px); }
-    nav.menu::-webkit-scrollbar { display: none; }
-    nav.menu a { background: #ececf0; border-radius: 980px; padding: 5px 13px; font-size: 13.5px; }
+    .burger { display: grid; place-items: center; width: 42px; height: 42px; margin-right: -8px; border: 0; background: none;
+              color: var(--ink); cursor: pointer; border-radius: 10px; padding: 0; }
+    .burger svg { width: 24px; height: 24px; }
+    .burger .x, header.open .burger .l { display: none; }
+    header.open .burger .x { display: block; }
+    nav.menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 4px 16px 12px;
+               background: rgba(255,255,255,.98); border-bottom: 1px solid var(--line); box-shadow: 0 14px 30px rgba(0,0,0,.08); }
+    header.open nav.menu { display: flex; }
+    nav.menu a { padding: 13px 2px; font-size: 17px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line); }
+    nav.menu a:last-child { border-bottom: 0; }
     nav.menu a:hover { text-decoration: none; }
-    nav.menu a.on { background: var(--ink); color: #fff; }
+    nav.menu a.on { color: var(--accent); }
   }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 980px;
          font-weight: 500; font-size: 16px; transition: filter .15s; min-height: 46px; }
@@ -75,15 +81,9 @@ document.documentElement.classList.add('js');
   .lede { font-size: clamp(18px, 2.4vw, 22px); color: var(--body); max-width: 38em; margin: 0 0 36px; }
   .hero-in { will-change: opacity, transform; }
 
+  /* 4 cartes du haut : même famille que les cartes Services (fond blanc, icône dégradée) */
   .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  @media (min-width: 761px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 14px; } }
-  .stat { border-radius: 18px; padding: 18px 20px; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
-  .stat b { display: block; font-size: clamp(19px, 5vw, 24px); hyphens: none; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 4px; }
-  .stat small { color: rgba(255,255,255,.95); font-size: 13px; font-weight: 500; line-height: 1.35; display: block; }
-  .stat:nth-child(1) { background: linear-gradient(120deg, #a78bfa, #f0abfc 50%, #fbbf24); }
-  .stat:nth-child(2) { background: linear-gradient(120deg, #38bdf8, #34d399); }
-  .stat:nth-child(3) { background: linear-gradient(120deg, #f472b6, #fb923c); }
-  .stat:nth-child(4) { background: linear-gradient(120deg, #2dd4bf, #a3e635); }
+  @media (min-width: 761px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
 
   /* ---- titres ---- */
   h2 { font-size: clamp(34px, 6vw, 60px); line-height: 1.08; font-weight: 800;
@@ -133,6 +133,16 @@ document.documentElement.classList.add('js');
   .card { background: var(--card); border-radius: 16px; padding: 24px 26px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
   .card h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.01em; }
   .card p { margin: 0; font-size: 15px; color: var(--body); }
+  .card.stat { padding: 24px 24px 26px; }
+  .card.stat h3 { font-size: 21px; letter-spacing: -.02em; margin-bottom: 6px; }
+  .card.stat p { font-size: 15.5px; line-height: 1.5; }
+  @media (max-width: 760px) {
+    .card.stat { padding: 16px 16px 18px; border-radius: 14px; }
+    .card.stat .ico { width: 36px; height: 36px; border-radius: 10px; margin-bottom: 10px; }
+    .card.stat .ico svg { width: 19px; height: 19px; }
+    .card.stat h3 { font-size: 17px; }
+    .card.stat p { font-size: 13.5px; line-height: 1.45; }
+  }
   .grid3 { display: grid; grid-template-columns: 1fr; gap: 14px; }
   @media (min-width: 761px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
   html.pin #services h2 { margin-bottom: 36px; }
@@ -318,8 +328,9 @@ document.documentElement.classList.add('js');
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Hailp, accueil"><svg class="brand-icon"><use href="#logo"/></svg><span>H<span class="ai">ai</span>lp</span></a>
     <div class="spacer"></div>
-    <nav class="menu" aria-label="Navigation"><a href="/" class="on" aria-current="page">Accueil</a><a href="#services">Services</a><a href="/second.html">Second</a><a href="/ai-mpct.html">AI-MPCT</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
+    <nav class="menu" id="menu" aria-label="Navigation"><a href="/" class="on" aria-current="page">Accueil</a><a href="#services">Services</a><a href="/second.html">Second</a><a href="/ai-mpct.html">AI-MPCT</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></nav>
     <a class="btn btn-primary btn-sm" href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg class="l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   </div>
 </header>
 
@@ -331,10 +342,10 @@ document.documentElement.classList.add('js');
       <p class="lede">Hailp accompagne votre entreprise dans l'intégration de l'IA, identifie où elle vous fait gagner du temps, conçoit les agents IA qui font le travail et forme vos équipes jusqu'à ce qu'elles s'en servent au quotidien.</p>
     </div>
     <div class="stats" aria-label="En bref">
-      <div class="stat"><b>Conseil</b><small>Audit et feuille de route IA</small></div>
-      <div class="stat"><b>Sur-mesure</b><small>Agents IA conçus pour vos process</small></div>
-      <div class="stat"><b>Sur étagère</b><small>Second, l'assistant personnel, et AI-MPCT, l'agent de prospection</small></div>
-      <div class="stat"><b>Adoption</b><small>Vos équipes accompagnées</small></div>
+      <div class="card stat"><div class="ico i1"><svg><use href="#i-compass"/></svg></div><h3>Conseil</h3><p>Audit et feuille de route IA</p></div>
+      <div class="card stat"><div class="ico i2"><svg><use href="#i-code"/></svg></div><h3>Sur-mesure</h3><p>Agents IA conçus pour vos process</p></div>
+      <div class="card stat"><div class="ico i3"><svg><use href="#i-bolt"/></svg></div><h3>Sur étagère</h3><p><a href="/second.html">Second</a>, l'assistant personnel, et <a href="/ai-mpct.html">AI-MPCT</a>, l'agent de prospection</p></div>
+      <div class="card stat"><div class="ico i4"><svg><use href="#i-team"/></svg></div><h3>Adoption</h3><p>Vos équipes accompagnées</p></div>
     </div>
   </div>
 
@@ -590,6 +601,16 @@ document.documentElement.classList.add('js');
   } else {
     revealed.forEach(function(el){ el.classList.add('in'); });
   }
+})();
+</script>
+<script>
+// Menu burger (mobile) : ouvre / ferme, se referme au clic sur un lien ou avec Échap
+(function(){
+  var h = document.querySelector('header'), b = h.querySelector('.burger');
+  function set(o){ h.classList.toggle('open', o); b.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  b.addEventListener('click', function(){ set(!h.classList.contains('open')); });
+  h.querySelectorAll('nav.menu a').forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
 })();
 </script>
 </body>

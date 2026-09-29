@@ -44,15 +44,21 @@ document.documentElement.classList.add('js');
   nav.menu a { color: var(--body); white-space: nowrap; }
   nav.menu a.on { color: var(--ink); font-weight: 600; }
   @media (max-width: 899px) { nav.menu { gap: 14px; } }
+  /* mobile : menu burger, le menu se déplie sous le bandeau */
+  .burger { display: none; }
   @media (max-width: 760px) {
-    header { padding: 10px 0 9px; }
-    header .wrap { flex-wrap: wrap; row-gap: 9px; }
-    nav.menu { order: 3; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
-               margin: 0 -16px; padding: 0 16px; width: calc(100% + 32px); }
-    nav.menu::-webkit-scrollbar { display: none; }
-    nav.menu a { background: #ececf0; border-radius: 980px; padding: 5px 13px; font-size: 13.5px; }
+    .burger { display: grid; place-items: center; width: 42px; height: 42px; margin-right: -8px; border: 0; background: none;
+              color: var(--ink); cursor: pointer; border-radius: 10px; padding: 0; }
+    .burger svg { width: 24px; height: 24px; }
+    .burger .x, header.open .burger .l { display: none; }
+    header.open .burger .x { display: block; }
+    nav.menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 4px 16px 12px;
+               background: rgba(255,255,255,.98); border-bottom: 1px solid var(--line); box-shadow: 0 14px 30px rgba(0,0,0,.08); }
+    header.open nav.menu { display: flex; }
+    nav.menu a { padding: 13px 2px; font-size: 17px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line); }
+    nav.menu a:last-child { border-bottom: 0; }
     nav.menu a:hover { text-decoration: none; }
-    nav.menu a.on { background: var(--ink); color: #fff; }
+    nav.menu a.on { color: var(--accent); }
   }
   @media (max-width: 760px) { header .btn { padding: 7px 14px; font-size: 14px; min-height: 36px; } }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 980px;
@@ -227,8 +233,9 @@ document.documentElement.classList.add('js');
       <span>H<span class="ai">ai</span>lp</span>
     </a>
     <div class="spacer"></div>
-    <nav class="menu" aria-label="Navigation"><a href="/">Accueil</a><a href="/#services">Services</a><a href="/second.html">Second</a><a href="/ai-mpct.html" class="on" aria-current="page">AI-MPCT</a><a href="/#methode">Méthode</a><a href="/#contact">Contact</a></nav>
+    <nav class="menu" id="menu" aria-label="Navigation"><a href="/">Accueil</a><a href="/#services">Services</a><a href="/second.html">Second</a><a href="/ai-mpct.html" class="on" aria-current="page">AI-MPCT</a><a href="/#methode">Méthode</a><a href="/#contact">Contact</a></nav>
     <a class="btn btn-primary" href="https://calendly.com/alexandre-wattel1/30min">Demander une démo</a>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg class="l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   </div>
 </header>
 
@@ -499,5 +506,15 @@ document.documentElement.classList.add('js');
 })();
 </script>
 
+<script>
+// Menu burger (mobile) : ouvre / ferme, se referme au clic sur un lien ou avec Échap
+(function(){
+  var h = document.querySelector('header'), b = h.querySelector('.burger');
+  function set(o){ h.classList.toggle('open', o); b.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  b.addEventListener('click', function(){ set(!h.classList.contains('open')); });
+  h.querySelectorAll('nav.menu a').forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
+})();
+</script>
 </body>
 </html>
