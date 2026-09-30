@@ -121,8 +121,8 @@ document.documentElement.classList.add('js');
 
   /* éléments pilotés par le scroll (valeurs de départ, le JS les anime) */
   html.pin [data-steps]:not(.nopin) .si { will-change: opacity, transform; }
-  html.pin [data-steps="ghost"] .si { opacity: .14; transform: translateY(20px); }
-  html.pin [data-steps="fade"] .si { opacity: 0; transform: translateY(28px); }
+  html.pin [data-steps="ghost"]:not(.nopin) .si { opacity: .14; transform: translateY(20px); }
+  html.pin [data-steps="fade"]:not(.nopin) .si { opacity: 0; transform: translateY(28px); }
   html.pin [data-steps]:not(.nopin) [data-k] { opacity: .22; transition: opacity .25s ease; }
 
   /* apparition simple quand pas d'épinglage (mobile) */

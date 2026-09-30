@@ -121,8 +121,8 @@ document.documentElement.classList.add('js');
 
   /* éléments pilotés par le scroll (valeurs de départ, le JS les anime) */
   html.pin [data-steps]:not(.nopin) .si { will-change: opacity, transform; }
-  html.pin [data-steps="ghost"] .si { opacity: .14; transform: translateY(20px); }
-  html.pin [data-steps="fade"] .si { opacity: 0; transform: translateY(28px); }
+  html.pin [data-steps="ghost"]:not(.nopin) .si { opacity: .14; transform: translateY(20px); }
+  html.pin [data-steps="fade"]:not(.nopin) .si { opacity: 0; transform: translateY(28px); }
   html.pin [data-steps]:not(.nopin) [data-k] { opacity: .22; transition: opacity .25s ease; }
 
   /* apparition simple quand pas d'épinglage (mobile) */
@@ -478,7 +478,7 @@ document.documentElement.classList.add('js');
           <div class="who"><div class="avatar" aria-hidden="true">AW</div><div><b>Alexandre Wattel</b><span>Fondateur · Conseil et agents IA</span></div></div>
           <ul class="lines">
             <li><a href="tel:+33658438824"><svg><use href="#i-phone"/></svg>+33 6 58 43 88 24</a></li>
-            <li><a href="mailto:alexandre.wattel1@gmail.com"><svg><use href="#i-mail"/></svg>alexandre.wattel1@gmail.com</a></li>
+            <li><a href="mailto:alexandre@hailp.tech"><svg><use href="#i-mail"/></svg>alexandre@hailp.tech</a></li>
             <li><a href="https://calendly.com/alexandre-wattel1/30min" target="_blank" rel="noopener"><svg><use href="#i-cal"/></svg>Prendre rendez-vous (Calendly)</a></li>
             <li><a href="https://www.linkedin.com/in/alexandre-wattel-652303a8/" target="_blank" rel="noopener"><svg><use href="#i-in"/></svg>LinkedIn · Alexandre Wattel</a></li>
           </ul>
@@ -497,7 +497,7 @@ document.documentElement.classList.add('js');
 <footer>
   <div class="wrap">
     <span>© 2026 Hailp · Lyon</span>
-    <details><summary>Mentions légales</summary><p>Éditeur : Alexandre Wattel, Lyon. Contact : alexandre.wattel1@gmail.com · +33 6 58 43 88 24. Activité en cours d'immatriculation. Hébergement : GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Ce site ne dépose aucun cookie et ne collecte aucune donnée personnelle.</p></details>
+    <details><summary>Mentions légales</summary><p>Éditeur : Alexandre Wattel, Lyon. Contact : alexandre@hailp.tech · +33 6 58 43 88 24. Activité en cours d'immatriculation. Hébergement : GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Ce site ne dépose aucun cookie et ne collecte aucune donnée personnelle.</p></details>
   </div>
 </footer>
 

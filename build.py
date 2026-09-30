@@ -15,7 +15,7 @@ CONFIG = {
     "role": "Fondateur · Conseil et agents IA",
     "phone": "+33 6 58 43 88 24",
     "phone_raw": "+33658438824",
-    "email": "alexandre.wattel1@gmail.com",  # → alexandre@<domaine> une fois la redirection OVH active
+    "email": "alexandre@hailp.tech",
     "linkedin": "https://www.linkedin.com/in/alexandre-wattel-652303a8/",
     "city": "Lyon",
     "aimpct": "/ai-mpct.html",          # page produit sur le site (ex-lien vers ai-mpct.com, le site de Mathieu)
