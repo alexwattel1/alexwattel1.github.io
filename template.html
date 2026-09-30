@@ -102,14 +102,14 @@ document.documentElement.classList.add('js');
   .scene { max-width: 980px; margin: 0 auto; padding: 64px 16px; display: flex; flex-direction: column; }
   html.pin .stack:not(.nopin) { height: calc(var(--n) * var(--per, 42vh) + 75vh); }
   html.pin .stack:not(.nopin) .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-  html.pin .stack:not(.nopin) .scene { height: 100%; padding: calc(var(--hh, 72px) + 12px) 24px 20px; justify-content: center; justify-content: safe center; }
+  html.pin .stack:not(.nopin) .scene { height: 100%; padding: calc(var(--hh, 72px) + 12px) 24px 32px; justify-content: center; justify-content: safe center; }
   /* scènes produit : plus denses, on resserre pour tenir dans un écran de portable */
   html.pin .stack:not(.nopin) .prodscene h2 { font-size: clamp(30px, min(5vw, 6vh), 52px); margin-bottom: 10px; }
   html.pin .stack:not(.nopin) .prodscene .sub { font-size: 16.5px; max-width: 50em; margin-bottom: 20px; }
   html.pin .stack:not(.nopin) .prodscene .prod { margin-bottom: 20px; }
   html.pin .stack:not(.nopin) .prodscene .demo { padding: 16px 18px; }
   html.pin .stack:not(.nopin) .prodscene .demo-desc { margin-bottom: 10px; }
-  html.pin .stack:not(.nopin) .prodscene { padding-top: calc(var(--hh, 72px) + 6px); padding-bottom: 12px; }
+  html.pin .stack:not(.nopin) .prodscene { padding-top: calc(var(--hh, 72px) + 6px); padding-bottom: 26px; }
   html.pin .stack:not(.nopin) .prodscene .sd { padding: 12px 14px; gap: 6px; }
   html.pin .stack:not(.nopin) .prodscene .say { margin-bottom: 3px; padding: 5px 12px; }
   html.pin .stack:not(.nopin) .prodscene .sd-blk { padding: 8px 12px; }
@@ -125,9 +125,15 @@ document.documentElement.classList.add('js');
   html.pin [data-steps="fade"]:not(.nopin) .si { opacity: 0; transform: translateY(28px); }
   html.pin [data-steps]:not(.nopin) [data-k] { opacity: .22; transition: opacity .25s ease; }
 
-  /* apparition simple quand pas d'épinglage (mobile) */
-  html.js:not(.pin) .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
-  html.js:not(.pin) .reveal.in { opacity: 1; transform: none; }
+  /* apparition au scroll quand la scène n'est pas épinglée (mobile, ou scène plus haute que l'écran) */
+  html.js:not(.pin) .reveal, html.pin .nopin .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease var(--rd, 0s), transform .6s ease var(--rd, 0s); }
+  html.js:not(.pin) .reveal.in, html.pin .nopin .reveal.in { opacity: 1; transform: none; }
+  /* léger décalage entre cartes voisines pour garder l'effet "une à une" */
+  .grid3 > .reveal:nth-child(2), .steps > .reveal:nth-child(2), .pipe > .reveal:nth-child(2) { --rd: .12s; }
+  .grid3 > .reveal:nth-child(3), .steps > .reveal:nth-child(3), .pipe > .reveal:nth-child(3) { --rd: .24s; }
+  .grid3 > .reveal:nth-child(4), .steps > .reveal:nth-child(4), .pipe > .reveal:nth-child(4) { --rd: .36s; }
+  .grid3 > .reveal:nth-child(5) { --rd: .48s; }
+  .grid3 > .reveal:nth-child(6) { --rd: .6s; }
   @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1 !important; transform: none !important; } }
 
   .card { background: var(--card); border-radius: 16px; padding: 24px 26px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
@@ -395,10 +401,10 @@ document.documentElement.classList.add('js');
         <p class="sub">Votre bras droit IA. Il connaît votre métier, voit vos outils et travaille selon vos méthodes. Il est installé chez vous et reste sous votre contrôle.</p>
         <div class="prod body">
           <ol class="pipe swapgrid">
-            <li class="si"><span class="n">1</span><div><b>Il sait</b>Une mémoire de vos dossiers, de votre métier et de vos méthodes</div></li>
-            <li class="si"><span class="n">2</span><div><b>Il voit</b>Branché sur vos mails, votre agenda et vos logiciels</div></li>
-            <li class="si"><span class="n">3</span><div><b>Il fait</b>Un simple mot déclenche vos procédures</div></li>
-            <li class="si"><span class="n">4</span><div><b>Il s'améliore</b>Chaque semaine il propose, vous validez</div></li>
+            <li class="si reveal"><span class="n">1</span><div><b>Il sait</b>Une mémoire de vos dossiers, de votre métier et de vos méthodes</div></li>
+            <li class="si reveal"><span class="n">2</span><div><b>Il voit</b>Branché sur vos mails, votre agenda et vos logiciels</div></li>
+            <li class="si reveal"><span class="n">3</span><div><b>Il fait</b>Un simple mot déclenche vos procédures</div></li>
+            <li class="si reveal"><span class="n">4</span><div><b>Il s'améliore</b>Chaque semaine il propose, vous validez</div></li>
           </ol>
           <div class="sd reveal" aria-label="Exemple d'une journée avec Second, données fictives">
             <div class="sd-bar"><span class="dot"></span>Second · mardi, 9 h 12<span class="pill ex">Exemple</span></div>
@@ -424,10 +430,10 @@ document.documentElement.classList.add('js');
         <p class="sub">Notre agent sur étagère détecte les entreprises qui ont un besoin maintenant, les qualifie, identifie les bons décideurs et rédige le message d'approche. Vos commerciaux ne perdent plus de temps à chercher : ils se concentrent sur la conversation.</p>
         <div class="prod body">
           <ol class="pipe swapgrid">
-            <li class="si"><span class="n">1</span><div><b>Signal d'achat</b>Un signal d'achat qui correspond à vos cibles</div></li>
-            <li class="si"><span class="n">2</span><div><b>Qualification</b>Vérification de l'entreprise, analyse de son site et score d'adéquation</div></li>
-            <li class="si"><span class="n">3</span><div><b>Décideurs</b>Identification des personas pertinents pour votre entreprise</div></li>
-            <li class="si"><span class="n">4</span><div><b>Message</b>Une approche personnalisée, prête à envoyer</div></li>
+            <li class="si reveal"><span class="n">1</span><div><b>Signal d'achat</b>Un signal d'achat qui correspond à vos cibles</div></li>
+            <li class="si reveal"><span class="n">2</span><div><b>Qualification</b>Vérification de l'entreprise, analyse de son site et score d'adéquation</div></li>
+            <li class="si reveal"><span class="n">3</span><div><b>Décideurs</b>Identification des personas pertinents pour votre entreprise</div></li>
+            <li class="si reveal"><span class="n">4</span><div><b>Message</b>Une approche personnalisée, prête à envoyer</div></li>
           </ol>
           <div class="demo reveal" aria-label="Exemple de fiche prospect produite par AI-MPCT, données fictives">
             <div data-k="0">
