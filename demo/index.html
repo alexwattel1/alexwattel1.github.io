@@ -138,7 +138,7 @@ el.addEventListener("tavus:conversation-started", () => {
   clearTimeout(timer);
   timer = setTimeout(() => {
     el.sendMessage({ event_type: "conversation.append_llm_context",
-      properties: { context: "Il reste une minute. Termine ta phrase, passe directement à la slide 10, dis son texte et ouvre l'agenda." } });
+      properties: { context: "Il reste une minute. Termine ta phrase, passe directement à la slide 10 et dis son texte." } });
   }, LAST_MINUTE_AT_S * 1000);
 });
 
@@ -153,14 +153,37 @@ el.addEventListener("tavus:tool-call", (e) => {
     properties: { tool_call_id, output: { ok }, status: ok ? "success" : "error" } });
 });
 
+// Relance : si l'avatar se tait en fin de slide sans que le prospect parle, on lui demande de continuer.
+// Pas de relance pendant la question de la slide 7, ni après la conclusion.
+const NUDGE_SIGNAL = "(Continuez la présentation.)";
+const NUDGE_AFTER_MS = 1500;
+const WAIT_FOR_PROSPECT = /pensez-vous déjà|réexplique|une question \?/i;
+const FINISHED = /bonne journée/i;
+let nudgeTimer = null, nudges = 0, lastPal = "", userSpeaking = false;
+function clearNudge() { clearTimeout(nudgeTimer); nudgeTimer = null; }
+
 el.addEventListener("tavus:protocol-message", (e) => {
   const { event_type, properties } = e.detail || {};
-  if (!kicked && /stopped_speaking/.test(event_type || "") && properties && /pal|replica/.test(properties.role || event_type)) {
-    kicked = true; // l'accueil est fini : on lance la présentation sans attendre le prospect
-    el.sendMessage({ event_type: "conversation.respond", properties: { text: START_SIGNAL } });
+  const ev = event_type || "";
+  if (ev === "conversation.user_started_speaking") { userSpeaking = true; clearNudge(); }
+  if (ev === "conversation.user_stopped_speaking") { userSpeaking = false; }
+  if (ev === "conversation.replica_started_speaking") clearNudge();
+  if (ev === "conversation.replica_stopped_speaking" || (/stopped_speaking/.test(ev) && properties && /pal|replica/.test(properties.role || ""))) {
+    if (!kicked) {
+      kicked = true; // l'accueil est fini : on lance la présentation sans attendre le prospect
+      el.sendMessage({ event_type: "conversation.respond", properties: { text: START_SIGNAL } });
+    } else if (!WAIT_FOR_PROSPECT.test(lastPal) && !FINISHED.test(lastPal) && nudges < 12) {
+      clearNudge();
+      nudgeTimer = setTimeout(() => {
+        if (userSpeaking) return;
+        nudges++;
+        el.sendMessage({ event_type: "conversation.respond", properties: { text: NUDGE_SIGNAL } });
+      }, NUDGE_AFTER_MS);
+    }
   }
-  if (event_type !== "conversation.utterance" || !properties) return;
+  if (ev !== "conversation.utterance" || !properties) return;
   if (typeof properties.final === "boolean") return; // partiel en streaming
+  if (properties.role !== "user") lastPal = String(properties.speech || "").slice(-300);
   transcript.push({ role: properties.role, speech: properties.speech });
 });
 
