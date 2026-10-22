@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Second en 5 minutes</title>
+<style>
+  :root {
+    --bg: #f5f5f7; --card: #ffffff; --ink: #1d1d1f; --text: #4b4b50; --muted: #86868b;
+    --line: #e8e8ed; --accent: #0071e3; --accent-soft: #eaf3fe;
+    --grad: linear-gradient(120deg, #0090ff, #7a5cff);
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Inter, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  header { position: sticky; top: 0; z-index: 10; background: rgba(245,245,247,.8); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 1180px; margin: 0 auto; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .brand { font-weight: 800; letter-spacing: -.03em; font-size: 20px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; text-decoration: none; }
+  main { max-width: 1180px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { color: var(--ink); font-weight: 800; letter-spacing: -.03em; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; margin: 0 0 10px; text-wrap: balance; }
+  h1 .g { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lede { font-size: 17px; margin: 0 0 28px; max-width: 720px; }
+  .grid { display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .card { background: var(--card); border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+  .stage { overflow: hidden; aspect-ratio: 16 / 9; position: relative; }
+  .stage tavus-embed { display: block; width: 100%; height: 100%; }
+  .notice { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px; color: var(--muted); background: var(--card); }
+  .notice[hidden] { display: none; }
+  .notice b { display: block; color: var(--ink); font-size: 20px; margin-bottom: 8px; }
+  .side { padding: 20px; display: flex; flex-direction: column; gap: 18px; }
+  .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 8px; }
+  .questions { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.45; }
+  .questions:empty::before { content: "Aucune pour l'instant."; color: var(--muted); margin-left: -18px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 999px; font: 600 15px var(--font); text-decoration: none; border: 0; cursor: pointer; text-align: center; }
+  .btn-primary { background: var(--grad); color: #fff; }
+  .btn-secondary { background: var(--line); color: var(--ink); }
+  .cta { display: flex; flex-direction: column; gap: 8px; }
+  .cta p { margin: 0; font-size: 14px; }
+  .fine { font-size: 13px; color: var(--muted); margin: 18px 0 0; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="https://hailp.tech">Hailp</a><a class="btn btn-secondary" href="https://calendly.com/alexandre-hailp/30min" target="_blank" rel="noopener">Parler à Alexandre</a></div></header>
+<main>
+  <h1 id="title">Second, présenté par le <span class="g">double numérique</span> d'Alexandre</h1>
+  <p class="lede">Cinq minutes avec une IA, qui vous présente ce que fait Hailp. Votre micro suffit, la caméra est facultative. Vous pouvez couper quand vous voulez.</p>
+
+  <div class="grid">
+    <section class="card stage" id="stage">
+      <div class="notice" id="notice">Chargement de la présentation…</div>
+    </section>
+
+    <aside class="card side">
+      <div>
+        <p class="label">Vos questions notées pour Alexandre</p>
+        <ul class="questions" id="questions"></ul>
+      </div>
+      <div class="cta">
+        <p>Envie d'en parler directement ?</p>
+        <a class="btn btn-primary" href="https://calendly.com/alexandre-hailp/30min" target="_blank" rel="noopener">Choisir un créneau de 30 min</a>
+      </div>
+    </aside>
+  </div>
+  <p class="fine">Cette présentation est faite par une intelligence artificielle, le double numérique d'Alexandre Wattel. La caméra est coupée par défaut et votre visage n'est pas analysé.</p>
+</main>
+
+<script>
+// ===== Réglages =====
+const DEPLOYMENT_ID = "b19a073a-1fae-441d-8735-0b90f9451b96";
+const WEBHOOK_URL = "";          // optionnel : webhook n8n qui reçoit questions + transcript en fin d'appel
+const LAST_MINUTE_AT_S = 300;    // l'appel est limité à 6 min par le déploiement
+const START_SIGNAL = "(Le prospect écoute, commencez la présentation.)";
+
+// ===== Prospect : ?p=<jeton> (généré par make_links.py) ou paramètres en clair pour les tests =====
+const q = new URLSearchParams(location.search);
+function decodeToken(t) {
+  try {
+    const b = t.replace(/-/g, "+").replace(/_/g, "/");
+    const bin = atob(b + "===".slice((b.length + 3) % 4));
+    return JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0))));
+  } catch (_) { return {}; }
+}
+const raw = q.get("p") ? decodeToken(q.get("p")) : Object.fromEntries(q);
+const clean = (v) => String(v || "").replace(/[<>"]/g, "").trim().slice(0, 120);
+const prospect = { prenom: clean(raw.prenom), nom: clean(raw.nom), fonction: clean(raw.fonction), entreprise: clean(raw.entreprise), activite: clean(raw.activite) };
+
+if (prospect.prenom) {
+  const t = document.getElementById("title");
+  t.textContent = `${prospect.prenom}, voici Second, présenté par le `;
+  const g = document.createElement("span"); g.className = "g"; g.textContent = "double numérique";
+  t.append(g, " d'Alexandre");
+}
+
+const context = [
+  "Informations sur le prospect, à utiliser comme prévu dans le script :",
+  `Prénom : ${prospect.prenom || "inconnu"}`,
+  `Nom : ${prospect.nom || "inconnu"}`,
+  `Fonction : ${prospect.fonction || "inconnue"}`,
+  `Entreprise : ${prospect.entreprise || "inconnue"}`,
+  `Activité de l'entreprise : ${prospect.activite || "inconnue"}`,
+  "Alexandre a cherché à le joindre par téléphone sans succès, puis lui a envoyé ce lien par mail.",
+  "Si une information est inconnue, ne la mentionne pas et adapte la phrase du script.",
+].join("\n");
+const greeting = `Bonjour${prospect.prenom ? " " + prospect.prenom : ""} !`;
+
+// ===== Questions notées + transcript =====
+const questions = [];
+const transcript = [];
+function noteQuestion(text) {
+  questions.push(text);
+  const li = document.createElement("li"); li.textContent = text;
+  document.getElementById("questions").append(li);
+}
+
+// ===== Avatar =====
+const stage = document.getElementById("stage");
+const notice = document.getElementById("notice");
+function showNotice(title, text) {
+  notice.replaceChildren();
+  const b = document.createElement("b"); b.textContent = title;
+  notice.append(b, text); notice.hidden = false;
+}
+
+const el = document.createElement("tavus-embed");
+el.setAttribute("deployment-id", DEPLOYMENT_ID);
+el.setAttribute("conversational-context", context);
+el.setAttribute("custom-greeting", greeting);
+el.setAttribute("camera-on-start", "off");
+stage.prepend(el);
+
+let timer = null;
+let kicked = false;
+el.addEventListener("tavus:ready", () => { notice.hidden = true; });
+
+el.addEventListener("tavus:conversation-started", () => {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    el.sendMessage({ event_type: "conversation.append_llm_context",
+      properties: { context: "Il reste une minute. Termine ta phrase, passe directement à la slide 10, dis son texte et ouvre l'agenda." } });
+  }, LAST_MINUTE_AT_S * 1000);
+});
+
+el.addEventListener("tavus:tool-call", (e) => {
+  const { name, arguments: rawArgs, tool_call_id } = e.detail;
+  if (name !== "noter_question" && name !== "afficher_etape") return; // les outils natifs (slides, agenda) sont gérés par Tavus
+  let args = {};
+  try { args = JSON.parse(rawArgs || "{}"); } catch (_) {}
+  const ok = name === "afficher_etape" || !!args.question;
+  if (name === "noter_question" && args.question) noteQuestion(String(args.question).slice(0, 300));
+  if (tool_call_id) el.sendMessage({ event_type: "conversation.tool_result",
+    properties: { tool_call_id, output: { ok }, status: ok ? "success" : "error" } });
+});
+
+el.addEventListener("tavus:protocol-message", (e) => {
+  const { event_type, properties } = e.detail || {};
+  if (!kicked && /stopped_speaking/.test(event_type || "") && properties && /pal|replica/.test(properties.role || event_type)) {
+    kicked = true; // l'accueil est fini : on lance la présentation sans attendre le prospect
+    el.sendMessage({ event_type: "conversation.respond", properties: { text: START_SIGNAL } });
+  }
+  if (event_type !== "conversation.utterance" || !properties) return;
+  if (typeof properties.final === "boolean") return; // partiel en streaming
+  transcript.push({ role: properties.role, speech: properties.speech });
+});
+
+el.addEventListener("tavus:conversation-ended", (e) => {
+  clearTimeout(timer);
+  if (WEBHOOK_URL) fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ conversation_id: e.detail.conversationId, prospect, questions, transcript, ended_at: new Date().toISOString() }) }).catch(() => {});
+});
+
+el.addEventListener("tavus:mode-change", (e) => {
+  if (e.detail && e.detail.mode === "unavailable") showNotice("La démo est occupée pour le moment.",
+    "Réessayez dans quelques minutes, ou réservez directement un créneau avec Alexandre à droite.");
+});
+el.addEventListener("tavus:error", (e) => console.warn("Tavus", e.detail));
+
+const s = document.createElement("script");
+s.src = "https://unpkg.com/@tavus/embed@0.19.2/dist/index.iife.js";
+s.onerror = () => showNotice("La démo n'a pas pu se charger.", "Vous pouvez réserver directement un créneau avec Alexandre à droite.");
+document.head.append(s);
+</script>
+</body>
+</html>
