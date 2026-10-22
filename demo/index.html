@@ -71,7 +71,6 @@
 const DEPLOYMENT_ID = "b19a073a-1fae-441d-8735-0b90f9451b96";
 const WEBHOOK_URL = "";          // optionnel : webhook n8n qui reçoit questions + transcript en fin d'appel
 const LAST_MINUTE_AT_S = 300;    // l'appel est limité à 6 min par le déploiement
-const START_SIGNAL = "(Le prospect écoute, commencez la présentation.)";
 
 // ===== Prospect : ?p=<jeton> (généré par make_links.py) ou paramètres en clair pour les tests =====
 const q = new URLSearchParams(location.search);
@@ -131,7 +130,6 @@ el.setAttribute("camera-on-start", "off");
 stage.prepend(el);
 
 let timer = null;
-let kicked = false;
 el.addEventListener("tavus:ready", () => { notice.hidden = true; });
 
 el.addEventListener("tavus:conversation-started", () => {
@@ -153,37 +151,10 @@ el.addEventListener("tavus:tool-call", (e) => {
     properties: { tool_call_id, output: { ok }, status: ok ? "success" : "error" } });
 });
 
-// Relance : si l'avatar se tait en fin de slide sans que le prospect parle, on lui demande de continuer.
-// Pas de relance pendant la question de la slide 7, ni après la conclusion.
-const NUDGE_SIGNAL = "(Continuez la présentation.)";
-const NUDGE_AFTER_MS = 1500;
-const WAIT_FOR_PROSPECT = /pensez-vous déjà|réexplique|une question \?/i;
-const FINISHED = /bonne journée/i;
-let nudgeTimer = null, nudges = 0, lastPal = "", userSpeaking = false;
-function clearNudge() { clearTimeout(nudgeTimer); nudgeTimer = null; }
-
 el.addEventListener("tavus:protocol-message", (e) => {
   const { event_type, properties } = e.detail || {};
-  const ev = event_type || "";
-  if (ev === "conversation.user_started_speaking") { userSpeaking = true; clearNudge(); }
-  if (ev === "conversation.user_stopped_speaking") { userSpeaking = false; }
-  if (ev === "conversation.replica_started_speaking") clearNudge();
-  if (ev === "conversation.replica_stopped_speaking" || (/stopped_speaking/.test(ev) && properties && /pal|replica/.test(properties.role || ""))) {
-    if (!kicked) {
-      kicked = true; // l'accueil est fini : on lance la présentation sans attendre le prospect
-      el.sendMessage({ event_type: "conversation.respond", properties: { text: START_SIGNAL } });
-    } else if (!WAIT_FOR_PROSPECT.test(lastPal) && !FINISHED.test(lastPal) && nudges < 12) {
-      clearNudge();
-      nudgeTimer = setTimeout(() => {
-        if (userSpeaking) return;
-        nudges++;
-        el.sendMessage({ event_type: "conversation.respond", properties: { text: NUDGE_SIGNAL } });
-      }, NUDGE_AFTER_MS);
-    }
-  }
-  if (ev !== "conversation.utterance" || !properties) return;
+  if (event_type !== "conversation.utterance" || !properties) return;
   if (typeof properties.final === "boolean") return; // partiel en streaming
-  if (properties.role !== "user") lastPal = String(properties.speech || "").slice(-300);
   transcript.push({ role: properties.role, speech: properties.speech });
 });
 
@@ -194,8 +165,8 @@ el.addEventListener("tavus:conversation-ended", (e) => {
 });
 
 el.addEventListener("tavus:mode-change", (e) => {
-  if (e.detail && e.detail.mode === "unavailable") showNotice("La démo est occupée pour le moment.",
-    "Réessayez dans quelques minutes, ou réservez directement un créneau avec Alexandre à droite.");
+  if (e.detail && e.detail.mode === "unavailable") showNotice("La démo n'est pas disponible pour le moment.",
+    "Vous pouvez réserver directement un créneau avec Alexandre.");
 });
 el.addEventListener("tavus:error", (e) => console.warn("Tavus", e.detail));
 
